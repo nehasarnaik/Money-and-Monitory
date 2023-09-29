@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import NavbarFunctions from "../Navbar/NavbarFunctions";
+import React from "react";
 import NavBarUser from "../Navbar/NavBarUser";
+import NavbarFunctions from "../Navbar/NavbarFunctions";
+import { useState } from "react";
 import "./withdraw.css";
 
-export default function Withdraw() {
+export default function Deposit() {
   const [selectedAccount, setSelectedAccount] = useState(""); // State to store selected account
-  const [withdrawAmount, setWithdrawAmount] = useState(""); // State to store withdrawal amount
+  const [depositAmount, setDepositAmount] = useState(""); // State to store Deposit amount
 
   const handleAccountChange = (event) => {
     setSelectedAccount(event.target.value);
   };
 
   const handleAmountChange = (event) => {
-    setWithdrawAmount(event.target.value);
+    setDepositAmount(event.target.value);
   };
 
   const handleSubmit = () => {
     // Handle submission logic here (e.g., making a withdrawal)
     // You can access the selectedAccount and withdrawAmount state values here
     console.log("Selected Account:", selectedAccount);
-    console.log("Withdraw Amount:", withdrawAmount);
+    console.log("Withdraw Amount:", depositAmount);
   };
 
   const handleCancel = () => {
     // Handle cancel logic here (e.g., resetting form fields)
     setSelectedAccount("");
-    setWithdrawAmount("");
+    setDepositAmount("");
   };
 
   return (
@@ -41,7 +41,7 @@ export default function Withdraw() {
               {" "}
               {/* Apply violet border */}
               <div className="card-body">
-                <h2 className="card-title white-text">Withdraw</h2>
+                <h2 className="card-title white-text">Deposit</h2>
                 <br />
                 {/* Center align the heading */}
                 <form className="text-start white-text">
@@ -67,9 +67,9 @@ export default function Withdraw() {
                       type="text"
                       className="form-control"
                       id="amount"
-                      value={withdrawAmount}
+                      value={depositAmount}
                       onChange={handleAmountChange}
-                      placeholder="Enter Amount to withdraw"
+                      placeholder="Enter Amount to Deposit"
                     />
                   </div>
                   <br />
@@ -81,9 +81,10 @@ export default function Withdraw() {
                     >
                       Submit
                     </button>
+                    &nbsp;&nbsp;
                     <button
                       type="button"
-                      className="btn btn-secondary ms-2"
+                      className="btn btn-secondary"
                       onClick={handleCancel}
                       style={{ fontWeight: "bold" }}
                     >

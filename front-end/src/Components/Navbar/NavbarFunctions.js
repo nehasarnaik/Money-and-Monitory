@@ -40,9 +40,9 @@ export default function NavbarFunctions() {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link violet-text" href="#">
+                <Link to={"/deposit"} class="nav-link violet-text">
                   Deposit
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
