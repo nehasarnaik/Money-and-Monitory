@@ -1,0 +1,17 @@
+h2.white-text {
+    color: white;
+  }
+
+form.white-text{
+  color: white;
+}
+
+
+
+/* In your CSS file */
+.cardbg-color {
+  position: relative; /* Required for the pseudo-element */
+  background-color: #702dab; /* Violet background color */
+  padding: 20px; /* Add padding to the card for better visibility */
+}
+
