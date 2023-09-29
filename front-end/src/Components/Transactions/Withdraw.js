@@ -90,6 +90,7 @@ export default function Withdraw() {
                       type="button"
                       className="btn btn-secondary ms-2"
                       onClick={handleCancel}
+                      style={{ fontWeight: "bold" }}
                     >
                       Cancel
                     </button>
