@@ -16,7 +16,7 @@ export default function TransactionSucess() {
         <div className="row justify-content-center violet-text">
           <h1>
             {" "}
-            Transaction Completed Successfully <i className="fas fa-check"></i>
+            Transaction Successful <i className="fas fa-check"></i>
           </h1>
           <h4 className="transaction-date">Date: {transactionDate}</h4>
           <div className="circle-image">

@@ -7,6 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TransactionSucess from "./Components/Transactions/TransactionSucess";
 import TransactionFail from "./Components/Transactions/TransactionFail";
 import Deposit from "./Components/Transactions/Deposit";
+import PaymentGateway from "./Components/Transactions/PaymentGateway";
+import LockAccount from "./Components/Savings/LockAccount";
+import TransactionHistory from "./Components/Transactions/TransactionHistory";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             element={<TransactionSucess />}
           ></Route>
           <Route path="/transactionfail" element={<TransactionFail />}></Route>
+          <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
+          <Route path="/lockaccount" element={<LockAccount />}></Route>
+          <Route path="/transactionhistory" element={<TransactionHistory />}></Route>
         </Routes>
       </BrowserRouter>
 

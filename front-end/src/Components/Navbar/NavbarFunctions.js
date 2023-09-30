@@ -20,9 +20,9 @@ export default function NavbarFunctions() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link violet-text" href="#">
+              <Link to={"/transactionhistory"} class="nav-link violet-text">
                   Statement
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link violet-text" href="#">

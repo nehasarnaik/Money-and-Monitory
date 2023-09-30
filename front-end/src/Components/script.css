@@ -4,4 +4,48 @@
     height: 50px;
     font-weight: 500;
   }
- 
+
+  .padding{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form_width{
+    padding-left: 38%;
+    padding-right: 38%;
+    padding-bottom: 10%;
+}
+
+.button{
+    background-color: #490778;
+    color: beige;
+}
+
+.top{
+    padding-top: 10%;
+    color: #490778;
+}
+
+  .beige-text {
+    color:  #490778; /* Set the desired font color (beige) */
+    padding-left: 1400px;
+  }
+
+  .btn-color{
+    background-color :#9B59B6
+  }
+
+  .icon{
+    padding-top: -10%;
+    padding-left: 90%;
+  }
+
+  .color{
+    color:  #490778;
+  }
+
+  .tablepadding{
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
