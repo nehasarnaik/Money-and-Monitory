@@ -20,7 +20,7 @@ export default function NavbarFunctions() {
                 </a>
               </li>
               <li className="nav-item">
-              <Link to={"/transactionhistory"} class="nav-link violet-text">
+                <Link to={"/transactionhistory"} class="nav-link violet-text">
                   Statement
                 </Link>
               </li>
@@ -30,9 +30,9 @@ export default function NavbarFunctions() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link violet-text" href="#">
+                <Link to={"/checkbalance"} class="nav-link violet-text">
                   Check Balance
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to={"/withdraw"} class="nav-link violet-text">
@@ -42,6 +42,11 @@ export default function NavbarFunctions() {
               <li className="nav-item">
                 <Link to={"/deposit"} class="nav-link violet-text">
                   Deposit
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/roundup"} class="nav-link violet-text">
+                  Round Ups
                 </Link>
               </li>
             </ul>
