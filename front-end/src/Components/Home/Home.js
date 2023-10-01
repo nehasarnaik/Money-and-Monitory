@@ -17,7 +17,7 @@ const Home = () => {
                     <Link to={'/register'} class="nav-link padding">Register</Link>
                 </li>
                 <li class="nav-item">
-                    <Link to={'/register'} class="nav-link padding">Login</Link>
+                    <Link to={'/login'} class="nav-link padding">Login</Link>
                 </li>
                 </ul>
             </div>
