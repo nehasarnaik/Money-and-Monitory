@@ -3,17 +3,110 @@ import { useNavigate } from "react-router-dom";
 import '../script.css'
 import './Register.css'
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
-    const[name,setName]=useState('');
-    const[email,setEmail]=useState('');
-    const[mobile,setMobile]=useState('');
-    const[dob,setDoB]=useState('');
-    const[address,setAddress]=useState('');
-    const[aadhar,setAadhar]=useState('');
-    const[password,setPassword]=useState('');
-    const[confirmPassword,setConfirmPassword]=useState('');
-    const navigate=useNavigate();
+    // const[name,setName]=useState('');
+    // const[email,setEmail]=useState('');
+    // const[mobile,setMobile]=useState('');
+    // const[dob,setDoB]=useState('');
+    // const[address,setAddress]=useState('');
+    // const[pin,setPin]=useState('');
+    // const[password,setPassword]=useState('');
+    // const[confirmPassword,setConfirmPassword]=useState('');
+    
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        mobile: "",
+        address: "",
+        dob: "",
+        pin: "",
+        password: "",
+        accountType:"Debit",
+        roundUpSavings: false
+      });
+
+     const [confirmPassword, setConfirmPassword] = useState('');
+   
+     const userUrl = "http://localhost:9090/user";
+
+    //accounts url
+     const debitAccountUrl = "http://localhost:9090/user/debitaccount";
+     const savingsAccountUrl = "http://localhost:9090/user/savingsaccount";
+
+    let navigate = useNavigate();
+
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+    const handleChange = (e) => {
+
+        const { name, value } = e.target;
+        if(name!=="roundUpSavings"){
+            setUser({ ...user, [name]: value });
+        }
+        else{
+            const { name, checked } = e.target;
+            setUser({ ...user, [name]: checked });
+        }
+       console.log(user.roundUpSavings)
+        if (e.target.name === "password") {
+        // Validate the password using a regular expression
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+        const isValid = passwordRegex.test(value);
+        setIsPasswordValid(isValid);
+        console.log(isValid);
+        }
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!isPasswordValid) {
+        // Display an error message for the invalid password
+        alert("Invalid password");
+        return;
+    }
+
+    const res = await axios.post(userUrl, user);
+    console.log(res.data.id);
+    console.log(user);
+    //createAccount(res.data.id);
+    navigate("/login");
+  };
+
+  //creating Account
+  const createAccount = async (id) => {
+    const debitAccountInfo = {
+      accountNumber: generateUniqueAccountNumber(),
+      accountType: user.accountType,
+      userId: id,
+      balance: 0, // Initial balance
+      transactionHistory: [], // Initial transaction history
+    };
+
+    await axios.post(debitAccountUrl, debitAccountInfo);
+
+    if(user.roundUpSavings===true){
+        const savingsAccountInfo = {
+            accountNumber: generateUniqueAccountNumber(),
+            accountType: "Savings",
+            userId: id,
+            balance: 0, // Initial balance
+            transactionHistory: [], // Initial transaction history
+          };
+      
+          await axios.post(savingsAccountUrl, savingsAccountInfo);
+      
+    }
+  };
+
+  //Generating a random account number
+  function generateUniqueAccountNumber() {
+    let x = Math.floor(Math.random() * 100000000000 + 1);
+    return x;
+  }
+
 
     return ( 
     <div>
@@ -34,62 +127,80 @@ const Register = () => {
             </div>
             </nav>
         </div>
-        <form >
+        <form onSubmit={onSubmit}>
             <div className="card-body form_width ">
                 <h2 className="top">Registration</h2>
                 <div className="row">
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={name}
-                            onChange={e=>setName(e.target.value)}
+                            type="text"
+                            name="name"
+                            value={user.name}
+                            onChange={(e) => handleChange(e)}
                             className="form-control" 
-                            placeholder="Name"></input>
+                            placeholder="Name"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={email}
-                            onChange={e=>setEmail(e.target.value)}
+                            type="text"
+                            name="email"
+                            value={user.email}
+                            onChange={e=>handleChange(e)}
                             className="form-control" 
-                            placeholder="Email ID"></input>
+                            placeholder="Email ID"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={mobile}
-                            onChange={e=>setMobile(e.target.value)}
+                            type="text"
+                            name="mobile"
+                            value={user.mobile}
+                            onChange={e=>handleChange(e)}
                             className="form-control" 
-                            placeholder="Mobile Number"></input>
+                            placeholder="Mobile Number"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={dob}
-                            onChange={e=>setDoB(e.target.value)}
+                            type="text"
+                            name="dob"
+                            value={user.dob}
+                            onChange={e=>handleChange(e)}
                             className="form-control" 
-                            placeholder="Date of Birth"></input>
+                            placeholder="Date of Birth"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={address}
-                            onChange={e=>setAddress(e.target.value)}
+                            type="text"
+                            name="address"
+                            value={user.address}
+                            onChange={e=>handleChange(e)}
                             className="form-control" 
-                            placeholder="Address"></input>
+                            placeholder="Address"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            value={password}
-                            onChange={e=>setPassword(e.target.value)}
+                            type="text"
+                            name="password"
+                            value={user.password}
+                            onChange={e=>handleChange(e)}
                             className="form-control" 
-                            placeholder="Password"></input>
+                            placeholder="Password"
+                            required></input>
                         </div>
                     </div>
                     <div className="col-lg-12 padding">
@@ -98,7 +209,20 @@ const Register = () => {
                             value={confirmPassword}
                             onChange={e=>setConfirmPassword(e.target.value)}
                             className="form-control" 
-                            placeholder="Confirm Password"></input>
+                            placeholder="Confirm Password"
+                            required></input>
+                        </div>
+                    </div>
+                    <div className="col-lg-12 padding">
+                        <div className="form-group">
+                            <input 
+                            type="text"
+                            name="pin"
+                            value={user.pin}
+                            onChange={e=>handleChange(e)}
+                            className="form-control" 
+                            placeholder="Create 4 digit pin"
+                            required></input>
                         </div>
                     </div>
                         <table>
@@ -106,7 +230,10 @@ const Register = () => {
                                 <td className="right">Round Ups savings feature</td>
                                 <td className="right">
                                     <label class="switch">  
-                                    <input type="checkbox"/>
+                                    <input type="checkbox"
+                                    name="roundUpSavings"
+                                    id="roundUpSavings"
+                                    onChange={e=>handleChange(e)}/>
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
