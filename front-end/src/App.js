@@ -29,7 +29,6 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/" element={<Dash_board></Dash_board>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/deposit" element={<Deposit />}></Route>
@@ -50,6 +49,7 @@ function App() {
           <Route path="/checkbalance" element={<CheckBalance />}></Route>
           <Route path="/viewprofile/:userId" element={<ViewProfile />}></Route>
           <Route path="/roundup" element={<RoundUp />}></Route>
+          <Route path="/dashboard" element={<Dash_board />}></Route>
         </Routes>
       </BrowserRouter><div id="footer"></div>
     </div>

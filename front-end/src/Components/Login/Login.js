@@ -10,10 +10,28 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // Add your authentication logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
-        //navigate('/dashboard');
+
+        fetch('http://localhost:9090/user/'+username+'/'+password)
+        .then((res) => res.json())
+         .then((data) => {
+            if(data){
+                React.createContext();
+                fetch('http://localhost:9090/user/'+username)
+                .then((res1) => res1.json())
+                .then((data1) => {
+                        console.log(data1);
+                        navigate('/dashboard', { state: { myData: data1 } });
+                })
+                .catch((err1) => {
+                    console.log(err1.message);
+                });
+            }else{
+                console.log("Invalid email or password")
+            }
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
     };
 
     return (
@@ -49,7 +67,7 @@ const Login = () => {
                                             className="form-control"
                                             id="exampleInputEmail1"
                                             aria-describedby="emailHelp"
-                                            placeholder="Enter email"
+                                            placeholder="Email ID"
                                             value={username}
                                             onChange={(e) => setUsername(e.target.value)}
                                         />

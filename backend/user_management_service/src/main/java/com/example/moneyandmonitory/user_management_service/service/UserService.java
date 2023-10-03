@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.example.moneyandmonitory.user_management_service.UniqueAccountNumber.AccountNumber.getID;
@@ -40,5 +41,27 @@ public class UserService {
             savingsAccountRepository.save(savingsAccount);
         }
         return userBO;
+    }
+
+    public boolean login(String email, String password) {
+        List<User> userList = userRepository.findAll();
+        for(User user:userList){
+            if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public User userDetails(String email) {
+        List<User> userList = userRepository.findAll();
+        for(User user:userList){
+            if(user.getEmail().equals(email)){
+                return user;
+            }
+        }
+
+        return null;
     }
 }

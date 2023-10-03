@@ -9,10 +9,10 @@ export default function NavbarFunctions() {
         <div className="row">
           <div className="col">
             <ul className="navbar-nav">
-              <li className="nav-item ">
-                <a className="nav-link violet-text" href="#">
+            <li className="nav-item">
+                <Link to={"/dashboard"} class="nav-link violet-text">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link violet-text" href="#">

@@ -1,25 +1,33 @@
 /* Sidebar.css */
 
 .sidebar {
-    width: 20%;
-    height: 100%;
-    background-color: #5c14a9; /* Background color for the sidebar */
-    color: #fff; /* Text color */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-  }
+  width: 90%;
+  height: 300px;
+  background-color: #fbfafc; /* Background color for the sidebar */
+  color: #490778; /* Text color */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  padding: 20px;
+}
+
+.profile-image {
+  width: 100px; /* Adjust the size of the profile image */
+  height: 100px; /* Adjust the size of the profile image */
+  border-radius: 50%; /* Make it a circle */
+  margin-bottom: 10px;
   
-  .profile-image {
-    width: 100px; /* Adjust the size of the profile image */
-    height: 100px; /* Adjust the size of the profile image */
-    border-radius: 50%; /* Make it a circle */
-    margin-bottom: 10px;
-  }
-  
-  .user-info {
-    text-align: center;
-  }
-  
+}
+
+.user-info {
+  text-align: left;
+}
+
+.h1{
+  width: 700px;
+}
+
+.h5{
+  width: 800px;
+}
