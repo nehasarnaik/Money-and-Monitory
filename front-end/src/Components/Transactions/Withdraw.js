@@ -3,11 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
 import "./withdraw.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Withdraw() {
   const [selectedAccount, setSelectedAccount] = useState(""); // State to store selected account
   const [withdrawAmount, setWithdrawAmount] = useState(""); // State to store withdrawal amount
 
+  let navigate = useNavigate();
   const handleAccountChange = (event) => {
     setSelectedAccount(event.target.value);
   };
@@ -16,9 +19,47 @@ export default function Withdraw() {
     setWithdrawAmount(event.target.value);
   };
 
-  const handleSubmit = () => {
-    // Handle submission logic here (e.g., making a withdrawal)
-    // You can access the selectedAccount and withdrawAmount state values here
+  const handleSubmit = async () => {
+    //Assuming withdraw only for savings account
+    //getting debit card number from the database to check
+    const userId = 2;
+    await axios
+      .get(`http://localhost:9091/account/savingsaccount/${userId}`)
+      .then((res) => {
+        console.log("from spring boot", res.data.savingsAccountNumber);
+        console.log("from react", selectedAccount);
+
+        if (selectedAccount !== String(res.data.savingsAccountNumber)) {
+          alert("enter a valid account number");
+        } else {
+          axios
+            .put(
+              `http://localhost:9091/account/savingsaccount/withdraw/${userId}/${withdrawAmount}`
+            )
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                alert("Withdraw Successful");
+                console.log(res.data.referenceNumber);
+                let transactionId = res.data.referenceNumber.toString();
+                console.log(transactionId);
+                navigate(`/transactionsuccess/${transactionId}`);
+              }
+            })
+            .catch((error) => {
+              if (error.response && error.response.status === 400) {
+                // Handle the 400 Bad Request error and show an alert
+                alert("Insufficient funds!");
+              } else {
+                // Handle other errors here
+                navigate("/transactionfail");
+              }
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     console.log("Selected Account:", selectedAccount);
     console.log("Withdraw Amount:", withdrawAmount);
   };
@@ -47,24 +88,23 @@ export default function Withdraw() {
                 <form className="text-start white-text">
                   <div className="mb-3">
                     <label htmlFor="accountSelect" className="form-label">
-                      Select Account
+                      Account Number
                     </label>
-                    <select
-                      className="form-select"
-                      id="accountSelect"
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="account"
                       value={selectedAccount}
                       onChange={handleAccountChange}
-                    >
-                      <option value="account1">Savings Account</option>
-                      <option value="account2">Debit Card Account</option>
-                    </select>
+                      placeholder="Enter Account number"
+                    />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="amount" className="form-label">
                       Amount
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       id="amount"
                       value={withdrawAmount}

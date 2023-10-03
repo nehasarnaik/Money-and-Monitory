@@ -1,13 +1,14 @@
 import React from "react";
 import NavBarUser from "../Navbar/NavBarUser";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import successimg from "../../Assets/sucess.png";
 
 export default function TransactionSucess() {
   const transactionDate = new Date().toLocaleDateString(); // Get the current date
 
   // Generate a random transaction ID (you can replace this with your logic)
   //temporary -- technically this should come from withdraw component
-  const transactionId = Math.floor(Math.random() * 1000000);
+  const transactionId = useParams().transactionId;
 
   return (
     <div>
@@ -23,7 +24,7 @@ export default function TransactionSucess() {
             {/* You can replace this with your circle image */}
             <br></br>
             <img
-              src="sucess.png" // Replace with your circle image URL
+              src={successimg} // Replace with your circle image URL
               alt="Circle"
               width="150"
               height="150"

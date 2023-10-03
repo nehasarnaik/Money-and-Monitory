@@ -12,10 +12,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
-
     private Date date;
-    private long senderAccountNumber;
-    private long receiverAccountNumber;
+    //empty for deposit/withdraw
+    // when payment is done recievers account number is stored
+    private long narration;
+
     private UUID referenceNumber;
     private double amount;
     private double closingBalance;
