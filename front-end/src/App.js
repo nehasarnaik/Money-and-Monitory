@@ -32,14 +32,18 @@ function App() {
           <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/deposit" element={<Deposit />}></Route>
           <Route
-            path="/transactionsuccess"
+            path="/transactionsuccess/:transactionId"
             element={<TransactionSucess />}
           ></Route>
+
           <Route path="/transactionfail" element={<TransactionFail />}></Route>
           <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
           <Route path="/lockaccount" element={<LockAccount />}></Route>
-          <Route path="/transactionhistory" element={<TransactionHistory />}></Route>
-          
+          <Route
+            path="/transactionhistory"
+            element={<TransactionHistory />}
+          ></Route>
+
           <Route path="/login" element={<Login />}></Route>
           <Route path="/checkbalance" element={<CheckBalance />}></Route>
           <Route path="/viewprofile/:userId" element={<ViewProfile />}></Route>
