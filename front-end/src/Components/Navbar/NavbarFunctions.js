@@ -44,6 +44,11 @@ export default function NavbarFunctions() {
                   Deposit
                 </Link>
               </li>
+              {<li className="nav-item">
+                <Link to={"/Dash_board"} class="nav-link violet-text">
+                  Dashboard
+                </Link>
+              </li>}
             </ul>
           </div>
         </div>
