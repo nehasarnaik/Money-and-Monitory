@@ -2,7 +2,7 @@ import React from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 
-export default function NavbarFunctions() {
+export default function NavbarSavings() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
@@ -14,25 +14,16 @@ export default function NavbarFunctions() {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <a className="nav-link violet-text" href="#">
-                  Pay
-                </a>
-              </li>
+
               <li className="nav-item">
                 <Link to={"/transactionhistory"} class="nav-link violet-text">
                   Statement
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/savingsaccount"} class="nav-link violet-text">
+                <a className="nav-link violet-text" href="#">
                   Savings Account
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/checkbalance"} class="nav-link violet-text">
-                  Check Balance
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
                 <Link to={"/withdraw"} class="nav-link violet-text">
@@ -40,22 +31,8 @@ export default function NavbarFunctions() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/deposit"} class="nav-link violet-text">
-                  Deposit
-                </Link>
-              </li>
-
-              {
-                <li className="nav-item">
-                  <Link to={"/Dash_board"} class="nav-link violet-text">
-                    Dashboard
-                  </Link>
-                </li>
-              }
-
-              <li className="nav-item">
-                <Link to={"/roundup"} class="nav-link violet-text">
-                  Round Ups
+                <Link to={"/lockaccount"} class="nav-link violet-text">
+                  Lock Savings Account
                 </Link>
               </li>
             </ul>

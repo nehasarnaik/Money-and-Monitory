@@ -20,42 +20,48 @@ import ViewProfile from "./Components/ViewProfile/ViewProfile";
 import RoundUp from "./Components/RoundUp/RoundUp";
 
 import { UserProvider } from "./UserContext";
+import Savings from "./Components/Savings/Savings";
 
 function App() {
   return (
     <UserProvider>
-    <div className="App">
+      <div className="App">
         <BrowserRouter>
-        <div className="header background_colour">
-          <h1 className="text_padding">Product Name</h1>
-        </div>
+          <div className="header background_colour">
+            <h1 className="text_padding">Product Name</h1>
+          </div>
 
-        <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/register" element={<Register></Register>}></Route>
-          <Route path="/withdraw" element={<Withdraw />}></Route>
-          <Route path="/deposit" element={<Deposit />}></Route>
-          <Route
-            path="/transactionsuccess/:transactionId"
-            element={<TransactionSucess />}
-          ></Route>
+          <Routes>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/withdraw" element={<Withdraw />}></Route>
+            <Route path="/deposit" element={<Deposit />}></Route>
+            <Route
+              path="/transactionsuccess/:transactionId"
+              element={<TransactionSucess />}
+            ></Route>
 
-          <Route path="/transactionfail" element={<TransactionFail />}></Route>
-          <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
-          <Route path="/lockaccount" element={<LockAccount />}></Route>
-          <Route
-            path="/transactionhistory"
-            element={<TransactionHistory />}
-          ></Route>
+            <Route
+              path="/transactionfail"
+              element={<TransactionFail />}
+            ></Route>
+            <Route path="/paymentgateway" element={<PaymentGateway />}></Route>
+            <Route path="/savingsaccount" element={<Savings />}></Route>
+            <Route path="/lockaccount" element={<LockAccount />}></Route>
+            <Route
+              path="/transactionhistory"
+              element={<TransactionHistory />}
+            ></Route>
 
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/checkbalance" element={<CheckBalance />}></Route>
-          <Route path="/viewprofile" element={<ViewProfile />}></Route>
-          <Route path="/roundup" element={<RoundUp />}></Route>
-          <Route path="/dashboard" element={<Dash_board />}></Route>
-        </Routes>
-      </BrowserRouter><div id="footer"></div>
-    </div>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/checkbalance" element={<CheckBalance />}></Route>
+            <Route path="/viewprofile" element={<ViewProfile />}></Route>
+            <Route path="/roundup" element={<RoundUp />}></Route>
+            <Route path="/dashboard" element={<Dash_board />}></Route>
+          </Routes>
+        </BrowserRouter>
+        <div id="footer"></div>
+      </div>
     </UserProvider>
   );
 }

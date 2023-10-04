@@ -1,65 +1,70 @@
-import React from "react";
-import NavBarUser from "../Navbar/NavBarUser";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
-import { useState } from "react";
+import NavBarUser from "../Navbar/NavBarUser";
 import "./withdraw.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../UserContext";
 
 export default function Deposit() {
+  const { user } = useUser();
   const [selectedAccount, setSelectedAccount] = useState(""); // State to store selected account
   const [depositAmount, setDepositAmount] = useState(""); // State to store Deposit amount
 
   let navigate = useNavigate();
 
-  const handleAccountChange = (event) => {
-    setSelectedAccount(event.target.value);
-  };
-
   const handleAmountChange = (event) => {
     setDepositAmount(event.target.value);
   };
 
-  const handleSubmit = async () => {
-    //Deposit only for Debit card for now
-
-    //getting debit card number from the database to check
-    const userId = 1;
-    await axios
+  useEffect(() => {
+    // Fetch the debit account number when the component mounts
+    const userId = user.userId;
+    axios
       .get(`http://localhost:9091/account/debitaccount/${userId}`)
       .then((res) => {
-        if (selectedAccount !== String(res.data.debitAccountNumber)) {
-          alert("enter a valid account number");
-        } else {
-          axios
-            .put(
-              `http://localhost:9091/account/debitaccount/deposit/${userId}/${depositAmount}`
-            )
-            .then((res) => {
-              console.log(res);
-              if (res.status === 200) {
-                alert("Deposit Successful");
-                console.log(res.data.referenceNumber);
-                let transactionId = res.data.referenceNumber.toString();
-                console.log(transactionId);
-                navigate(`/transactionsuccess/${transactionId}`);
-              } else {
-                navigate("/transactionfail");
-              }
-            });
-        }
+        setSelectedAccount(String(res.data.debitAccountNumber));
       })
       .catch((err) => {
         console.log(err);
       });
+  }, [user.userId]); // Dependency array ensures this effect runs when userId changes
 
-    console.log("Selected Account:", selectedAccount);
-    console.log("Withdraw Amount:", depositAmount);
+  const handleSubmit = async () => {
+    // Deposit only for Debit card for now
+
+    // Getting debit card number from the database to check
+    const userId = user.userId;
+    await axios
+      .put(
+        `http://localhost:9091/account/debitaccount/deposit/${userId}/${depositAmount}`
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          alert("Deposit Successful");
+          console.log(res.data.referenceNumber);
+          let transactionId = res.data.referenceNumber.toString();
+          console.log(transactionId);
+          navigate(`/transactionsuccess/${transactionId}`);
+        } else {
+          navigate("/transactionfail");
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          // Handle the 400 Bad Request error and show an alert
+          alert("Insufficient funds!");
+        } else {
+          // Handle other errors here
+          navigate("/transactionfail");
+        }
+      });
   };
 
   const handleCancel = () => {
     // Handle cancel logic here (e.g., resetting form fields)
-    setSelectedAccount("");
     setDepositAmount("");
   };
 
@@ -88,8 +93,7 @@ export default function Deposit() {
                       className="form-control"
                       id="account"
                       value={selectedAccount}
-                      onChange={handleAccountChange}
-                      placeholder="Enter Account Number to Deposit"
+                      disabled
                     />
                   </div>
                   <div className="mb-3">
