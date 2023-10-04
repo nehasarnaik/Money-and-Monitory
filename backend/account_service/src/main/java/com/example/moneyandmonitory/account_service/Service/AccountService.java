@@ -17,10 +17,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 @Service
 public class AccountService {
@@ -172,5 +177,16 @@ public class AccountService {
         System.out.println(debitAccount.getDebitAccountNumber());
         System.out.println(debitAccount.getTransactions());
         return debitAccount.getTransactions();
+    }
+
+    public void lockAccount(long userId,String lockDate) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse(lockDate, formatter);
+        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
+        savingsAccount.setLockAccount(date);
+        savingsAccountRepository.save(savingsAccount);
+
+
     }
 }
