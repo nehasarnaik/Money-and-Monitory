@@ -34,7 +34,7 @@ export default function TransactionSucess() {
             <br></br>
             <h3 className="transaction-id">Transaction ID: {transactionId}</h3>
             <br></br>
-            <Link className="btn violet-button" to="/home">
+            <Link className="btn violet-button" to="/dashboard">
               Home
             </Link>
           </div>

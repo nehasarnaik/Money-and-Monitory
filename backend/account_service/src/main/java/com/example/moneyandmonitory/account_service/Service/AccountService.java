@@ -1,5 +1,6 @@
 package com.example.moneyandmonitory.account_service.Service;
 
+import com.example.moneyandmonitory.account_service.DTO.MoneyTransferRequestDTO;
 import com.example.moneyandmonitory.account_service.Repository.DebitAccountRepository;
 import com.example.moneyandmonitory.account_service.Repository.SavingsAccountRepository;
 import com.example.moneyandmonitory.account_service.model.DebitAccount;
@@ -43,6 +44,14 @@ public class AccountService {
         return savingsAccountRepository.findByuserId(userId);
     }
 
+    private Transaction createTransaction(double amount, String narration, double closingBalance) {
+
+        if(amount < 0)
+        {
+            return new Transaction(new Date(),narration , UUID.randomUUID(), -amount, 0, closingBalance);
+        }
+        return new Transaction(new Date(),narration , UUID.randomUUID(), 0,amount, closingBalance);
+    }
     @Transactional
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(long userId, double amount) {
 
@@ -54,7 +63,7 @@ public class AccountService {
         }
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
-        Transaction t = createTransaction(-amount, 0, closingBal);
+        Transaction t = createTransaction(-amount, "Debited " + amount, closingBal);
 
         Update update = new Update()
                 .inc("balance", -amount)  // Decrement the balance by the specified amount
@@ -71,19 +80,12 @@ public class AccountService {
         }
     }
 
-    private Transaction createTransaction(double amount, long narration, double closingBalance) {
-
-        return new Transaction(new Date(),narration , UUID.randomUUID(), amount, closingBalance);
-    }
-
-
-
-    public ResponseEntity<Transaction> depositFromDebitAccount(long userId, double amount) {
+    public ResponseEntity<Transaction> depositToDebitAccount(long userId, double amount) {
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
         double newBalance = curBal + amount;
-        Transaction t = createTransaction(amount, 0, newBalance);
+        Transaction t = createTransaction(amount, "credited " + amount, newBalance);
         Update update = new Update()
                 .inc("balance", amount)  // Decrement the balance by the specified amount
                 .push("transactions", t ); // Add the new transaction
@@ -100,7 +102,32 @@ public class AccountService {
     }
 
 
-    public ResponseEntity<Transaction> paymentFromDebitAccount(long userId, double amount, long recvAcc) {
+    //withdraw from debitaccount
+
+
+    public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
+        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
+        double curBal = savingsAccount.getBalance();
+        Query query = new Query(Criteria.where("userId").is(userId));
+        double newBalance = curBal + amount;
+        Transaction t = createTransaction(amount, "", newBalance);
+        Update update = new Update()
+                .inc("balance", amount)  // Decrement the balance by the specified amount
+                .push("transactions", t ); // Add the new transaction
+        SavingsAccount modifiedAcc = mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().returnNew(true), SavingsAccount.class);
+
+        if(modifiedAcc != null)
+        {
+            return new ResponseEntity<>(t, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        }
+
+    }
+
+    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
+
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         if(curBal < amount)
@@ -109,8 +136,8 @@ public class AccountService {
         }
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
-
-        Transaction t =  createTransaction(-amount, recvAcc, closingBal);
+        String narration = "debited " + amount ;
+        Transaction t =  createTransaction(-amount, narration, closingBal);
 
         Update update = new Update()
                 .inc("balance", -amount)  // Decrement the balance by the specified amount
@@ -128,11 +155,24 @@ public class AccountService {
 
     }
 
+<<<<<<< HEAD
     public double getSavingsAccountBalance(long userId) {
         return savingsAccountRepository.findByuserId(userId).getBalance();
     }
 
     public double getDebitAccountBalance(long userId) {
         return debitAccountRepository.findByuserId(userId).getBalance();
+=======
+    public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
+        MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
+        DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
+        double finalAmount = mt.getAmount();
+        if(debitAccount.roundUp==true){
+            finalAmount=Math.ceil(mt.getAmount());
+            double savingsAmount=finalAmount-mt.getAmount();
+            depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
+        }
+        return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
+>>>>>>> 726babd50a24a3b4c3dda9a74b2ad60fc541c757
     }
 }

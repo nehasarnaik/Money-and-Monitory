@@ -31,6 +31,7 @@ public class UserService {
         User userBO = userRepository.save(user);
         DebitAccount debitAccount = new DebitAccount();
         debitAccount.setUserId(userBO.getUserId());
+        debitAccount.roundUp=userBO.roundUpSavings;
         debitAccountRepository.save(debitAccount);
 
         if(userBO.roundUpSavings){
