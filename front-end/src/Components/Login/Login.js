@@ -2,11 +2,15 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Login.css';
+import { useUser } from '../../UserContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+
+    const { updateUser } = useUser();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -15,22 +19,24 @@ const Login = () => {
         .then((res) => res.json())
          .then((data) => {
             if(data){
-                React.createContext();
+                
                 fetch('http://localhost:9090/user/'+username)
                 .then((res1) => res1.json())
                 .then((data1) => {
                         console.log(data1);
-                        navigate('/dashboard', { state: { myData: data1 } });
+                        updateUser(data1);
+                        navigate('/dashboard');
                 })
                 .catch((err1) => {
-                    console.log(err1.message);
+                    
+                    setError(err1.message);
                 });
             }else{
-                console.log("Invalid email or password")
+                setError("Invalid email or password");
             }
          })
          .catch((err) => {
-            console.log(err.message);
+            setError(err.message);
          });
     };
 
@@ -82,9 +88,14 @@ const Login = () => {
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
-                                    <button
+                                    {error && ( // Display the error message if error is not null
+                                        <p className="error-message">
+                                            {error}
+                                        </p>
+                                    )}
+                                   <button
                                         type="submit"
-                                        className="btn btn-primary btn-block mt-4 custom-button"
+                                        className={`btn btn-primary btn-block custom-button ${error ? '' : 'mt-4'}`}
                                         onClick={handleLogin}
                                     >
                                         Login

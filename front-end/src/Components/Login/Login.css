@@ -47,3 +47,11 @@
     flex-basis: 29.5%;
     /* Adjust this value to your desired width */
 }
+
+.error-message {
+    color: red;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 9px;
+    /* Add more styles as needed */
+}

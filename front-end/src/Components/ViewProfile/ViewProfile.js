@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
+import React from 'react';
 import './ViewProfile.css';
+import { useUser } from '../../UserContext';
+
 
 const ViewProfile = () => {
-  const { userId } = useParams();
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios.get(`/api/users/${userId}`)
-      .then((response) => {
-        setUser(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-        setLoading(false);
-      });
-  }, [userId]);
-
+ 
+  const { user } = useUser(); 
   return (
     // Click on the image logo or username to ViewProfile
     <div className="container view-profile mt-5">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      
         <div className="card mb-5">
           <div className="card-body view-profile">
             <h5 className="card-title view-profile mb-4 violet-text bold-text">YOUR PROFILE</h5>
@@ -50,7 +33,6 @@ const ViewProfile = () => {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 }

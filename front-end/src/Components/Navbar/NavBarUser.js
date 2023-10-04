@@ -2,14 +2,16 @@ import React from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import userprofile from "../../Assets/user-profile.png";
+import { useUser } from '../../UserContext';
 
 export default function NavBarUser() {
+  const { user } = useUser(); 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-violet">
       <div className="container-fluid">
         <div className="d-flex justify-content-between w-100">
           <Link
-            to="/viewprofile/:userId"
+            to="/viewprofile"
             className="navbar-brand"
             style={{ color: "#490778" }}
           >
@@ -20,7 +22,7 @@ export default function NavBarUser() {
               height="30"
               className="d-inline-block align-top rounded-circle me-2"
             />
-            Username
+            {user.name}
           </Link>
           <button
             className="btn"

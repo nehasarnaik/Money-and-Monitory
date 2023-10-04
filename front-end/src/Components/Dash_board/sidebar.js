@@ -1,9 +1,10 @@
 import React from 'react';
 import './sidebar.css'; 
+import { useUser } from '../../UserContext';
 
-const Sidebar = (myData) => {
-  const user = myData.data;
-  
+const Sidebar = () => {
+ 
+  const { user } = useUser(); 
   return (
     <div className="sidebar">
       <div className="user-profile">

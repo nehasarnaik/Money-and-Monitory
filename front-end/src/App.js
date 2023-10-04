@@ -19,8 +19,11 @@ import CheckBalance from "./Components/Transactions/CheckBalance";
 import ViewProfile from "./Components/ViewProfile/ViewProfile";
 import RoundUp from "./Components/RoundUp/RoundUp";
 
+import { UserProvider } from "./UserContext";
+
 function App() {
   return (
+    <UserProvider>
     <div className="App">
         <BrowserRouter>
         <div className="header background_colour">
@@ -47,12 +50,13 @@ function App() {
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/checkbalance" element={<CheckBalance />}></Route>
-          <Route path="/viewprofile/:userId" element={<ViewProfile />}></Route>
+          <Route path="/viewprofile" element={<ViewProfile />}></Route>
           <Route path="/roundup" element={<RoundUp />}></Route>
           <Route path="/dashboard" element={<Dash_board />}></Route>
         </Routes>
       </BrowserRouter><div id="footer"></div>
     </div>
+    </UserProvider>
   );
 }
 
