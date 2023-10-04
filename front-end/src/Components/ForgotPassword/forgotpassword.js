@@ -1,73 +1,60 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import RegisterNav from '../Navbar/RegisterNav';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
 
-  const [email, setEmail] = useState('');
-  const [pin, setPin] = useState('');
-  const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    pin: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+    
+    if (e.target.name === "password") {
+    // Validate the password using a regular expression
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    const isValid = passwordRegex.test(value);
+    console.log(isValid);
+    }
+};
 
   const handleChangePassword = () => {
-    if (newPassword === confirmPassword) {
+
+    if(!isPasswordValid){
+        alert("Invalid Password");
+    }
+    else if (user.password === confirmPassword) {
       // Passwords match, you can proceed with changing the password
       // You can add your logic to update the password in your backend here
-      console.log('Password changed successfully');
-    } else {
-      
-      setError('Passwords do not match');
+      axios.put("http://localhost:9090/user/forgotPassword", user)
+      .then((res) => {
+        if (res.status === 200) {
+            alert("Password Changed Successfully");
+            navigate("/login");
+        }
+      })
+      .catch((error) => {
+        alert("Incorrect Pin");
+      });
+    }
+    else {
+        alert("Password missmatch");
     }
   };
 
-  // return (
-  //   <div>
-  //     <h2>Forgot Password</h2>
-  //     <div>
-  //       <label>Enter PIN:</label>
-  //       <input type="text" value={pin} onChange={(e) => setPin(e.target.value)} />
-  //     </div>
-  //     <div>
-  //       <label>New Password:</label>
-  //       <input
-  //         type="password"
-  //         value={newPassword}
-  //         onChange={(e) => setNewPassword(e.target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       <label>Confirm New Password:</label>
-  //       <input
-  //         type="password"
-  //         value={confirmPassword}
-  //         onChange={(e) => setConfirmPassword(e.target.value)}
-  //       />
-  //     </div>
-  //     {error && <p style={{ color: 'red' }}>{error}</p>}
-  //     <button onClick={handleChangePassword}>Change</button>
-  //   </div>
-  // );
-
   return (
     <div>
-        <div>
-            <nav class="navbar navbar-expand-lg  nav background">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <Link className="nav-link"></Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link to={'/register'} class="nav-link padding">Register</Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link to={'/login'} class="nav-link padding">Login</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
+        <RegisterNav></RegisterNav>
         <div className="login-container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-4 custom-column">
@@ -83,20 +70,21 @@ function ForgotPassword() {
                                         aria-describedby="emailHelp"
                                         placeholder="Email ID"
                                         required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        name="email"
+                                        value={user.email}
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
                                 <div className="form-group mb-3 mt-4">
                                     <input
                                         type="password"
                                         className="form-control"
-                                        id="exampleInputEmail1"
-                                        aria-describedby="emailHelp"
+                                        id="pin"
                                         placeholder="Pin"
                                         required
-                                        value={pin}
-                                        onChange={(e) => setPin(e.target.value)}
+                                        name="pin"
+                                        value={user.pin}
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
                                 <div className="form-group mb-3 mt-4">
@@ -106,15 +94,16 @@ function ForgotPassword() {
                                         id="exampleInputPassword1"
                                         placeholder="Set new password"
                                         required
-                                        value={newPassword}
-                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        name="password"
+                                        value={user.password}
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
                                 <div className="form-group mb-3 mt-4">
                                     <input
                                         type="password"
                                         className="form-control"
-                                        id="exampleInputPassword1"
+                                        id="exampleInputPassword2"
                                         placeholder="Confirm password"
                                         required
                                         value={confirmPassword}

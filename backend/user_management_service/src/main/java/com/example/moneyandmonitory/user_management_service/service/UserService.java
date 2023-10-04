@@ -1,5 +1,6 @@
 package com.example.moneyandmonitory.user_management_service.service;
 
+import com.example.moneyandmonitory.user_management_service.DTO.ForgotPasswordRequestDTO;
 import com.example.moneyandmonitory.user_management_service.model.DebitAccount;
 import com.example.moneyandmonitory.user_management_service.model.SavingsAccount;
 import com.example.moneyandmonitory.user_management_service.model.User;
@@ -12,6 +13,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,6 +101,18 @@ public class UserService {
             savingsAccount.setSavingsAccountNumber(debitAccount.getSavingsAccountNumber());
             savingsAccount.setRoundUp(roundup);
             savingsAccountRepository.save(savingsAccount);
+        }
+    }
+
+    public ResponseEntity<ForgotPasswordRequestDTO> forgotPassword(ForgotPasswordRequestDTO forgotPasswordRequestDTO) {
+        User user = userRepository.findByemail(forgotPasswordRequestDTO.getEmail());
+        System.out.println(user.getPassword());
+        if(user.getPin()==forgotPasswordRequestDTO.getPin()){
+            user.setPassword(forgotPasswordRequestDTO.getPassword());
+            userRepository.save(user);
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 }
