@@ -186,6 +186,11 @@ public class AccountService {
         return debitAccount.getTransactions();
     }
 
+
+    public List<Transaction> transactionHistorySavingsAccount(long userId) {
+        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
+        return savingsAccount.getTransactions();
+    }
     public void lockAccount(long userId,Date lockDate) {
 
         Query query = new Query(Criteria.where("userId").is(userId));

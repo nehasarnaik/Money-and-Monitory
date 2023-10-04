@@ -78,11 +78,15 @@ public class AccountController {
         return accountService.transactionHistoryForDebitAccount(userId);
     }
 
+    @GetMapping("/savings/transactionhistory/{userId}")
+    public List<Transaction> transactionHistoryForSavingsAccount(@PathVariable long userId){
+        return accountService.transactionHistorySavingsAccount(userId);
+    }
+
     @PutMapping("lockaccount/{userId}/{date}")
     public void lockAccount(@PathVariable long userId, @PathVariable Date date){
         accountService.lockAccount(userId,date);
     }
-
 
 }
 

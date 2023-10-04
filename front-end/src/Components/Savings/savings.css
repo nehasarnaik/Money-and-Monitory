@@ -26,6 +26,15 @@
     margin-right: 370px;
 }
 
+.alert-light-violet{
+    color:#490778;
+    background-color: rgb(192, 186, 186);
+}
+
+.text-clr{
+    color:#490778;
+}
+
 .width{
     padding-bottom: 3%;
 }
@@ -33,3 +42,4 @@
 .calender{
     padding-right: 70%;
 }
+

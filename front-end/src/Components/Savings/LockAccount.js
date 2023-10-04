@@ -31,10 +31,10 @@ export default function LockAccount() {
     navigate("/dashboard");
   };
 
-  
   return (
     <div className="width">
       <NavBarUser />
+      <NavbarSavings />
       <NavbarFunctions />
       
         <br></br>

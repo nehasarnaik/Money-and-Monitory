@@ -16,15 +16,14 @@ export default function NavbarSavings() {
               </li>
 
               <li className="nav-item">
-                <Link to={"/transactionhistory"} class="nav-link violet-text">
+                <Link
+                  to={"/savings/transactionhistory"}
+                  class="nav-link violet-text"
+                >
                   Statement
                 </Link>
               </li>
-              <li className="nav-item">
-                <a className="nav-link violet-text" href="#">
-                  Savings Account
-                </a>
-              </li>
+
               <li className="nav-item">
                 <Link to={"/withdraw"} class="nav-link violet-text">
                   Withdraw

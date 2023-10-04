@@ -1,8 +1,24 @@
 import React from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../UserContext";
 
 export default function NavbarFunctions() {
+  const { user } = useUser(); // Get the user from the context
+  let navigate = useNavigate(); // Get the navigate function from the router
+
+  const handleSavingsAccountLinkClick = (event) => {
+    // Check if the user's roundoff is enabled
+    console.log(user);
+    if (user && user.roundUpSavings) {
+      // If roundoff is enabled, navigate to the Savings Account page
+      return;
+    } else {
+      // If roundoff is not enabled, show an alert
+      alert("Round Off is not enabled. Please enable it first.");
+      event.preventDefault();
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
@@ -25,7 +41,11 @@ export default function NavbarFunctions() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/savingsaccount"} class="nav-link violet-text">
+                <Link
+                  to="/savingsaccount"
+                  className="nav-link violet-text"
+                  onClick={handleSavingsAccountLinkClick} // Add the click event handler
+                >
                   Savings Account
                 </Link>
               </li>
