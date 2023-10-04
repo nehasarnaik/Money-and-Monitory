@@ -186,14 +186,15 @@ public class AccountService {
         return debitAccount.getTransactions();
     }
 
-    public void lockAccount(long userId,String lockDate) {
+    public void lockAccount(long userId,Date lockDate) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.parse(lockDate, formatter);
-        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
-        savingsAccount.setLockAccount(date);
-        savingsAccountRepository.save(savingsAccount);
+        Query query = new Query(Criteria.where("userId").is(userId));
 
+        Update update = new Update().set("lockAccount",lockDate);
+
+        FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
+
+        mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
 
     }
 }

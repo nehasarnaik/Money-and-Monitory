@@ -45,6 +45,11 @@ export default function NavbarFunctions() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link to={"/lockaccount"} class="nav-link violet-text">
+                  Lock Account
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to={"/roundup"} class="nav-link violet-text">
                   Round Ups
                 </Link>

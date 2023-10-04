@@ -79,8 +79,10 @@ public class AccountController {
     }
 
     @PutMapping("lockaccount/{userId}/{date}")
-    public void lockAccount(@PathVariable long userId, @PathVariable String date){
+    public void lockAccount(@PathVariable long userId, @PathVariable Date date){
         accountService.lockAccount(userId,date);
     }
+
+
 }
 

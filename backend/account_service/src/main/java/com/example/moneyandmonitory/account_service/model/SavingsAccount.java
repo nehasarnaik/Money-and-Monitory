@@ -20,5 +20,5 @@ public class SavingsAccount {
     private double balance;
     public boolean roundUp;
     private List<Transaction> transactions;
-    private LocalDate lockAccount;
+    private Date lockAccount;
 }

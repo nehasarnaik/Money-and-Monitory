@@ -6,15 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
-    // const[name,setName]=useState('');
-    // const[email,setEmail]=useState('');
-    // const[mobile,setMobile]=useState('');
-    // const[dob,setDoB]=useState('');
-    // const[address,setAddress]=useState('');
-    // const[pin,setPin]=useState('');
-    // const[password,setPassword]=useState('');
-    // const[confirmPassword,setConfirmPassword]=useState('');
-    
+   
     const [user, setUser] = useState({
         name: "",
         email: "",
