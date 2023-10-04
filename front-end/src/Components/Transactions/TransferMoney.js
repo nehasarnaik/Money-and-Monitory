@@ -25,7 +25,6 @@ export default function TransferMoney() {
         cvv: ""
       });
 
-
     let navigate = useNavigate();
 
     const handleChange = (e) => {

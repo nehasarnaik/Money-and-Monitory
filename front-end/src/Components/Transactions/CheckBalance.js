@@ -2,22 +2,36 @@ import React from 'react';
 import NavbarFunctions from '../Navbar/NavbarFunctions';
 import NavBarUser from '../Navbar/NavBarUser';
 import { useState } from 'react';
+import { useUser } from '../../UserContext';
 
 const CheckBalance = () => {
     const [selectedAccount, setSelectedAccount] = useState('');
     const [balance, setBalance] = useState(null);
-
+    const [error, setError] = useState(null);
+    const { user } = useUser();
     const handleAccountChange = (e) => {
         setSelectedAccount(e.target.value);
     };
 
     const handleCheckBalance = () => {
-        // Simulate fetching balance from an API or database
-        // Replace this with your actual logic to retrieve the balance
-        if (selectedAccount === 'savings') {
-            setBalance(5000); // Example balance for savings account
-        } else if (selectedAccount === 'debitcard') {
-            setBalance(1000); // Example balance for debit card account
+
+        // Make an API request to fetch the balance
+        if (selectedAccount === 'savings' || selectedAccount === 'debit') {
+            fetch(`http://localhost:9091/account/${selectedAccount}account/balance/${user.userId}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    setBalance(data);
+                    setError(null);
+                })
+                .catch((error) => {
+                    setError(error.message);
+                    console.error('Error fetching balance:', error);
+                });
         }
     };
 
@@ -41,7 +55,7 @@ const CheckBalance = () => {
                                     >
                                         <option value="">Select Account</option>
                                         <option value="savings">Savings Account</option>
-                                        <option value="debitcard">Debit Card Account</option>
+                                        <option value="debit">Debit Card Account</option>
                                     </select>
                                 </div>
                                 <button
@@ -52,11 +66,14 @@ const CheckBalance = () => {
                                 >
                                     Check Balance
                                 </button>
-
-                                {balance !== null && (
+                                {error !== null  && (
+                                        <h5 className="mt-4" style={{color:'red'}}>Enable Roundup Service Please!</h5>
+                                )}
+                                {error === null && balance  !== null && (
                                     <div className="mt-3">
                                         <h4 className="text-center">Current Balance:</h4>
-                                        <p className="text-center">{`$${balance}`}</p>
+                                        <p className="text-center bold-text" style={{fontSize:'20px',color:'#03C03C'}}>
+                                            {`$${balance}`}</p>
                                     </div>
                                 )}
                             </div>

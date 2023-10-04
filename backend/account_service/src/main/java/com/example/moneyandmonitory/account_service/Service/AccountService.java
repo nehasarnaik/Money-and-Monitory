@@ -160,6 +160,13 @@ public class AccountService {
 
     }
 
+    public double getSavingsAccountBalance(long userId) {
+        return savingsAccountRepository.findByuserId(userId).getBalance();
+    }
+
+    public double getDebitAccountBalance(long userId) {
+        return debitAccountRepository.findByuserId(userId).getBalance();
+    }
     public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
         MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
         DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
