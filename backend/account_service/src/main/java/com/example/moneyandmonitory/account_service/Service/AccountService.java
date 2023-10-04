@@ -103,14 +103,14 @@ public class AccountService {
 
 
     //withdraw from debitaccount
-    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
+
 
     public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         double curBal = savingsAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
         double newBalance = curBal + amount;
-        Transaction t = createTransaction(amount, 0, newBalance);
+        Transaction t = createTransaction(amount, "", newBalance);
         Update update = new Update()
                 .inc("balance", amount)  // Decrement the balance by the specified amount
                 .push("transactions", t ); // Add the new transaction
@@ -126,7 +126,7 @@ public class AccountService {
 
     }
 
-    public ResponseEntity<Transaction> paymentFromDebitAccount(long userId, double amount, long recvAcc) {
+    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
 
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
@@ -164,6 +164,6 @@ public class AccountService {
             double savingsAmount=finalAmount-mt.getAmount();
             depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
         }
-        return paymentFromDebitAccount(debitAccount.getUserId(),finalAmount,mt.getReceiverAccountNumber());
+        return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
     }
 }

@@ -10,7 +10,9 @@ import axios from "axios";
 export default function TransferMoney() {
     
     const { user } = useUser();
-    const [debitAccount, setDebitAccount] = useState(null);
+    const [debitAccountNumber, setDebitAccountNumber] = useState();
+    const [cardNumber, setCardNumber] = useState();
+    const [cvv, setCvv] = useState();
     const [error, setError] = useState(null);
 
     const userUrl = "http://localhost:9091/account/transfermoney";
@@ -34,25 +36,38 @@ export default function TransferMoney() {
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(user.userId);
-        const res = await axios.post(userUrl, payment);
-        console.log(res)
-        navigate("/paymentgateway");
+        if(cvv===payment.cvv){
+            const res = await axios.post(userUrl, payment);
+            console.log(res)
+            //navigate("/paymentgateway");
+            if (res.status === 200) {
+                alert("Transaction Successful");
+                console.log(res.data.referenceNumber);
+                let transactionId = res.data.referenceNumber.toString();
+                console.log(transactionId);
+                navigate(`/transactionsuccess/${transactionId}`);
+              } else {
+                navigate("/transactionfail");
+              }
+        }else{
+            alert("Enter correct CVV");
+        }
     };
 
-    // useEffect(() => {
-    //     fetch('http://localhost:9091/account/debitaccount/'+user.userId)
-    //     .then((res) => res.json())
-    //      .then((data) => {
-    //         console.log(data)
-    //         setDebitAccount(data);
-    //      })
-    //      .catch((err) => {
-    //         console.log(err)
-    //         setError(err.message);
-    //      });
-    //   }, []); // 
-
-   
+    useEffect(() => {
+        // Fetch the debit account number when the component mounts
+        const userId = user.userId;
+        axios
+          .get(`http://localhost:9091/account/debitaccount/${userId}`)
+          .then((res) => {
+            setDebitAccountNumber(String(res.data.debitAccountNumber));
+            setCardNumber(String(res.data.card.cardNumber));
+            setCvv(String(res.data.card.cvv));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, [user.userId]); // Dependency array ensures this effect runs when userId changes
 
     return ( 
     <div>
@@ -69,7 +84,7 @@ export default function TransferMoney() {
                             <label className="label youraccount">Your Account Number</label>
                             <input 
                             type="text"
-                            value={user.userId}
+                            value={debitAccountNumber}
                             name="debitAccountNumber"
                             className="form-control" 
                             placeholder="Account Number"
@@ -107,7 +122,7 @@ export default function TransferMoney() {
                             <label className="label cardnumber">Your Card Number</label>
                             <input 
                             type="text"
-                            value="default value"
+                            value={cardNumber}
                             name="cardNumber"
                             className="form-control" 
                             placeholder="Card Number"
@@ -118,7 +133,7 @@ export default function TransferMoney() {
                         <div className="form-group">
                             <label className="label cvv">Your Card CVV</label>
                             <input 
-                            type="text"
+                            type="password"
                             name="cvv"
                             value={payment.cvv}
                             onChange={e=>handleChange(e)}

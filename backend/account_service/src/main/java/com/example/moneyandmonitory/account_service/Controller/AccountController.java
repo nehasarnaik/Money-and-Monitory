@@ -52,7 +52,9 @@ public class AccountController {
     }
 
     @PostMapping("/transfermoney")
-    public ResponseEntity<Transaction> transferMoney(@RequestBody MoneyTransferRequestDTO moneyTransferRequestDTO){
+    public ResponseEntity<Transaction> transferMoney(@RequestBody MoneyTransferRequestDTO moneyTransferRequestDTO)
+    {
         return accountService.transferMoney(moneyTransferRequestDTO);
     }
+}
 

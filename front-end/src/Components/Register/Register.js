@@ -194,7 +194,7 @@ const Register = () => {
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            type="text"
+                            type="password"
                             name="password"
                             value={user.password}
                             onChange={e=>handleChange(e)}
@@ -206,6 +206,8 @@ const Register = () => {
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
+                            type="password"
+                            name="confirmPassword"
                             value={confirmPassword}
                             onChange={e=>setConfirmPassword(e.target.value)}
                             className="form-control" 
@@ -216,7 +218,7 @@ const Register = () => {
                     <div className="col-lg-12 padding">
                         <div className="form-group">
                             <input 
-                            type="text"
+                            type="password"
                             name="pin"
                             value={user.pin}
                             onChange={e=>handleChange(e)}
