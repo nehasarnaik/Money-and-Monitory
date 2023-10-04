@@ -6,6 +6,7 @@ import "./withdraw.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
+import NavbarSavings from "../Navbar/NavbarSavings";
 
 export default function Withdraw() {
   const { user } = useUser();
@@ -68,7 +69,7 @@ export default function Withdraw() {
   return (
     <div>
       <NavBarUser />
-      <NavbarFunctions />
+      <NavbarSavings />
       <div className="container mt-4">
         <div className="row justify-content-center">
           <div className="col-md-4">

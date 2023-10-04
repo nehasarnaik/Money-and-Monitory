@@ -173,4 +173,9 @@ public class AccountService {
         System.out.println(debitAccount.getTransactions());
         return debitAccount.getTransactions();
     }
+
+    public List<Transaction> transactionHistorySavingsAccount(long userId) {
+        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
+        return savingsAccount.getTransactions();
+    }
 }

@@ -62,5 +62,10 @@ public class AccountController {
     public List<Transaction> transactionHistoryForDebitAccount(@PathVariable long userId){
         return accountService.transactionHistoryForDebitAccount(userId);
     }
+
+    @GetMapping("/savings/transactionhistory/{userId}")
+    public List<Transaction> transactionHistoryForSavingsAccount(@PathVariable long userId){
+        return accountService.transactionHistorySavingsAccount(userId);
+    }
 }
 
