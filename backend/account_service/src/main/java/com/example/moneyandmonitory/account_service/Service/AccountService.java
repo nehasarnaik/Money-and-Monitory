@@ -155,14 +155,13 @@ public class AccountService {
 
     }
 
-<<<<<<< HEAD
     public double getSavingsAccountBalance(long userId) {
         return savingsAccountRepository.findByuserId(userId).getBalance();
     }
 
     public double getDebitAccountBalance(long userId) {
         return debitAccountRepository.findByuserId(userId).getBalance();
-=======
+    }
     public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
         MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
         DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
@@ -173,6 +172,5 @@ public class AccountService {
             depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
         }
         return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
->>>>>>> 726babd50a24a3b4c3dda9a74b2ad60fc541c757
     }
 }
