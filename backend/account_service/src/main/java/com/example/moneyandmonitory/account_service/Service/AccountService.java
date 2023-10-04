@@ -17,10 +17,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 @Service
 public class AccountService {
@@ -155,6 +160,13 @@ public class AccountService {
 
     }
 
+    public double getSavingsAccountBalance(long userId) {
+        return savingsAccountRepository.findByuserId(userId).getBalance();
+    }
+
+    public double getDebitAccountBalance(long userId) {
+        return debitAccountRepository.findByuserId(userId).getBalance();
+    }
     public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
         MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
         DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
@@ -174,8 +186,20 @@ public class AccountService {
         return debitAccount.getTransactions();
     }
 
+
     public List<Transaction> transactionHistorySavingsAccount(long userId) {
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         return savingsAccount.getTransactions();
+    }
+    public void lockAccount(long userId,Date lockDate) {
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        Update update = new Update().set("lockAccount",lockDate);
+
+        FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
+
+        mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
+
     }
 }

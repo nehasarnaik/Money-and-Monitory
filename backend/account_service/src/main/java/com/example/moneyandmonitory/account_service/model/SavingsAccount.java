@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,4 +20,5 @@ public class SavingsAccount {
     private double balance;
     public boolean roundUp;
     private List<Transaction> transactions;
+    private Date lockAccount;
 }

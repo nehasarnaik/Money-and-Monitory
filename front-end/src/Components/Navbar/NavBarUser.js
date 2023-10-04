@@ -3,9 +3,17 @@ import "./navbar.css";
 import { Link } from "react-router-dom";
 import userprofile from "../../Assets/user-profile.png";
 import { useUser } from '../../UserContext';
+import { useNavigate } from "react-router-dom";
 
 export default function NavBarUser() {
   const { user } = useUser(); 
+
+  let navigate = useNavigate();
+
+  const handleLogout = () => {
+      navigate("/")
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-violet">
       <div className="container-fluid">
@@ -31,6 +39,7 @@ export default function NavBarUser() {
               backgroundColor: "#490778",
               color: "white",
             }}
+            onClick={handleLogout}
           >
             Logout
           </button>

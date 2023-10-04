@@ -6,23 +6,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @Document(collection = "savingsAccount")
 public class SavingsAccount {
-    @Id
+
     private long savingsAccountNumber;
     private long userId;
     private String accountType;
     private double balance;
     public boolean roundUp;
     private List<Transaction> transaction;
+    private String lockAccount;
+
+    LocalDate today = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String date = today.format(formatter);
 
     public SavingsAccount() {
         this.accountType = "Savings";
         this.balance = 0.0;
         this.roundUp=false;
+        this.lockAccount=date;
     }
 }

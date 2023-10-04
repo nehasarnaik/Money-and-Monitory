@@ -18,7 +18,6 @@ import static com.example.moneyandmonitory.user_management_service.UniqueAccount
 @Document(collection = "debitAccount")
 public class DebitAccount {
 
-    @Id
     private long debitAccountNumber;
     private long userId;
     private String accountType;

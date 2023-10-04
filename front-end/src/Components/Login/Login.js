@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Login.css';
 import { useUser } from '../../UserContext';
+import axios from 'axios'; // Make sure you have Axios installed
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,32 +13,28 @@ const Login = () => {
 
     const { updateUser } = useUser();
 
-    const handleLogin = (e) => {
+   
+
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:9090/user/'+username+'/'+password)
-        .then((res) => res.json())
-         .then((data) => {
-            if(data){
-                
-                fetch('http://localhost:9090/user/'+username)
-                .then((res1) => res1.json())
-                .then((data1) => {
-                        console.log(data1);
-                        updateUser(data1);
-                        navigate('/dashboard');
-                })
-                .catch((err1) => {
-                    
-                    setError(err1.message);
-                });
-            }else{
+        try {
+            // Make the first request to validate the username and password
+            const response = await axios.get(`http://localhost:9090/user/${username}/${password}`);
+
+            if (response.data) {
+                // If the first request succeeds, make the second request to get user data
+                const response1 = await axios.get(`http://localhost:9090/user/${username}`);
+                const userData = response1.data;
+                console.log(userData);
+                updateUser(userData);
+                navigate('/dashboard');
+            } else {
                 setError("Invalid email or password");
             }
-         })
-         .catch((err) => {
-            setError(err.message);
-         });
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     return (

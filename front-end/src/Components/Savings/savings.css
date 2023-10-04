@@ -1,5 +1,5 @@
 .h1{
-    padding-right: 57%;
+    padding-right: 2%;
     color: #490778;
 }
 
@@ -33,5 +33,13 @@
 
 .text-clr{
     color:#490778;
+}
+
+.width{
+    padding-bottom: 3%;
+}
+
+.calender{
+    padding-right: 70%;
 }
 
