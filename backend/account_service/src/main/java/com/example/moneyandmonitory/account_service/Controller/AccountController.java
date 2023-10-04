@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -55,6 +56,11 @@ public class AccountController {
     public ResponseEntity<Transaction> transferMoney(@RequestBody MoneyTransferRequestDTO moneyTransferRequestDTO)
     {
         return accountService.transferMoney(moneyTransferRequestDTO);
+    }
+
+    @GetMapping("/debit/transactionhistory/{userId}")
+    public List<Transaction> transactionHistoryForDebitAccount(@PathVariable long userId){
+        return accountService.transactionHistoryForDebitAccount(userId);
     }
 }
 

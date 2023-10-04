@@ -17,5 +17,5 @@ public class SavingsAccount {
     private String accountType;
     private double balance;
     public boolean roundUp;
-    private List<Transaction> transaction;
+    private List<Transaction> transactions;
 }

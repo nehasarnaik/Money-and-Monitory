@@ -166,4 +166,11 @@ public class AccountService {
         }
         return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
     }
+
+    public List<Transaction> transactionHistoryForDebitAccount(long userId) {
+        DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
+        System.out.println(debitAccount.getDebitAccountNumber());
+        System.out.println(debitAccount.getTransactions());
+        return debitAccount.getTransactions();
+    }
 }

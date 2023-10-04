@@ -18,6 +18,6 @@ public class DebitAccount {
     private double balance;
     private long savingsAccountNumber;
     public boolean roundUp;
-    private List<Transaction> transaction;
+    private List<Transaction> transactions;
     private Card card;
 }
