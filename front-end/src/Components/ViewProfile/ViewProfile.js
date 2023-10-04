@@ -29,7 +29,7 @@ const ViewProfile = () => {
               <div className="mb-3">
                 <strong>Address:</strong> {user.address}
               </div>
-              {/* Add more user data fields as needed */}
+              {/* Add more user data fields if needed */}
             </div>
           </div>
         </div>
