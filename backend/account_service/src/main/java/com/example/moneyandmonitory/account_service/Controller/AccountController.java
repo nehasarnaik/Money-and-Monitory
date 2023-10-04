@@ -88,5 +88,9 @@ public class AccountController {
         accountService.lockAccount(userId,date);
     }
 
+    @PutMapping("/roundup/{userId}/{roundup}")
+    public void roundUpFeature(@PathVariable long userId){
+        accountService.roundUpFeature(userId);
+    }
 }
 

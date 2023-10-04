@@ -5,21 +5,28 @@ import NavBarUser from "../Navbar/NavBarUser";
 import NavbarSavings from "../Navbar/NavbarSavings";
 import { useNavigate } from "react-router-dom";
 import './savings.css'
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useUser } from "../../UserContext";
 import axios from "axios";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function LockAccount() {
 
   const { user } = useUser();
   const [selectedDate, setSelectedDate] = useState(null);
-  const [formatedDate, setFormatedDate] = useState(null);
+  const minDate = new Date();
   const navigate = useNavigate();
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    console.log(date)
+      setSelectedDate(date);
+  };
+
+  const yesterday = moment().subtract(1, 'day');
+  const disablePastDt = current => {
+    return current.isAfter(yesterday);
   };
 
   const onSubmit = () => {
@@ -49,7 +56,8 @@ export default function LockAccount() {
             placeholderText="Select date"
             selected={selectedDate}
             onChange={handleDateChange}
-            dateFormat="yyyy-MM-dd" // Specify the date format you prefer
+            dateFormat="dd-MM-yyyy" // Specify the date format you prefer
+            minDate={yesterday.toDate()} // Set minDate to yesterday
           />
         </div>
         <br></br>

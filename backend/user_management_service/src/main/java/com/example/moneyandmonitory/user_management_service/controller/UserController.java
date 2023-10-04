@@ -26,4 +26,9 @@ public class UserController {
     public User userDetails(@PathVariable String email){
         return userService.userDetails(email);
     }
+
+    @PutMapping("/roundup/{userId}")
+    public void roundUpFeature(@PathVariable long userId){
+        userService.roundUpFeature(userId);
+    }
 }

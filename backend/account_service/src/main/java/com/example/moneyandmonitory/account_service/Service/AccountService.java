@@ -205,4 +205,17 @@ public class AccountService {
         mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
 
     }
+
+    public void roundUpFeature(long userId) {
+
+        DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
+        boolean roundup = !debitAccount.roundUp;
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        Update update = new Update().set("roundUp",roundup);
+
+        FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
+
+        mongoTemplate.findAndModify(query, update, options, DebitAccount.class);
+    }
 }

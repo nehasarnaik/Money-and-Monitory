@@ -3,14 +3,21 @@ import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
 import "./RoundUp.css";
 import NavbarSavings from "../Navbar/NavbarSavings";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../UserContext";
 
 const RoundUp = () => {
-  // Initialize the state to true (enabled)
-  const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(true);
+  const navigate = useNavigate();
+  const { user } = useUser();
+  const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(user.roundUp);
 
   // Function to toggle the Round Up service
   const toggleRoundUp = () => {
     setIsRoundUpEnabled(!isRoundUpEnabled);
+    //axios.put("http://localhost:9091/account/roundup/"+user.userId);
+    axios.put("http://localhost:9090/user/roundup/"+user.userId);
+    navigate("/savingsaccount");
   };
 
   return (

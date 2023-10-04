@@ -4,6 +4,7 @@ import { useState } from 'react';
 import './Login.css';
 import { useUser } from '../../UserContext';
 import axios from 'axios'; // Make sure you have Axios installed
+import RegisterNav from '../Navbar/RegisterNav';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -40,21 +41,7 @@ const Login = () => {
     return (
         <div>
             <div>
-                <nav class="navbar navbar-expand-lg  nav background">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <Link className="nav-link"></Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to={'/register'} class="nav-link padding">Register</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to={'/login'} class="nav-link padding">Login</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+               <RegisterNav></RegisterNav>
             </div>
 
             <div className="login-container mt-5">
@@ -100,6 +87,9 @@ const Login = () => {
                                 </form>
                                 <p className="mt-3 text-center white-text">
                                     Don't have an account? <Link to="/register" className="violet-link">Register</Link>
+                                </p>
+                                <p className="mt-3 text-center white-text">
+                                     <Link to="/forgotpassword" className="violet-link">Forgot Password?</Link>
                                 </p>
                             </div>
                         </div>

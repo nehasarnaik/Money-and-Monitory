@@ -22,12 +22,12 @@ public class SavingsAccount {
     private double balance;
     public boolean roundUp;
     private List<Transaction> transaction;
-    private String lockAccount;
+    private Date lockAccount;
 
     public SavingsAccount() {
         this.accountType = "Savings";
         this.balance = 0.0;
         this.roundUp=false;
-        this.lockAccount=null;
+        this.lockAccount=new Date();
     }
 }

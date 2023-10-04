@@ -33,7 +33,6 @@ export default function Deposit() {
 
   const handleSubmit = async () => {
     // Deposit only for Debit card for now
-
     // Getting debit card number from the database to check
     const userId = user.userId;
     await axios

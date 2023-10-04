@@ -7,6 +7,11 @@ import com.example.moneyandmonitory.user_management_service.repository.DebitAcco
 import com.example.moneyandmonitory.user_management_service.repository.SavingsAccountRepository;
 import com.example.moneyandmonitory.user_management_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +28,9 @@ public class UserService {
 
     @Autowired
     private DebitAccountRepository debitAccountRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Autowired
     SavingsAccountRepository savingsAccountRepository;
@@ -64,5 +72,32 @@ public class UserService {
         }
 
         return null;
+    }
+
+    public void roundUpFeature(long userId) {
+
+        DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
+        boolean roundup = !debitAccount.roundUp;
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        Update update = new Update().set("roundUp",roundup);
+
+        FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
+
+        mongoTemplate.findAndModify(query, update, options, DebitAccount.class);
+
+        User user = userRepository.findById(userId).orElse(null);
+        user.roundUpSavings=roundup;
+        userRepository.save(user);
+
+        SavingsAccount savingAccount = savingsAccountRepository.findByuserId(userId);
+
+        if(savingAccount==null){
+            SavingsAccount savingsAccount = new SavingsAccount();
+            savingsAccount.setUserId(userId);
+            savingsAccount.setSavingsAccountNumber(debitAccount.getSavingsAccountNumber());
+            savingsAccount.setRoundUp(roundup);
+            savingsAccountRepository.save(savingsAccount);
+        }
     }
 }
