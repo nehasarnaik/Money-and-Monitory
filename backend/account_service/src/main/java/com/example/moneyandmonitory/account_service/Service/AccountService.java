@@ -1,5 +1,6 @@
 package com.example.moneyandmonitory.account_service.Service;
 
+import com.example.moneyandmonitory.account_service.DTO.MoneyTransferRequestDTO;
 import com.example.moneyandmonitory.account_service.Repository.DebitAccountRepository;
 import com.example.moneyandmonitory.account_service.Repository.SavingsAccountRepository;
 import com.example.moneyandmonitory.account_service.model.DebitAccount;
@@ -99,6 +100,26 @@ public class AccountService {
 
     }
 
+    public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
+        SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
+        double curBal = savingsAccount.getBalance();
+        Query query = new Query(Criteria.where("userId").is(userId));
+        double newBalance = curBal + amount;
+        Transaction t = createTransaction(amount, 0, newBalance);
+        Update update = new Update()
+                .inc("balance", amount)  // Decrement the balance by the specified amount
+                .push("transactions", t ); // Add the new transaction
+        SavingsAccount modifiedAcc = mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().returnNew(true), SavingsAccount.class);
+
+        if(modifiedAcc != null)
+        {
+            return new ResponseEntity<>(t, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        }
+
+    }
 
     public ResponseEntity<Transaction> paymentFromDebitAccount(long userId, double amount, long recvAcc) {
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
@@ -126,5 +147,17 @@ public class AccountService {
 
         return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
 
+    }
+
+    public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
+        MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
+        DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
+        double finalAmount = mt.getAmount();
+        if(debitAccount.roundUp==true){
+            finalAmount=Math.ceil(mt.getAmount());
+            double savingsAmount=finalAmount-mt.getAmount();
+            depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
+        }
+        return paymentFromDebitAccount(debitAccount.getUserId(),finalAmount,mt.getReceiverAccountNumber());
     }
 }

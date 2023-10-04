@@ -1,5 +1,6 @@
 package com.example.moneyandmonitory.account_service.Controller;
 
+import com.example.moneyandmonitory.account_service.DTO.MoneyTransferRequestDTO;
 import com.example.moneyandmonitory.account_service.Service.AccountService;
 import com.example.moneyandmonitory.account_service.model.DebitAccount;
 import com.example.moneyandmonitory.account_service.model.SavingsAccount;
@@ -7,6 +8,8 @@ import com.example.moneyandmonitory.account_service.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,5 +49,10 @@ public class AccountController {
     public ResponseEntity<Transaction> paymentFromDebitAccount(@PathVariable long userId, @PathVariable double amount, @PathVariable long accountNo)
     {
         return accountService.paymentFromDebitAccount(userId, amount, accountNo);
+    }
+
+    @PostMapping("/transfermoney")
+    public ResponseEntity<Transaction> transferMoney(@RequestBody MoneyTransferRequestDTO moneyTransferRequestDTO){
+        return accountService.transferMoney(moneyTransferRequestDTO);
     }
 }

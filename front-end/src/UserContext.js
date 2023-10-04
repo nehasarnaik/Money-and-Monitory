@@ -8,6 +8,7 @@ export function useUser() {
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
+ 
 
   const updateUser = (userData) => {
     setUser(userData);

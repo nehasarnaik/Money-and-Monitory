@@ -24,6 +24,7 @@ public class DebitAccount {
     private String accountType;
     private double balance;
     private long savingsAccountNumber;
+    public boolean roundUp;
     private List<Transaction> transaction;
     private Card card;
 

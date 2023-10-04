@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import '../script.css'
 import NavBarUser from "../Navbar/NavBarUser";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import "../script.css"
+import { useUser } from '../../UserContext';
+import axios from "axios";
 
 export default function TransferMoney() {
     
+    const { user } = useUser();
+    const [debitAccount, setDebitAccount] = useState(null);
+    const [error, setError] = useState(null);
+
+    const userUrl = "http://localhost:9091/account/transfermoney";
+
     const [payment, setPayment] = useState({
+        userId:user.userId,
+        debitAccountNumber:"",
         receiverAccountNumber: "",
         amount: "",
         cvv: ""
@@ -23,8 +33,26 @@ export default function TransferMoney() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        console.log(user.userId);
+        const res = await axios.post(userUrl, payment);
+        console.log(res)
         navigate("/paymentgateway");
     };
+
+    // useEffect(() => {
+    //     fetch('http://localhost:9091/account/debitaccount/'+user.userId)
+    //     .then((res) => res.json())
+    //      .then((data) => {
+    //         console.log(data)
+    //         setDebitAccount(data);
+    //      })
+    //      .catch((err) => {
+    //         console.log(err)
+    //         setError(err.message);
+    //      });
+    //   }, []); // 
+
+   
 
     return ( 
     <div>
@@ -41,9 +69,8 @@ export default function TransferMoney() {
                             <label className="label youraccount">Your Account Number</label>
                             <input 
                             type="text"
-                            value="default value"
-                            name="senderAccountNumber"
-                            onChange={(e) => handleChange(e)}
+                            value={user.userId}
+                            name="debitAccountNumber"
                             className="form-control" 
                             placeholder="Account Number"
                             required></input>
