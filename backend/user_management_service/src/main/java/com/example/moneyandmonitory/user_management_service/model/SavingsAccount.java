@@ -24,14 +24,10 @@ public class SavingsAccount {
     private List<Transaction> transaction;
     private String lockAccount;
 
-    LocalDate today = LocalDate.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    String date = today.format(formatter);
-
     public SavingsAccount() {
         this.accountType = "Savings";
         this.balance = 0.0;
         this.roundUp=false;
-        this.lockAccount=date;
+        this.lockAccount=null;
     }
 }

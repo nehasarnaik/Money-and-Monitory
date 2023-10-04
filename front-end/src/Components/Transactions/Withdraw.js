@@ -54,7 +54,10 @@ export default function Withdraw() {
         if (error.response && error.response.status === 400) {
           // Handle the 400 Bad Request error and show an alert
           alert("Insufficient funds!");
-        } else {
+        } else if(error.response && error.response.status === 412){
+          alert("Account is locked");
+        }
+        else{
           // Handle other errors here
           navigate("/transactionfail");
         }

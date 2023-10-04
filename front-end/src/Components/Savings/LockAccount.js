@@ -2,6 +2,7 @@ import React, { useState,useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
+import NavbarSavings from "../Navbar/NavbarSavings";
 import { useNavigate } from "react-router-dom";
 import './savings.css'
 import DatePicker from 'react-datepicker';

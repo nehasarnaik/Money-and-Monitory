@@ -61,27 +61,30 @@ public class AccountService {
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(long userId, double amount) {
 
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
-        double curBal = savingsAccount.getBalance();
+        Date date = new Date();
+        if(date.after(savingsAccount.getLockAccount())) {
+            double curBal = savingsAccount.getBalance();
 
-        if(curBal < amount) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        double closingBal = curBal - amount;
-        Query query = new Query(Criteria.where("userId").is(userId));
-        Transaction t = createTransaction(-amount, "Debited " + amount, closingBal);
+            if (curBal < amount) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
+            double closingBal = curBal - amount;
+            Query query = new Query(Criteria.where("userId").is(userId));
+            Transaction t = createTransaction(-amount, "Debited " + amount, closingBal);
 
-        Update update = new Update()
-                .inc("balance", -amount)  // Decrement the balance by the specified amount
-                .push("transactions", t); // Add the new transaction
+            Update update = new Update()
+                    .inc("balance", -amount)  // Decrement the balance by the specified amount
+                    .push("transactions", t); // Add the new transaction
 
-        FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
-        SavingsAccount savingsAccount1 =  mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
-        if(savingsAccount1 != null)
-        {
-            return new ResponseEntity<>(t, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+            FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
+            SavingsAccount savingsAccount1 = mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
+            if (savingsAccount1 != null) {
+                return new ResponseEntity<>(t, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+            }
+        }else {
+            return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
         }
     }
 
