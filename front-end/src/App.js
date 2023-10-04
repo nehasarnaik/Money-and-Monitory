@@ -20,6 +20,8 @@ import ViewProfile from "./Components/ViewProfile/ViewProfile";
 import RoundUp from "./Components/RoundUp/RoundUp";
 
 import { UserProvider } from "./UserContext";
+import TransferMoney from "./Components/Transactions/TransferMoney";
+import ForgotPassword from "./Components/ForgotPassword/forgotpassword";
 
 function App() {
   return (
@@ -53,6 +55,8 @@ function App() {
           <Route path="/viewprofile" element={<ViewProfile />}></Route>
           <Route path="/roundup" element={<RoundUp />}></Route>
           <Route path="/dashboard" element={<Dash_board />}></Route>
+          <Route path="/transfermoney" element={<TransferMoney />}></Route>
+          <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
         </Routes>
       </BrowserRouter><div id="footer"></div>
     </div>

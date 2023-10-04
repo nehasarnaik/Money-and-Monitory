@@ -49,3 +49,25 @@
     padding-right: 10%;
   }
 
+  .label{
+    padding-right: 45%;
+    padding-bottom: 2%;
+    color:#490778
+  }
+
+  .youraccount{
+    padding-right: 55%;
+  }
+
+  .amount{
+    padding-right: 68%;
+  }
+
+  .cvv{
+    padding-right: 70%;
+  }
+
+  .cardnumber{
+    padding-right: 63%;
+  }
+
