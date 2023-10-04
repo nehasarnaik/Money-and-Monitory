@@ -127,4 +127,12 @@ public class AccountService {
         return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
 
     }
+
+    public double getSavingsAccountBalance(long userId) {
+        return savingsAccountRepository.findByuserId(userId).getBalance();
+    }
+
+    public double getDebitAccountBalance(long userId) {
+        return debitAccountRepository.findByuserId(userId).getBalance();
+    }
 }

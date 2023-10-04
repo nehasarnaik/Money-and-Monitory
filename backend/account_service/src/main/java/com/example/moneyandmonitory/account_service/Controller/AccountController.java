@@ -22,6 +22,20 @@ public class AccountController {
         return accountService.getDebitAccountInfo(userId);
     }
 
+    @GetMapping("/savingsaccount/balance/{userId}")
+    public double getSavingsAccountBalance(@PathVariable long userId)
+    {
+        return accountService.getSavingsAccountBalance(userId);
+    }
+
+    @GetMapping("/debitaccount/balance/{userId}")
+    public double getDebitAccountBalance(@PathVariable long userId)
+    {
+        return accountService.getDebitAccountBalance(userId);
+    }
+
+
+
     @GetMapping("/savingsaccount/{userId}")
     public SavingsAccount getSavingsAccountInfo(@PathVariable long userId)
     {

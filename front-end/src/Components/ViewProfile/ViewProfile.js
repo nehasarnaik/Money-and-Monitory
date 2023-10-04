@@ -15,6 +15,7 @@ const ViewProfile = () => {
             <h5 className="card-title view-profile mb-4 violet-text bold-text">YOUR PROFILE</h5>
             <div className="profile-info">
               <div className="mb-3">
+            
                 <strong>Name:</strong> {user.name}
               </div>
               <div className="mb-3">
