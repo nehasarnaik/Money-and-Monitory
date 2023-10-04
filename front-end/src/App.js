@@ -20,13 +20,15 @@ import ViewProfile from "./Components/ViewProfile/ViewProfile";
 import RoundUp from "./Components/RoundUp/RoundUp";
 
 import { UserProvider } from "./UserContext";
+
+import Savings from "./Components/Savings/Savings";
 import TransferMoney from "./Components/Transactions/TransferMoney";
 import ForgotPassword from "./Components/ForgotPassword/forgotpassword";
 
 function App() {
   return (
     <UserProvider>
-    <div className="App">
+      <div className="App">
         <BrowserRouter>
         <div className="header background_colour">
           <h1 className="text_padding">Product Name</h1>

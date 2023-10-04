@@ -30,7 +30,7 @@ export default function TransactionFail() {
               Later.&#128577;
             </h3>
             <br></br>
-            <Link className="btn violet-button" to="/home">
+            <Link className="btn violet-button" to="/dashboard">
               Home
             </Link>
           </div>

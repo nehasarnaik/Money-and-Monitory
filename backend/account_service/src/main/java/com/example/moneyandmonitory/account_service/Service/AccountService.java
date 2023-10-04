@@ -44,6 +44,14 @@ public class AccountService {
         return savingsAccountRepository.findByuserId(userId);
     }
 
+    private Transaction createTransaction(double amount, String narration, double closingBalance) {
+
+        if(amount < 0)
+        {
+            return new Transaction(new Date(),narration , UUID.randomUUID(), -amount, 0, closingBalance);
+        }
+        return new Transaction(new Date(),narration , UUID.randomUUID(), 0,amount, closingBalance);
+    }
     @Transactional
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(long userId, double amount) {
 
@@ -55,7 +63,7 @@ public class AccountService {
         }
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
-        Transaction t = createTransaction(-amount, 0, closingBal);
+        Transaction t = createTransaction(-amount, "Debited " + amount, closingBal);
 
         Update update = new Update()
                 .inc("balance", -amount)  // Decrement the balance by the specified amount
@@ -72,19 +80,12 @@ public class AccountService {
         }
     }
 
-    private Transaction createTransaction(double amount, long narration, double closingBalance) {
-
-        return new Transaction(new Date(),narration , UUID.randomUUID(), amount, closingBalance);
-    }
-
-
-
-    public ResponseEntity<Transaction> depositFromDebitAccount(long userId, double amount) {
+    public ResponseEntity<Transaction> depositToDebitAccount(long userId, double amount) {
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
         double newBalance = curBal + amount;
-        Transaction t = createTransaction(amount, 0, newBalance);
+        Transaction t = createTransaction(amount, "credited " + amount, newBalance);
         Update update = new Update()
                 .inc("balance", amount)  // Decrement the balance by the specified amount
                 .push("transactions", t ); // Add the new transaction
@@ -99,6 +100,10 @@ public class AccountService {
         }
 
     }
+
+
+    //withdraw from debitaccount
+    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
 
     public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
@@ -122,6 +127,7 @@ public class AccountService {
     }
 
     public ResponseEntity<Transaction> paymentFromDebitAccount(long userId, double amount, long recvAcc) {
+
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         if(curBal < amount)
@@ -130,8 +136,8 @@ public class AccountService {
         }
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
-
-        Transaction t =  createTransaction(-amount, recvAcc, closingBal);
+        String narration = "debited " + amount ;
+        Transaction t =  createTransaction(-amount, narration, closingBal);
 
         Update update = new Update()
                 .inc("balance", -amount)  // Decrement the balance by the specified amount
