@@ -64,6 +64,7 @@ const Register = () => {
     const res = await axios.post(userUrl, user);
     console.log(res.data.id);
     console.log(user);
+    alert("Registration Successful");
     //createAccount(res.data.id);
     navigate("/login");
   };

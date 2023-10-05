@@ -51,9 +51,9 @@ export default function Savings() {
               </p>
             </div>
           </div>
-          <div className="col-md-3">
-            <RoundUp /> {/* Display RoundUp component to the right */}
-          </div>
+          {/* <div className="col-md-3">
+            <RoundUp /> 
+          </div> */}
         </div>
       </div>
     </div>

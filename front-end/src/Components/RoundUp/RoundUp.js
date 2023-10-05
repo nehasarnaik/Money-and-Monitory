@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
 import "./RoundUp.css";
@@ -10,18 +10,20 @@ import { useUser } from "../../UserContext";
 const RoundUp = () => {
   const navigate = useNavigate();
   const { user } = useUser();
-  const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(user.roundUp);
+  const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(user.roundUpSavings);
 
   // Function to toggle the Round Up service
   const toggleRoundUp = () => {
     setIsRoundUpEnabled(!isRoundUpEnabled);
     //axios.put("http://localhost:9091/account/roundup/"+user.userId);
     axios.put("http://localhost:9090/user/roundup/"+user.userId);
-    navigate("/savingsaccount");
+    //navigate("/savingsaccount");
   };
 
   return (
     <div>
+      <NavBarUser></NavBarUser>
+      <NavbarFunctions></NavbarFunctions>
       <div className="roundup-container mt-3">
         <h2 className="violet-text  bold-text">Round Up Service</h2>
         <label className="switch">
