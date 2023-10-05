@@ -17,6 +17,7 @@ export default function NavbarFunctions() {
       // If roundoff is not enabled, show an alert
       alert("Round Off is not enabled. Please enable it first.");
       //navigate("/roundup")
+
       event.preventDefault();
     }
   };
@@ -55,16 +56,13 @@ export default function NavbarFunctions() {
                   Check Balance
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to={"/withdraw"} class="nav-link violet-text">
-                  Withdraw
-                </Link>
-              </li>
+
               <li className="nav-item">
                 <Link to={"/deposit"} class="nav-link violet-text">
                   Deposit
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link to={"/roundup"} class="nav-link violet-text">
                   Round Up Savings

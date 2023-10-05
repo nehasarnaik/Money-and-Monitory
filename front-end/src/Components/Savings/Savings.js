@@ -47,7 +47,7 @@ export default function Savings() {
                 </strong>
               </p>
               <p className="mb-0">
-                <strong>Balance: Rs {accountInfo.balance || ""}</strong>
+                <strong>Balance: $ {accountInfo.balance || ""}</strong>
               </p>
             </div>
           </div>

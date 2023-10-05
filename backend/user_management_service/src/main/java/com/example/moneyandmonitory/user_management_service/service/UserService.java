@@ -16,12 +16,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
-
-import static com.example.moneyandmonitory.user_management_service.UniqueAccountNumber.AccountNumber.getID;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -114,5 +111,28 @@ public class UserService {
         }else{
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    public ResponseEntity<User> updateProfile(User updateUser) {
+
+        Optional<User> user = userRepository.findById(updateUser.getUserId());
+
+        if(user.isPresent())
+        {
+            User foundUser = user.get();
+            foundUser.setName(updateUser.getName());
+            foundUser.setEmail(updateUser.getEmail());
+            foundUser.setMobile(updateUser.getMobile());
+            foundUser.setDob(updateUser.getDob());
+            foundUser.setAddress(updateUser.getAddress());
+
+            userRepository.save(foundUser);
+            return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+
+
     }
 }

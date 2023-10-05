@@ -38,4 +38,9 @@ public class UserController {
     public ResponseEntity<ForgotPasswordRequestDTO> forgotPassword(@RequestBody ForgotPasswordRequestDTO forgotPasswordRequestDTO){
         return userService.forgotPassword(forgotPasswordRequestDTO);
     }
+
+    @PutMapping("/updateprofile")
+    public  ResponseEntity<User> updateProfile(@RequestBody User updateUser){
+        return userService.updateProfile(updateUser);
+    }
 }
