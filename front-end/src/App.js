@@ -25,6 +25,7 @@ import Savings from "./Components/Savings/Savings";
 import TransferMoney from "./Components/Transactions/TransferMoney";
 import ForgotPassword from "./Components/ForgotPassword/forgotpassword";
 import TransactionHistorySavings from "./Components/Transactions/TransactionHistorySavings";
+import EditProfile from "./Components/ViewProfile/EditProfile";
 
 function App() {
   return (
@@ -44,7 +45,6 @@ function App() {
               path="/transactionsuccess/:transactionId"
               element={<TransactionSucess />}
             ></Route>
-
             <Route
               path="/transactionfail"
               element={<TransactionFail />}
@@ -59,10 +59,10 @@ function App() {
               path="/savings/transactionhistory"
               element={<TransactionHistorySavings />}
             ></Route>
-
             <Route path="/login" element={<Login />}></Route>
             <Route path="/checkbalance" element={<CheckBalance />}></Route>
             <Route path="/viewprofile" element={<ViewProfile />}></Route>
+            <Route path="/editprofile" element={<EditProfile />}></Route>
             <Route path="/roundup" element={<RoundUp />}></Route>
             <Route path="/dashboard" element={<Dash_board />}></Route>
             <Route path="/transfermoney" element={<TransferMoney />}></Route>
