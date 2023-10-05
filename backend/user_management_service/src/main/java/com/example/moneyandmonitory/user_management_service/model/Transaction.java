@@ -1,6 +1,6 @@
 package com.example.moneyandmonitory.user_management_service.model;
 
-import jakarta.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
