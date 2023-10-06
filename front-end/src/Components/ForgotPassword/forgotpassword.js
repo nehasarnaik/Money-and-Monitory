@@ -36,7 +36,7 @@ function ForgotPassword() {
     else if (user.password === confirmPassword) {
       // Passwords match, you can proceed with changing the password
       // You can add your logic to update the password in your backend here
-      axios.put("http://localhost:9090/user/forgotPassword", user)
+      axios.put("http://localhost:8080/user-management-service/user/forgotPassword", user)
       .then((res) => {
         if (res.status === 200) {
             alert("Password Changed Successfully");

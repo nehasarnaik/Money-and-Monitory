@@ -18,7 +18,7 @@ export default function TransactionHistory() {
 
 
   useEffect(() => {
-    fetch('http://localhost:9091/account/debit/transactionhistory/'+user.userId)
+    fetch('http://localhost:8080/account-service/account/debit/transactionhistory/'+user.userId)
       .then((response) => response.json())
       .then((data) =>{ 
         setTransactionData(data);

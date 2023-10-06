@@ -21,11 +21,11 @@ const Login = () => {
 
         try {
             // Make the first request to validate the username and password
-            const response = await axios.get(`http://localhost:9090/user/${username}/${password}`);
+            const response = await axios.get(`http://localhost:8080/user-management-service/user/${username}/${password}`);
 
             if (response.data) {
                 // If the first request succeeds, make the second request to get user data
-                const response1 = await axios.get(`http://localhost:9090/user/${username}`);
+                const response1 = await axios.get(`http://localhost:8080/user-management-service/user/${username}`);
                 const userData = response1.data;
                 console.log(userData);
                 updateUser(userData);

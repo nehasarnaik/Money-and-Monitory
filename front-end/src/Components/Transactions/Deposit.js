@@ -22,7 +22,7 @@ export default function Deposit() {
     // Fetch the debit account number when the component mounts
     const userId = user.userId;
     axios
-      .get(`http://localhost:9091/account/debitaccount/${userId}`)
+      .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`)
       .then((res) => {
         setSelectedAccount(String(res.data.debitAccountNumber));
       })
@@ -37,7 +37,7 @@ export default function Deposit() {
     const userId = user.userId;
     await axios
       .put(
-        `http://localhost:9091/account/debitaccount/deposit/${userId}/${depositAmount}`
+        `http://localhost:8080/account-service/account/debitaccount/deposit/${userId}/${depositAmount}`
       )
       .then((res) => {
         console.log(res);

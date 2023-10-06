@@ -22,11 +22,11 @@ const Register = () => {
 
      const [confirmPassword, setConfirmPassword] = useState('');
    
-     const userUrl = "http://localhost:9090/user";
+     const userUrl = "http://localhost:8080/user-management-service/user";
 
     //accounts url
-     const debitAccountUrl = "http://localhost:9090/user/debitaccount";
-     const savingsAccountUrl = "http://localhost:9090/user/savingsaccount";
+     const debitAccountUrl = "http://localhost:8080/user-management-service/user/debitaccount";
+     const savingsAccountUrl = "http://localhost:8080/user-management-service/user/savingsaccount";
 
     let navigate = useNavigate();
 

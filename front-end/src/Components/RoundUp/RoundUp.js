@@ -15,8 +15,8 @@ const RoundUp = () => {
   // Function to toggle the Round Up service
   const toggleRoundUp = () => {
     setIsRoundUpEnabled(!isRoundUpEnabled);
-    //axios.put("http://localhost:9091/account/roundup/"+user.userId);
-    axios.put("http://localhost:9090/user/roundup/"+user.userId);
+    //axios.put("http://localhost:8080/account-service/account/roundup/"+user.userId);
+    axios.put("http://localhost:8080/user-management-service/user/roundup/"+user.userId);
     //navigate("/savingsaccount");
   };
 

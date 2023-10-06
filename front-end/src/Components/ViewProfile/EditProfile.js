@@ -27,7 +27,7 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .put("http://localhost:9090/user/updateprofile", formData)
+      .put("http://localhost:8080/user-management-service/user/updateprofile", formData)
       .then((response) => {
         if (response.status === 200) {
           alert("Update Successful");

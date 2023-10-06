@@ -10,7 +10,7 @@ export default function TransactionHistorySavings() {
   const [data, setTransactionData] = useState("");
   useEffect(() => {
     fetch(
-      "http://localhost:9091/account/savings/transactionhistory/" + user.userId
+      "http://localhost:8080/account-service/account/savings/transactionhistory/" + user.userId
     )
       .then((response) => response.json())
       .then((data) => {

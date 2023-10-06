@@ -15,7 +15,7 @@ export default function TransferMoney() {
     const [cvv, setCvv] = useState();
     const [error, setError] = useState(null);
 
-    const userUrl = "http://localhost:9091/account/transfermoney";
+    const userUrl = "http://localhost:8080/account-service/account/transfermoney";
 
     const [payment, setPayment] = useState({
         userId:user.userId,
@@ -57,7 +57,7 @@ export default function TransferMoney() {
         // Fetch the debit account number when the component mounts
         const userId = user.userId;
         axios
-          .get(`http://localhost:9091/account/debitaccount/${userId}`)
+          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`)
           .then((res) => {
             setDebitAccountNumber(String(res.data.debitAccountNumber));
             setCardNumber(String(res.data.card.cardNumber));

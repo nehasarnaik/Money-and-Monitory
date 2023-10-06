@@ -34,7 +34,7 @@ export default function LockAccount() {
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
     const formattedDate = inputDate.toLocaleDateString("en-IN", options);
 
-    axios.put("http://localhost:9091/account/lockaccount/"+user.userId+"/"+selectedDate);
+    axios.put("http://localhost:8080/account-service/account/lockaccount/"+user.userId+"/"+selectedDate);
     alert("Savings account locked till " + formattedDate)
     navigate("/dashboard");
   };

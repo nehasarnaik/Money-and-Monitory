@@ -19,7 +19,7 @@ export default function Withdraw() {
     // Fetch savings account number when the component mounts
     const userId = user.userId;
     axios
-      .get(`http://localhost:9091/account/savingsaccount/${userId}`)
+      .get(`http://localhost:8080/account-service/account/savingsaccount/${userId}`)
       .then((res) => {
         setSelectedAccount(String(res.data.savingsAccountNumber));
       })
@@ -38,7 +38,7 @@ export default function Withdraw() {
 
     await axios
       .put(
-        `http://localhost:9091/account/savingsaccount/withdraw/${userId}/${withdrawAmount}`
+        `http://localhost:8080/account-service/account/savingsaccount/withdraw/${userId}/${withdrawAmount}`
       )
       .then((res) => {
         console.log(res);

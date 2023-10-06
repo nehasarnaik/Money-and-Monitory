@@ -13,7 +13,7 @@ export default function Savings() {
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:9091/account/savingsaccount/${user.userId}`
+          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`
         );
         if (response.ok) {
           const data = await response.json();

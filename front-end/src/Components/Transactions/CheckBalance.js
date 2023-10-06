@@ -17,7 +17,7 @@ const CheckBalance = () => {
 
         // Make an API request to fetch the balance
         if (selectedAccount === 'savings' || selectedAccount === 'debit') {
-            fetch(`http://localhost:9091/account/${selectedAccount}account/balance/${user.userId}`)
+            fetch(`http://localhost:8080/account-service/account/${selectedAccount}account/balance/${user.userId}`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
