@@ -1,31 +1,30 @@
-import React, { useState,useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
 import NavbarSavings from "../Navbar/NavbarSavings";
 import { useNavigate } from "react-router-dom";
-import './savings.css'
-import 'react-datepicker/dist/react-datepicker.css';
+import "./savings.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { useUser } from "../../UserContext";
 import axios from "axios";
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datetime/css/react-datetime.css';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datetime/css/react-datetime.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function LockAccount() {
-
   const { user } = useUser();
   const [selectedDate, setSelectedDate] = useState(null);
   const minDate = new Date();
   const navigate = useNavigate();
 
   const handleDateChange = (date) => {
-      setSelectedDate(date);
+    setSelectedDate(date);
   };
 
-  const yesterday = moment().subtract(1, 'day');
-  const disablePastDt = current => {
+  const yesterday = moment().subtract(1, "day");
+  const disablePastDt = (current) => {
     return current.isAfter(yesterday);
   };
 
@@ -34,8 +33,13 @@ export default function LockAccount() {
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
     const formattedDate = inputDate.toLocaleDateString("en-IN", options);
 
-    axios.put("http://localhost:8080/account-service/account/lockaccount/"+user.userId+"/"+selectedDate);
-    alert("Savings account locked till " + formattedDate)
+    axios.put(
+      "http://localhost:8080/account-service/account/lockaccount/" +
+        user.userId +
+        "/" +
+        selectedDate
+    );
+    alert("Savings account locked till " + formattedDate);
     navigate("/dashboard");
   };
 
@@ -43,16 +47,14 @@ export default function LockAccount() {
     <div className="width">
       <NavBarUser />
       <NavbarSavings />
-      <NavbarFunctions />
-      
-        <br></br>
-        <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
-        <br></br>
-        <h4 className="h4">LOCK YOUR SAVINGS ACCOUNT</h4>
-        
-        <form className="dropdown" onSubmit={onSubmit}>
+      <br></br>
+      <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
+      <br></br>
+      <h4 className="h4">LOCK YOUR SAVINGS ACCOUNT</h4>
+
+      <form className="dropdown" onSubmit={onSubmit}>
         <div className="calender">
-          <DatePicker 
+          <DatePicker
             placeholderText="Select date"
             selected={selectedDate}
             onChange={handleDateChange}
@@ -62,12 +64,17 @@ export default function LockAccount() {
         </div>
         <br></br>
         <label>
-        <input className="checkbox" type="checkbox" required/> You won't be able to withdraw money for above selected period of time</label><br></br>
+          <input className="checkbox" type="checkbox" required /> You won't be
+          able to withdraw money for above selected period of time
+        </label>
         <br></br>
-        <button className="btn btn-light button buttonpadding" type="submit">Lock the Account</button>
+        <br></br>
+        <button className="btn btn-light button buttonpadding" type="submit">
+          Lock the Account
+        </button>
         <br></br>
         <br></br>
-        </form>
+      </form>
     </div>
   );
 }

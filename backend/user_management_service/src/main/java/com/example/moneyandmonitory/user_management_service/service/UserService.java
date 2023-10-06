@@ -7,6 +7,9 @@ import com.example.moneyandmonitory.user_management_service.model.User;
 import com.example.moneyandmonitory.user_management_service.repository.DebitAccountRepository;
 import com.example.moneyandmonitory.user_management_service.repository.SavingsAccountRepository;
 import com.example.moneyandmonitory.user_management_service.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -21,8 +24,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
 
@@ -36,6 +41,7 @@ public class UserService {
     SavingsAccountRepository savingsAccountRepository;
     public User registerUser(User user) {
 
+        logger.info("Storing new user details ");
         User userBO = userRepository.save(user);
         DebitAccount debitAccount = new DebitAccount();
         debitAccount.setUserId(userBO.getUserId());
@@ -53,6 +59,7 @@ public class UserService {
     }
 
     public boolean login(String email, String password) {
+        logger.info("Handling login request ");
         List<User> userList = userRepository.findAll();
         for(User user:userList){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
@@ -64,6 +71,7 @@ public class UserService {
     }
 
     public User userDetails(String email) {
+        logger.info("Fetching user details(inside service class)");
         List<User> userList = userRepository.findAll();
         for(User user:userList){
             if(user.getEmail().equals(email)){
@@ -76,6 +84,7 @@ public class UserService {
 
     public void roundUpFeature(long userId) {
 
+        logger.info("Inside RoundupFeature function in userservice class");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         boolean roundup = !debitAccount.roundUp;
         Query query = new Query(Criteria.where("userId").is(userId));
@@ -102,6 +111,7 @@ public class UserService {
     }
 
     public ResponseEntity<ForgotPasswordRequestDTO> forgotPassword(ForgotPasswordRequestDTO forgotPasswordRequestDTO) {
+        logger.info("Implementing forgot password process for email: {}", forgotPasswordRequestDTO.getEmail());
         User user = userRepository.findByemail(forgotPasswordRequestDTO.getEmail());
         System.out.println(user.getPassword());
         if(user.getPin()==forgotPasswordRequestDTO.getPin()){
@@ -116,6 +126,7 @@ public class UserService {
 
     public ResponseEntity<User> updateProfile(User updateUser) {
 
+        logger.info("Implementing update user profile for user with email: {}", updateUser.getEmail());
         Optional<User> user = userRepository.findById(updateUser.getUserId());
 
         if(user.isPresent())
