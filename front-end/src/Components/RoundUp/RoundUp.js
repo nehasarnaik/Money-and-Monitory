@@ -6,6 +6,7 @@ import NavbarSavings from "../Navbar/NavbarSavings";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
+import SidebarFunctions from "../Navbar/SidebarFunctions";
 
 const RoundUp = () => {
   const navigate = useNavigate();
@@ -17,13 +18,14 @@ const RoundUp = () => {
     setIsRoundUpEnabled(!isRoundUpEnabled);
     //axios.put("http://localhost:8080/account-service/account/roundup/"+user.userId);
     axios.put("http://localhost:8080/user-management-service/user/roundup/"+user.userId);
+    user.roundUpSavings = !user.roundUpSavings;
     //navigate("/savingsaccount");
   };
 
   return (
     <div>
       <NavBarUser></NavBarUser>
-      <NavbarFunctions></NavbarFunctions>
+      <SidebarFunctions/>
       <div className="roundup-container mt-3">
         <h2 className="violet-text  bold-text">Round Up Service</h2>
         <label className="switch">

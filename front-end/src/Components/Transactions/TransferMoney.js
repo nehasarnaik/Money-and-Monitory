@@ -1,12 +1,12 @@
 import { useState,useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../script.css'
 import NavBarUser from "../Navbar/NavBarUser";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import "../script.css"
 import { useUser } from '../../UserContext';
 import axios from "axios";
-
+import SidebarFunctions from "../Navbar/SidebarFunctions";
 export default function TransferMoney() {
     
     const { user } = useUser();
@@ -53,6 +53,7 @@ export default function TransferMoney() {
         }
     };
 
+   
     useEffect(() => {
         // Fetch the debit account number when the component mounts
         const userId = user.userId;
@@ -68,83 +69,81 @@ export default function TransferMoney() {
           });
       }, [user.userId]); // Dependency array ensures this effect runs when userId changes
 
-    return ( 
-    <div>
+    return (
         <div>
-        <NavBarUser />
-        <NavbarFunctions />
-        </div>
-        <form onSubmit={onSubmit}>
-            <div className="card-body form_width ">
-                <h2 className="top">Make Payment</h2>
-                <div className="row">
-                    <div className="col-lg-12 padding">
-                        <div className="form-group">
-                            <label className="label youraccount">Your Account Number</label>
-                            <input 
-                            type="text"
-                            value={debitAccountNumber}
-                            name="debitAccountNumber"
-                            className="form-control" 
-                            placeholder="Account Number"
-                            required></input>
-                        </div>
+            <NavBarUser/>
+            <SidebarFunctions/>
+            <form onSubmit={onSubmit}>
+                    <div className="card-body form_width">
+                        <h2 className="top">Make Payment</h2>
+                        <div className="row">
+                            <div className="col-lg-12 padding">
+                                <div className="form-group">
+                                    <label className="label youraccount">Your Account Number</label>
+                                    <input 
+                                    type="text"
+                                    value={debitAccountNumber}
+                                    name="debitAccountNumber"
+                                    className="form-control" 
+                                    placeholder="Account Number"
+                                    required></input>
+                                </div>
+                            </div>
+                            <div className="col-lg-12 padding">
+                                <div className="form-group">
+                                    <label className="label">Receiver's Account Number</label>
+                                    <input 
+                                    type="text"
+                                    name="receiverAccountNumber"
+                                    value={payment.receiverAccountNumber}
+                                    onChange={(e) => handleChange(e)}
+                                    className="form-control" 
+                                    placeholder="Account Number"
+                                    required></input>
+                                </div>
+                            </div>
+                            <div className="col-lg-12 padding">
+                                <div className="form-group">
+                                    <label className="label amount">Amount to Pay</label>
+                                    <input 
+                                    type="text"
+                                    name="amount"
+                                    value={payment.amount}
+                                    onChange={e=>handleChange(e)}
+                                    className="form-control" 
+                                    placeholder="Enter Amount"
+                                    required></input>
+                                </div>
+                            </div>
+                            <div className="col-lg-12 padding">
+                                <div className="form-group">
+                                    <label className="label cardnumber">Your Card Number</label>
+                                    <input 
+                                    type="text"
+                                    value={cardNumber}
+                                    name="cardNumber"
+                                    className="form-control" 
+                                    placeholder="Card Number"
+                                    required></input>
+                                </div>
+                            </div>
+                            <div className="col-lg-12 padding">
+                                <div className="form-group">
+                                    <label className="label cvv">Your Card CVV</label>
+                                    <input 
+                                    type="password"
+                                    name="cvv"
+                                    value={payment.cvv}
+                                    onChange={e=>handleChange(e)}
+                                    className="form-control" 
+                                    placeholder="Enter CVV"
+                                    required></input>
+                                </div>
+                            </div>
+                            </div>
+                        <button className="btn btn-light button" type="submit">Proceed</button>
                     </div>
-                    <div className="col-lg-12 padding">
-                        <div className="form-group">
-                            <label className="label">Receiver's Account Number</label>
-                            <input 
-                            type="text"
-                            name="receiverAccountNumber"
-                            value={payment.receiverAccountNumber}
-                            onChange={(e) => handleChange(e)}
-                            className="form-control" 
-                            placeholder="Account Number"
-                            required></input>
-                        </div>
-                    </div>
-                    <div className="col-lg-12 padding">
-                        <div className="form-group">
-                            <label className="label amount">Amount to Pay</label>
-                            <input 
-                            type="text"
-                            name="amount"
-                            value={payment.amount}
-                            onChange={e=>handleChange(e)}
-                            className="form-control" 
-                            placeholder="Enter Amount"
-                            required></input>
-                        </div>
-                    </div>
-                    <div className="col-lg-12 padding">
-                        <div className="form-group">
-                            <label className="label cardnumber">Your Card Number</label>
-                            <input 
-                            type="text"
-                            value={cardNumber}
-                            name="cardNumber"
-                            className="form-control" 
-                            placeholder="Card Number"
-                            required></input>
-                        </div>
-                    </div>
-                    <div className="col-lg-12 padding">
-                        <div className="form-group">
-                            <label className="label cvv">Your Card CVV</label>
-                            <input 
-                            type="password"
-                            name="cvv"
-                            value={payment.cvv}
-                            onChange={e=>handleChange(e)}
-                            className="form-control" 
-                            placeholder="Enter CVV"
-                            required></input>
-                        </div>
-                    </div>
-                    </div>
-                <button className="btn btn-light button" type="submit">Proceed</button>
+                </form>
             </div>
-        </form>
-    </div> 
     );
 }

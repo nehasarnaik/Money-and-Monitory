@@ -43,31 +43,38 @@ export default function LockAccount() {
     <div className="width">
       <NavBarUser />
       <NavbarSavings />
-      <NavbarFunctions />
-      
+      <div className="container lockAccount">
         <br></br>
-        <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
-        <br></br>
-        <h4 className="h4">LOCK YOUR SAVINGS ACCOUNT</h4>
-        
-        <form className="dropdown" onSubmit={onSubmit}>
-        <div className="calender">
-          <DatePicker 
-            placeholderText="Select date"
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd-MM-yyyy" // Specify the date format you prefer
-            minDate={yesterday.toDate()} // Set minDate to yesterday
-          />
+        <h1 className="display-3">WANT TO SAVE MORE MONEY?</h1>
+        <h4 className="display-6">LOCK YOUR SAVINGS ACCOUNT</h4>
+          <div className="container">
+            <hr/>
+            <form className="dropdown" onSubmit={onSubmit}>
+            <div className="row">
+              <div class="col">
+                <div className="calender">
+                  <DatePicker 
+                    placeholderText="Select date"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    dateFormat="dd-MM-yyyy" // Specify the date format you prefer
+                    minDate={yesterday.toDate()} // Set minDate to yesterday
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <label>
+                  <input className="checkbox" type="checkbox" required/>
+                      You won't be able to withdraw money for above selected period of time
+                </label>
+              </div>
+              <div class="col">
+                <button className="btn btn-primary" type="submit" style={{float:"left"}}>Lock the Account</button>
+              </div>
+            </div>
+            </form>
+          </div>
         </div>
-        <br></br>
-        <label>
-        <input className="checkbox" type="checkbox" required/> You won't be able to withdraw money for above selected period of time</label><br></br>
-        <br></br>
-        <button className="btn btn-light button buttonpadding" type="submit">Lock the Account</button>
-        <br></br>
-        <br></br>
-        </form>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import "./withdraw.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
+import SidebarFunctions from "../Navbar/SidebarFunctions";
 
 export default function Deposit() {
   const { user } = useUser();
@@ -70,7 +71,7 @@ export default function Deposit() {
   return (
     <div>
       <NavBarUser />
-      <NavbarFunctions />
+      <SidebarFunctions />
       <div className="container mt-4">
         <div className="row justify-content-center">
           {/* Center align content */}

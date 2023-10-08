@@ -6,6 +6,7 @@ import "../script.css"
 import { useUser } from "../../UserContext";
 import Pagination from "./Pagination";
 import Records from "./Records";
+import SidebarFunctions from "../Navbar/SidebarFunctions";
 
 export default function TransactionHistory() {
   const { user } = useUser();
@@ -36,15 +37,18 @@ export default function TransactionHistory() {
     return (
       <div>
           <NavBarUser />
-          <NavbarFunctions />
-          <div className="history">
-              <Records data={currentRecords}/>
-              <Pagination
-                  nPages={nPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  color="secondary"
-              />
+          <SidebarFunctions/>
+          
+          <div className="container">
+            <div className="history">
+                <Records data={currentRecords}/>
+                <Pagination
+                    nPages={nPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    color="secondary"
+                />
+            </div>
           </div>
       </div>
     );

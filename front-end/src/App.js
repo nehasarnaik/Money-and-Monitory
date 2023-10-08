@@ -32,10 +32,8 @@ function App() {
     <UserProvider>
       <div className="App">
         <BrowserRouter>
-          <div className="header background_colour">
-            <h1 className="text_padding">Product Name</h1>
-          </div>
-
+            
+        
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
@@ -70,7 +68,6 @@ function App() {
             <Route path="/savingsaccount" element={<Savings />}></Route>
           </Routes>
         </BrowserRouter>
-        <div id="footer"></div>
       </div>
     </UserProvider>
   );
