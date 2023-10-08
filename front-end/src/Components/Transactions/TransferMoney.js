@@ -71,7 +71,6 @@ export default function TransferMoney() {
 
     return (
         <div>
-            <NavBarUser/>
             <SidebarFunctions/>
             <form onSubmit={onSubmit}>
                     <div className="card-body form_width">

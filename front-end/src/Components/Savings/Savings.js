@@ -32,7 +32,6 @@ export default function Savings() {
 
   return (
     <div>
-      <NavBarUser />
       <NavbarSavings />
 
       <div className="container mt-4">

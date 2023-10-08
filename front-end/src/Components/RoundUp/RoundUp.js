@@ -24,7 +24,6 @@ const RoundUp = () => {
 
   return (
     <div>
-      <NavBarUser></NavBarUser>
       <SidebarFunctions/>
       <div className="roundup-container mt-3">
         <h2 className="violet-text  bold-text">Round Up Service</h2>

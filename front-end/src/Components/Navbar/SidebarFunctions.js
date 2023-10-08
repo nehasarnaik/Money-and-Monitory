@@ -25,6 +25,9 @@ export default function SidebarFunctions() {
             handleSavingsAccountLinkClick(e);
         }
     };
+    const handleLogout = () => {
+        navigate("/")
+    }
     return (
         <div class="d-flex flex-column flex-shrink-0 p-3 text-dark" style={{width: "220px", position:"fixed", height:"-webkit-fill-available"}}>
             <div class="h4">Debit Account</div>
@@ -33,7 +36,7 @@ export default function SidebarFunctions() {
             <li class="nav-item">
                 <div className="h4">
                     <button type="button" class="btn btn-block text-white" style={{backgroundColor:"#490778"}} value = "/dashboard" onClick={handleSidebarClick}>
-                        Home
+                        Dashboard
                     </button>
                 </div>
             </li>
@@ -78,6 +81,20 @@ export default function SidebarFunctions() {
                         Round Up Savings
                     </button>
                 </div>
+            </li>
+            <li>
+            <hr/>
+            <button
+            className="btn btn-block"
+            style={{
+              borderColor: "white",
+              backgroundColor: "#490778",
+              color: "white",
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
             </li>
             <hr/>
             </ul>                

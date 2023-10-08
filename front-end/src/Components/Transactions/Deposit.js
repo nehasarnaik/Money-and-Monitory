@@ -70,7 +70,6 @@ export default function Deposit() {
 
   return (
     <div>
-      <NavBarUser />
       <SidebarFunctions />
       <div className="container mt-4">
         <div className="row justify-content-center">

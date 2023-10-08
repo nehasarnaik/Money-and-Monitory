@@ -54,11 +54,22 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 50px;   /* Height of the footer */
+  padding:10px;
   background: #490778;
 }
 
 .lockAccount{
   margin-left: 190px;
   margin-right: 190px;
+}
+
+.backgroundClass{
+  background-image: url("./bg.PNG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 820px;
+}
+html, body {
+  height: 100%;
+  width: 100%;
 }

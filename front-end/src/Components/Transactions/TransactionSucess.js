@@ -12,7 +12,6 @@ export default function TransactionSucess() {
 
   return (
     <div>
-      <NavBarUser />
       <div className="container mt-4">
         <div className="row justify-content-center violet-text">
           <h1>

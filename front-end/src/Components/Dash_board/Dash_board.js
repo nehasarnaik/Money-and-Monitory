@@ -9,7 +9,6 @@ function Dashboard() {
   return (
     <div>
        <div>
-         <NavBarUser />
          <SidebarFunctions/>
        </div>
        <div className='container'>

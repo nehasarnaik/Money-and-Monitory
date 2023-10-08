@@ -11,7 +11,6 @@ export default function PaymentGateway() {
   const navigate = useNavigate();
   return (
     <div>
-      <NavBarUser />
       <NavbarFunctions />
       <div></div>
       <form>

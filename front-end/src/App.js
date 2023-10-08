@@ -30,7 +30,7 @@ import EditProfile from "./Components/ViewProfile/EditProfile";
 function App() {
   return (
     <UserProvider>
-      <div className="App">
+      <div className="App" style={{height:"820px"}}>
         <BrowserRouter>
             
         

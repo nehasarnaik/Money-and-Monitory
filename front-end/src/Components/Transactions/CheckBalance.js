@@ -38,7 +38,6 @@ const CheckBalance = () => {
 
     return (
         <div>
-            <NavBarUser />
             <SidebarFunctions />
             <div className="container mt-3">
                 <div className="row">

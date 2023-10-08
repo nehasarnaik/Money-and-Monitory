@@ -21,7 +21,6 @@ export default function TransactionHistorySavings() {
 
   return (
     <div>
-      <NavBarUser />
       <NavbarSavings />
       <br></br>
       <h1 className="color">TRANSACTION HISTORY - SAVINGS ACCOUNT</h1>

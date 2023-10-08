@@ -36,7 +36,6 @@ export default function TransactionHistory() {
 
     return (
       <div>
-          <NavBarUser />
           <SidebarFunctions/>
           
           <div className="container">

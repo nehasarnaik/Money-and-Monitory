@@ -41,7 +41,6 @@ export default function LockAccount() {
 
   return (
     <div className="width">
-      <NavBarUser />
       <NavbarSavings />
       <div className="container lockAccount">
         <br></br>
