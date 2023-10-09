@@ -6,6 +6,9 @@ import com.example.moneyandmonitory.account_service.Repository.SavingsAccountRep
 import com.example.moneyandmonitory.account_service.model.DebitAccount;
 import com.example.moneyandmonitory.account_service.model.SavingsAccount;
 import com.example.moneyandmonitory.account_service.model.Transaction;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,7 +31,10 @@ import java.text.SimpleDateFormat;
 
 
 @Service
+@Slf4j
 public class AccountService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private DebitAccountRepository debitAccountRepository;
@@ -59,6 +65,7 @@ public class AccountService {
     }
     @Transactional
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(long userId, double amount) {
+        logger.info("Inside WithdrawFromSavingsAccount function in Account service");
 
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         Date date = new Date();
@@ -66,6 +73,7 @@ public class AccountService {
             double curBal = savingsAccount.getBalance();
 
             if (curBal < amount) {
+                logger.warn("Insufficient funds for withdrawal. userId: {}, current balance: {}", userId, curBal);
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
             double closingBal = curBal - amount;
@@ -79,16 +87,21 @@ public class AccountService {
             FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);
             SavingsAccount savingsAccount1 = mongoTemplate.findAndModify(query, update, options, SavingsAccount.class);
             if (savingsAccount1 != null) {
+                logger.info("Withdrawal from savings account successful for userId: {}, amount: {}", userId, amount);
                 return new ResponseEntity<>(t, HttpStatus.OK);
             } else {
+                logger.error("Withdrawal from savings account failed for userId: {}", userId);
                 return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
             }
         }else {
+            logger.warn("Withdrawal request denied due to account lock. userId: {}", userId);
             return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
         }
     }
 
     public ResponseEntity<Transaction> depositToDebitAccount(long userId, double amount) {
+
+        logger.info("Deposit request for debit account of userId: {}, amount: {}", userId, amount);
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
@@ -101,9 +114,11 @@ public class AccountService {
 
         if(modifiedAcc != null)
         {
+            logger.info("Deposit to debit account successful for userId: {}, amount: {}", userId, amount);
             return new ResponseEntity<>(t, HttpStatus.OK);
         }
         else {
+            logger.error("Deposit to debit account failed for userId: {}", userId);
             return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
         }
 
@@ -114,6 +129,7 @@ public class AccountService {
 
 
     public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
+        logger.error("Inside depositToSavingsAccount Function in Account service");
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         double curBal = savingsAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
@@ -126,16 +142,18 @@ public class AccountService {
 
         if(modifiedAcc != null)
         {
+            logger.info("Deposit to savings account successful for userId: {}, amount: {}", userId, amount);
             return new ResponseEntity<>(t, HttpStatus.OK);
         }
         else {
+            logger.error("Deposit to debit account failed for userId: {}", userId);
             return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
         }
 
     }
 
     public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
-
+        logger.info("Inside WithdrawFromDebitAccount function in Account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
         if(curBal < amount)
@@ -156,33 +174,42 @@ public class AccountService {
         DebitAccount debitAccount1 = mongoTemplate.findAndModify(query, update, options, DebitAccount.class);
 
         if(debitAccount1 != null) {
+            logger.info("Withdrawal from debit account successful for userId: {}, amount: {}", userId, amount);
             return new ResponseEntity<>(t, HttpStatus.OK);
         }
-
+        logger.error("Withdrawal from debit account failed for userId: {}", userId);
         return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
 
     }
 
     public double getSavingsAccountBalance(long userId) {
+        logger.info("Inside getSavingsAccountBalance function in account service");
         return savingsAccountRepository.findByuserId(userId).getBalance();
     }
 
     public double getDebitAccountBalance(long userId) {
+        logger.info("Inside getDebitAccountBalance function in account service");
         return debitAccountRepository.findByuserId(userId).getBalance();
     }
     public ResponseEntity<Transaction> transferMoney(MoneyTransferRequestDTO moneyTransferRequestDTO) {
+        logger.info("Money transfer request initiated (inside Account service class) ");
+
         MoneyTransferRequestDTO mt=moneyTransferRequestDTO;
         DebitAccount debitAccount = debitAccountRepository.findByuserId(mt.getUserId());
         double finalAmount = mt.getAmount();
         if(debitAccount.roundUp==true){
+
             finalAmount=Math.ceil(mt.getAmount());
             double savingsAmount=finalAmount-mt.getAmount();
             depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
+            logger.info("Round-up is performed");
         }
+        logger.info("Round-up disabled so normal payment is done");
         return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
     }
 
     public List<Transaction> transactionHistoryForDebitAccount(long userId) {
+        logger.info("Indside transactionhistoryfordebitaccount function in account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         System.out.println(debitAccount.getDebitAccountNumber());
         System.out.println(debitAccount.getTransactions());
@@ -191,11 +218,13 @@ public class AccountService {
 
 
     public List<Transaction> transactionHistorySavingsAccount(long userId) {
+        logger.info("Inside transactionhistoryfordebitaccount function in account service");
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         return savingsAccount.getTransactions();
     }
     public void lockAccount(long userId,Date lockDate) {
 
+        logger.info("Inside lockAccount function in account service");
         Query query = new Query(Criteria.where("userId").is(userId));
 
         Update update = new Update().set("lockAccount",lockDate);
@@ -207,7 +236,7 @@ public class AccountService {
     }
 
     public void roundUpFeature(long userId) {
-
+        logger.info("Inside roundUpFeature function in account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         boolean roundup = !debitAccount.roundUp;
         Query query = new Query(Criteria.where("userId").is(userId));
