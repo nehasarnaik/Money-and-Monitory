@@ -33,8 +33,8 @@ const Login = () => {
                 // If the first request succeeds, make the second request to get user data
                 const response1 = await axios.get(`http://localhost:8080/user-management-service/user/${username}`, {
                     auth: {
-                        username: username1,
-                        password: password1
+                        username: MSUsername,
+                        password: MSPassword
                       }
                 });
                 const userData = response1.data;
