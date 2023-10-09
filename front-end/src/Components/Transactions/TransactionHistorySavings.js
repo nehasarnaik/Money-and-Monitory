@@ -40,17 +40,17 @@ export default function TransactionHistorySavings() {
     <div>
       <NavbarSavings />
 
-//       <div className="history">
-//         <Records data={currentRecords} />
-//         <Pagination
-//           nPages={nPages}
-//           currentPage={currentPage}
-//           setCurrentPage={setCurrentPage}
-//           color="secondary"
-//         />
-//       </div>
+       <div className="history">
+         {/* <Records data={currentRecords} />
+         <Pagination
+          nPages={nPages}
+           currentPage={currentPage}
+           setCurrentPage={setCurrentPage}
+           color="secondary"
+         /> */}
+       </div>
 
-//       <br></br>
+       <br></br>
       <h1 className="color">TRANSACTION HISTORY - SAVINGS ACCOUNT</h1>
 
       <br></br>

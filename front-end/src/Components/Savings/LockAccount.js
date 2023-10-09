@@ -75,7 +75,7 @@ export default function LockAccount() {
         <br></br>
       </form>
 
-//       <div className="container lockAccount">
+{/* //       <div className="container lockAccount">
 //         <br></br>
 //         <h1 className="display-3">WANT TO SAVE MORE MONEY?</h1>
 //         <h4 className="display-6">LOCK YOUR SAVINGS ACCOUNT</h4>
@@ -106,7 +106,7 @@ export default function LockAccount() {
 //             </div>
 //             </form>
 //           </div>
-//         </div>
+//         </div> */}
 
     </div>
   );
