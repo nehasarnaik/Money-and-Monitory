@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/account")
 @Slf4j
 public class AccountController {
@@ -92,14 +92,26 @@ public class AccountController {
 
     @GetMapping("/debit/transactionhistory/{userId}")
     public List<Transaction> transactionHistoryForDebitAccount(@PathVariable long userId){
+
         logger.info("Fetching transaction history for debit account of userId: {}", userId);
-        return accountService.transactionHistoryForDebitAccount(userId);
+        //return accountService.transactionHistoryForDebitAccount(userId);
+
+        List<Transaction> transactions = accountService.transactionHistoryForDebitAccount(userId);
+        if(transactions == null)return Collections.emptyList();
+        return transactions;
+
     }
 
     @GetMapping("/savings/transactionhistory/{userId}")
     public List<Transaction> transactionHistoryForSavingsAccount(@PathVariable long userId){
+
         logger.info("Fetching transaction history for savings account of userId: {}", userId);
-        return accountService.transactionHistorySavingsAccount(userId);
+        //return accountService.transactionHistorySavingsAccount(userId);
+
+        List<Transaction> transactions = accountService.transactionHistorySavingsAccount(userId);
+        if(transactions == null)return Collections.emptyList();
+        return transactions;
+
     }
 
     @PutMapping("lockaccount/{userId}/{date}")

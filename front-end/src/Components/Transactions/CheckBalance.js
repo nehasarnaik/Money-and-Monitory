@@ -3,6 +3,7 @@ import NavbarFunctions from '../Navbar/NavbarFunctions';
 import NavBarUser from '../Navbar/NavBarUser';
 import { useState } from 'react';
 import { useUser } from '../../UserContext';
+import SidebarFunctions from '../Navbar/SidebarFunctions';
 
 const CheckBalance = () => {
     const [selectedAccount, setSelectedAccount] = useState('');
@@ -37,8 +38,7 @@ const CheckBalance = () => {
 
     return (
         <div>
-            <NavBarUser />
-            <NavbarFunctions />
+            <SidebarFunctions />
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">

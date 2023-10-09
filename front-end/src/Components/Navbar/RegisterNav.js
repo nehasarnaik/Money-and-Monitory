@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 const RegisterNav = () => {
     return ( 
+
             <nav class="navbar navbar-expand-lg  nav background">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse container" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <Link className="nav-link"></Link>

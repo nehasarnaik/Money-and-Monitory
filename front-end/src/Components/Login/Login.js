@@ -39,11 +39,10 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='backgroundClass'>
             <div>
                <RegisterNav></RegisterNav>
             </div>
-
             <div className="login-container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-4 custom-column">

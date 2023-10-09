@@ -71,7 +71,6 @@ export default function Withdraw() {
 
   return (
     <div>
-      <NavBarUser />
       <NavbarSavings />
       <div className="container mt-4">
         <div className="row justify-content-center">

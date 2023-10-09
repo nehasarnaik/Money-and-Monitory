@@ -32,7 +32,6 @@ export default function Savings() {
 
   return (
     <div>
-      <NavBarUser />
       <NavbarSavings />
 
       <div className="container mt-4">
@@ -51,9 +50,6 @@ export default function Savings() {
               </p>
             </div>
           </div>
-          {/* <div className="col-md-3">
-            <RoundUp /> 
-          </div> */}
         </div>
       </div>
     </div>

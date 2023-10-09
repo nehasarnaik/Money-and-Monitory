@@ -16,6 +16,9 @@ export default function NavbarFunctions() {
     } else {
       // If roundoff is not enabled, show an alert
       alert("Round Off is not enabled. Please enable it first.");
+      <div class="alert alert-primary" role="alert">
+        This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+      </div>
       //navigate("/roundup")
 
       event.preventDefault();

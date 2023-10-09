@@ -6,32 +6,52 @@ const Sidebar = () => {
  
   const { user } = useUser(); 
   return (
-    <div className="sidebar">
-      <div className="user-profile">
-        <div className="user-info">
-        <table >
-        <tr>
-            <td className='h1 sidebar'>
-              <h3>DEBIT ACCOUNT</h3>
-              <img
-              src="user-profile.png" 
-              alt="Profile"
-              className="profile-image"
-            />
-            <h1>{user.name}</h1>
-            </td>
-            <td className='h5'>
-              <h3>USER DETAILS</h3>
-              <h5>User Id:{user.userId}</h5>
-              <h5>Email Id:{user.email}</h5>
-              <h5>Phone:{user.mobile}</h5>
-              <h5>Date of Birth:{user.dob}</h5>
-              <h5>Address:{user.address}</h5>
-            </td>
-            
-        </tr>
-    </table>
-    </div>
+    <div className='container'>
+      <div className="sidebar">
+        <div className="user-profile">
+          <div className="user-info">
+            <table >
+              <tr>
+                <td className='h1 sidebar'>
+                  <h3 className='display-3'>DEBIT ACCOUNT</h3>
+                  <img src="user-profile.png" alt="Profile" className="profile-image"/>
+                <h1 className='display-6'>{user.name}</h1>
+                <hr/>
+                </td>
+                </tr>
+                <tr>
+                <td className='sidebar'>
+                  <h3 className='display-6'>USER DETAILS</h3>
+
+                  <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <th scope="row">User ID</th>
+                        <td>{user.userId}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email Id</th>
+                        <td>{user.email}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Phone</th>
+                        <td>{user.mobile}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Date of Birth</th>
+                        <td>{user.dob}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Address</th>
+                        <td>{user.address}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

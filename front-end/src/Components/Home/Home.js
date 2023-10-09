@@ -7,12 +7,7 @@ import Login from '../Login/Login';
 import RegisterNav from '../Navbar/RegisterNav';
 
 const Home = () => {
-    return ( 
-        <div>
-           
-            <Login></Login>
-        </div>
-     );
+    return <div><Login></Login></div>;
 }
  
 export default Home;
