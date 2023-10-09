@@ -54,6 +54,5 @@ export default function TransactionHistory() {
             </div>
           </div>
       </div>
-    </div>
   );
 }
