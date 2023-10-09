@@ -40,8 +40,11 @@ export default function TransferMoney() {
         if(cvv===payment.cvv){
             
             const res = await axios.post(userUrl, payment, {
-                headers: { 'Authorization': + 'Basic ' + btoa(MSUsername + ':' + MSPassword) }
-        });
+                auth: {
+                    username: MSUsername,
+                    password: MSPassword
+                  }
+              });
             console.log(res)
             //navigate("/paymentgateway");
             if (res.status === 200) {
@@ -63,7 +66,7 @@ export default function TransferMoney() {
         // Fetch the debit account number when the component mounts
         const userId = user.userId;   
         axios
-          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{},{
+          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{
             auth: {
                 username: MSUsername,
                 password: MSPassword
