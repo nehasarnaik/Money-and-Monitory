@@ -18,15 +18,14 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        var username1 = 'MSUser';
-        var password1 = 'moneyAndMonitory';    
-        var basicAuth = 'Basic ' + btoa(username1 + ':' + password1);
+        var MSUsername = 'MSUser';
+        var MSPassword = 'moneyAndMonitory';    
         try {
             // Make the first request to validate the username and password
             const response = await axios.get(`http://localhost:8080/user-management-service/user/${username}/${password}`, {
                 auth: {
-                  username: username1,
-                  password: password1
+                  username: MSUsername,
+                  password: MSPassword
                 }
               });
 
