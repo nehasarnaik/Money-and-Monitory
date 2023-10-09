@@ -18,14 +18,26 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
+        var username1 = 'MSUser';
+        var password1 = 'moneyAndMonitory';    
+        var basicAuth = 'Basic ' + btoa(username1 + ':' + password1);
         try {
             // Make the first request to validate the username and password
-            const response = await axios.get(`http://localhost:8080/user-management-service/user/${username}/${password}`);
+            const response = await axios.get(`http://localhost:8080/user-management-service/user/${username}/${password}`, {
+                auth: {
+                  username: username1,
+                  password: password1
+                }
+              });
 
             if (response.data) {
                 // If the first request succeeds, make the second request to get user data
-                const response1 = await axios.get(`http://localhost:8080/user-management-service/user/${username}`);
+                const response1 = await axios.get(`http://localhost:8080/user-management-service/user/${username}`, {
+                    auth: {
+                        username: username1,
+                        password: password1
+                      }
+                });
                 const userData = response1.data;
                 console.log(userData);
                 updateUser(userData);
@@ -39,7 +51,7 @@ const Login = () => {
     };
 
     return (
-        <div className='backgroundClass'>
+        <div>
             <div>
                <RegisterNav></RegisterNav>
             </div>
