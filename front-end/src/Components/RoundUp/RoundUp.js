@@ -12,12 +12,20 @@ const RoundUp = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(user.roundUpSavings);
-
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
   // Function to toggle the Round Up service
   const toggleRoundUp = () => {
     setIsRoundUpEnabled(!isRoundUpEnabled);
     //axios.put("http://localhost:8080/account-service/account/roundup/"+user.userId);
-    axios.put("http://localhost:8080/user-management-service/user/roundup/"+user.userId);
+    axios.put("http://localhost:8080/user-management-service/user/roundup/"+user.userId,{},
+      {
+        auth: {
+            username: MSUsername,
+            password: MSPassword
+          }
+    }
+    );
     user.roundUpSavings = !user.roundUpSavings;
     //navigate("/savingsaccount");
   };

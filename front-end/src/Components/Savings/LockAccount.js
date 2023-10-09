@@ -18,7 +18,8 @@ export default function LockAccount() {
   const [selectedDate, setSelectedDate] = useState(null);
   const minDate = new Date();
   const navigate = useNavigate();
-
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -37,7 +38,12 @@ export default function LockAccount() {
       "http://localhost:8080/account-service/account/lockaccount/" +
         user.userId +
         "/" +
-        selectedDate
+        selectedDate,{},{
+          auth: {
+              username: MSUsername,
+              password: MSPassword
+            }
+      }
     );
     alert("Savings account locked till " + formattedDate);
     navigate("/dashboard");

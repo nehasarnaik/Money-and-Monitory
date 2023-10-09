@@ -7,13 +7,16 @@ import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
 export default function Savings() {
   const { user } = useUser();
   const [accountInfo, setAccountInfo] = useState({});
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`
+          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`,{method:'GET', 
+          headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
         );
         if (response.ok) {
           const data = await response.json();

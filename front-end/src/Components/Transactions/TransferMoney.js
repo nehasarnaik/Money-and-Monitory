@@ -16,7 +16,8 @@ export default function TransferMoney() {
     const [error, setError] = useState(null);
 
     const userUrl = "http://localhost:8080/account-service/account/transfermoney";
-
+    const MSUsername = 'MSUser';
+    const MSPassword = 'moneyAndMonitory';    
     const [payment, setPayment] = useState({
         userId:user.userId,
         debitAccountNumber:"",
@@ -34,9 +35,13 @@ export default function TransferMoney() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        
         console.log(user.userId);
         if(cvv===payment.cvv){
-            const res = await axios.post(userUrl, payment);
+            
+            const res = await axios.post(userUrl, payment, {
+                headers: { 'Authorization': + 'Basic ' + btoa(MSUsername + ':' + MSPassword) }
+        });
             console.log(res)
             //navigate("/paymentgateway");
             if (res.status === 200) {
@@ -56,9 +61,14 @@ export default function TransferMoney() {
    
     useEffect(() => {
         // Fetch the debit account number when the component mounts
-        const userId = user.userId;
+        const userId = user.userId;   
         axios
-          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`)
+          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{},{
+            auth: {
+                username: MSUsername,
+                password: MSPassword
+              }
+          })
           .then((res) => {
             setDebitAccountNumber(String(res.data.debitAccountNumber));
             setCardNumber(String(res.data.card.cardNumber));

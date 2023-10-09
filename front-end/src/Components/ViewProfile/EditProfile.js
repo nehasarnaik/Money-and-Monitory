@@ -6,6 +6,8 @@ import axios from "axios";
 export default function EditProfile() {
   let navigate = useNavigate();
   const { user, updateUser } = useUser();
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
 
   const [formData, setFormData] = useState({
     userId: user.userId,
@@ -27,7 +29,13 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .put("http://localhost:8080/user-management-service/user/updateprofile", formData)
+      .put("http://localhost:8080/user-management-service/user/updateprofile", formData,
+      {
+        auth: {
+            username: MSUsername,
+            password: MSPassword
+          }
+    })
       .then((response) => {
         if (response.status === 200) {
           alert("Update Successful");

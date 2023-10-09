@@ -13,12 +13,15 @@ const CheckBalance = () => {
     const handleAccountChange = (e) => {
         setSelectedAccount(e.target.value);
     };
-
+    const MSUsername = 'MSUser';
+    const MSPassword = 'moneyAndMonitory';
+  
     const handleCheckBalance = () => {
 
         // Make an API request to fetch the balance
         if (selectedAccount === 'savings' || selectedAccount === 'debit') {
-            fetch(`http://localhost:8080/account-service/account/${selectedAccount}account/balance/${user.userId}`)
+            fetch(`http://localhost:8080/account-service/account/${selectedAccount}account/balance/${user.userId}`,
+            {method:'GET', headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}})
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

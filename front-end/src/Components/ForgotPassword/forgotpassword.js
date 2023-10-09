@@ -13,7 +13,8 @@ function ForgotPassword() {
     pin: "",
     password: "",
   });
-
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -36,7 +37,13 @@ function ForgotPassword() {
       axios
         .put(
           "http://localhost:8080/user-management-service/user/forgotPassword",
-          user
+          user,
+          {
+            auth: {
+                username: MSUsername,
+                password: MSPassword
+              }
+        }
         )
         .then((res) => {
           console.log(res);

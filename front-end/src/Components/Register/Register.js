@@ -29,7 +29,8 @@ const Register = () => {
      const savingsAccountUrl = "http://localhost:8080/user-management-service/user/savingsaccount";
 
     let navigate = useNavigate();
-
+    const MSUsername = 'MSUser';
+    const MSPassword = 'moneyAndMonitory';
     const [isPasswordValid, setIsPasswordValid] = useState(true);
 
     const handleChange = (e) => {
@@ -61,7 +62,12 @@ const Register = () => {
         return;
     }
 
-    const res = await axios.post(userUrl, user);
+    const res = await axios.post(userUrl, user,{
+        auth: {
+            username: MSUsername,
+            password: MSPassword
+          }
+    });
     console.log(res.data.id);
     console.log(user);
     alert("Registration Successful");
@@ -90,7 +96,13 @@ const Register = () => {
             transactionHistory: [], // Initial transaction history
           };
       
-          await axios.post(savingsAccountUrl, savingsAccountInfo);
+          await axios.post(savingsAccountUrl, savingsAccountInfo,{
+            auth: {
+                username: MSUsername,
+                password: MSPassword
+              }
+        }
+);
       
     }
   };

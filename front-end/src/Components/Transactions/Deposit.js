@@ -18,12 +18,18 @@ export default function Deposit() {
   const handleAmountChange = (event) => {
     setDepositAmount(event.target.value);
   };
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
 
   useEffect(() => {
     // Fetch the debit account number when the component mounts
     const userId = user.userId;
-    axios
-      .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`)
+    axios.get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{
+      auth: {
+          username: MSUsername,
+          password: MSPassword
+        }
+  })
       .then((res) => {
         setSelectedAccount(String(res.data.debitAccountNumber));
       })
@@ -38,7 +44,14 @@ export default function Deposit() {
     const userId = user.userId;
     await axios
       .put(
-        `http://localhost:8080/account-service/account/debitaccount/deposit/${userId}/${depositAmount}`
+        `http://localhost:8080/account-service/account/debitaccount/deposit/${userId}/${depositAmount}`,{},
+        {
+          auth: {
+              username: MSUsername,
+              password: MSPassword
+            }
+      }
+
       )
       .then((res) => {
         console.log(res);

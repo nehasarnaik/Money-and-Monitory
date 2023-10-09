@@ -12,6 +12,8 @@ export default function Withdraw() {
   const { user } = useUser();
   const [selectedAccount, setSelectedAccount] = useState(""); // State to store selected account
   const [withdrawAmount, setWithdrawAmount] = useState(""); // State to store withdrawal amount
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory';
 
   let navigate = useNavigate();
 
@@ -19,7 +21,15 @@ export default function Withdraw() {
     // Fetch savings account number when the component mounts
     const userId = user.userId;
     axios
-      .get(`http://localhost:8080/account-service/account/savingsaccount/${userId}`)
+      .get(`http://localhost:8080/account-service/account/savingsaccount/${userId}`,
+      {
+        auth: {
+            username: MSUsername,
+            password: MSPassword
+          }
+    }
+
+      )
       .then((res) => {
         setSelectedAccount(String(res.data.savingsAccountNumber));
       })
@@ -38,7 +48,13 @@ export default function Withdraw() {
 
     await axios
       .put(
-        `http://localhost:8080/account-service/account/savingsaccount/withdraw/${userId}/${withdrawAmount}`
+        `http://localhost:8080/account-service/account/savingsaccount/withdraw/${userId}/${withdrawAmount}`, {},
+        {
+          auth: {
+              username: MSUsername,
+              password: MSPassword
+            }
+      }
       )
       .then((res) => {
         console.log(res);

@@ -16,11 +16,13 @@ export default function TransactionHistory() {
   // No of Records to be displayed on each page
   const [recordsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
-
+  const MSUsername = 'MSUser';
+  const MSPassword = 'moneyAndMonitory'; 
   useEffect(() => {
     fetch(
       "http://localhost:8080/account-service/account/debit/transactionhistory/" +
-        user.userId
+        user.userId,{method:'GET', 
+        headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
     )
       .then((response) => response.json())
       .then((data) => {
