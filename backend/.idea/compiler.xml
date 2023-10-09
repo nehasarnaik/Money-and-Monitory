@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user_management_service" />
+        <module name="api-gateway" />
         <module name="service-discovery" />
         <module name="account_service" />
       </profile>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account_service" options="-parameters" />
+      <module name="api-gateway" options="-parameters" />
       <module name="service-discovery" options="-parameters" />
       <module name="user_management_service" options="-parameters" />
     </option>
