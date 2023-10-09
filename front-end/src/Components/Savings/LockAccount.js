@@ -18,8 +18,8 @@ export default function LockAccount() {
   const [selectedDate, setSelectedDate] = useState(null);
   const minDate = new Date();
   const navigate = useNavigate();
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory';
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -38,11 +38,13 @@ export default function LockAccount() {
       "http://localhost:8080/account-service/account/lockaccount/" +
         user.userId +
         "/" +
-        selectedDate,{},{
-          auth: {
-              username: MSUsername,
-              password: MSPassword
-            }
+        selectedDate,
+      {},
+      {
+        auth: {
+          username: MSUsername,
+          password: MSPassword,
+        },
       }
     );
     alert("Savings account locked till " + formattedDate);
@@ -50,9 +52,9 @@ export default function LockAccount() {
   };
 
   return (
-     <div className="width">
-       <NavbarSavings />
-    {/* //   <br></br>
+    <div className="width">
+      <NavbarSavings />
+      {/* //   <br></br>
     //   <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
     //   <br></br>
     //   <h4 className="h4">LOCK YOUR SAVINGS ACCOUNT</h4>
@@ -81,39 +83,45 @@ export default function LockAccount() {
     //     <br></br>
     //   </form> */}
 
-       <div className="container lockAccount">
-         <br></br>
+      <div className="container lockAccount">
+        <br></br>
         <h1 className="display-3">WANT TO SAVE MORE MONEY?</h1>
-         <h4 className="display-6">LOCK YOUR SAVINGS ACCOUNT</h4>
-          <div className="container">
-             <hr/>
-             <form className="dropdown" onSubmit={onSubmit}>
-             <div className="row">
-             <div class="col">
-                 <div className="calender">
-                  <DatePicker 
-                     placeholderText="Select date"
-                     selected={selectedDate}
-                     onChange={handleDateChange}
-                     dateFormat="dd-MM-yyyy" // Specify the date format you prefer
-                     minDate={yesterday.toDate()} // Set minDate to yesterday
-                   />
-                 </div>
-               </div>
-               <div class="col-6">
-                 <label>
-                   <input className="checkbox" type="checkbox" required/>
-                       You won't be able to withdraw money for above selected period of time
-                 </label>
-               </div>
-               <div class="col">
-                 <button className="btn btn-primary" type="submit" style={{float:"left"}}>Lock the Account</button>
-               </div>
-             </div>
-             </form>
-           </div>
-         </div> 
-
+        <h4 className="display-6">LOCK YOUR SAVINGS ACCOUNT</h4>
+        <div className="container">
+          <hr />
+          <form className="dropdown" onSubmit={onSubmit}>
+            <div className="row">
+              <div class="col">
+                <div className="calender">
+                  <DatePicker
+                    placeholderText="Select date"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    dateFormat="dd-MM-yyyy" // Specify the date format you prefer
+                    minDate={yesterday.toDate()} // Set minDate to yesterday
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <label>
+                  <input className="checkbox" type="checkbox" required />
+                  You won't be able to withdraw money for above selected period
+                  of time
+                </label>
+              </div>
+              <div class="col">
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  style={{ float: "left" }}
+                >
+                  Lock the Account
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

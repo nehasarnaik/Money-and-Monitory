@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import NavBarUser from "../Navbar/NavBarUser";
 import NavbarSavings from "../Navbar/NavbarSavings";
-import Table from "react-bootstrap/esm/Table";
+import Table from "react-bootstrap/Table";
 import Records from "./Records";
 import Pagination from "./Pagination";
 
@@ -44,17 +44,17 @@ export default function TransactionHistorySavings() {
     <div>
       <NavbarSavings />
 
-       <div className="history">
-         {/* <Records data={currentRecords} />
+      <div className="history">
+        {/* <Records data={currentRecords} />
          <Pagination
           nPages={nPages}
            currentPage={currentPage}
            setCurrentPage={setCurrentPage}
            color="secondary"
          /> */}
-       </div>
+      </div>
 
-       <br></br>
+      <br></br>
       <h1 className="color">TRANSACTION HISTORY - SAVINGS ACCOUNT</h1>
 
       <br></br>
@@ -91,8 +91,7 @@ export default function TransactionHistorySavings() {
             </tbody>
           </Table>
         </div>
-
+      </div>
     </div>
-  </div>
   );
 }
