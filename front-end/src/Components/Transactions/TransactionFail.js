@@ -2,10 +2,12 @@ import React from "react";
 import NavBarUser from "../Navbar/NavBarUser";
 import { Link } from "react-router-dom";
 import "./withdraw.css";
+import HeaderBar from "../Header/header";
 
 export default function TransactionFail() {
   return (
     <div>
+      <HeaderBar/>
       <div className="container mt-4">
         <div className="row justify-content-center violet-text">
           <h1>
