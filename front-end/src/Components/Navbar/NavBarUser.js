@@ -2,17 +2,17 @@ import React from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import userprofile from "../../Assets/user-profile.png";
-import { useUser } from '../../UserContext';
+import { useUser } from "../../UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBarUser() {
-  const { user } = useUser(); 
+  const { user } = useUser();
 
   let navigate = useNavigate();
 
   const handleLogout = () => {
-      navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-violet">
