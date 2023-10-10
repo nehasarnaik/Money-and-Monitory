@@ -61,6 +61,16 @@ const Register = () => {
         // Display an error message for the invalid password
         alert("Invalid password");
         return;
+    }else if(user.mobile.length!=10){
+        alert("Invalid phone number");
+        return;
+    }
+    else if(user.password!=confirmPassword){
+        alert("Password Missmatch");
+        return;
+    }else if(user.pin.length!=4){
+        alert("Pin should be 4 digit");
+        return;
     }
 
     const res = await axios.post(userUrl, user,{
@@ -125,7 +135,7 @@ const Register = () => {
         <form onSubmit={onSubmit}>
             
             <div className="card-body  mt-11 ">
-                <h2 className="top">Registration</h2>
+                <h2 className="top">JOIN US NOW</h2>
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="form-group">

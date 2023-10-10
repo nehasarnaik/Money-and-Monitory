@@ -61,7 +61,7 @@ const Login = () => {
                     <div className="col-md-4 custom-column">
                         <div class="card">
                             <div className="card-body">
-                                <h3 className="card-title text-center violet-text bold-text">Login</h3>
+                                <h3 className="card-title text-center violet-text bold-text">LOGIN</h3>
                                 <form>
                                     <div className="form-group mb-3 mt-4">
                                         <input

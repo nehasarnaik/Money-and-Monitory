@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import RegisterNav from "../Navbar/RegisterNav";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import HeaderBar from "../Header/header";
 
 function ForgotPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -63,6 +64,7 @@ function ForgotPassword() {
 
   return (
     <div>
+      <HeaderBar/>
       <RegisterNav></RegisterNav>
       <div className="login-container mt-5">
         <div className="row justify-content-center">
