@@ -1,13 +1,10 @@
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../script.css'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from '../Register/Register';
-import { Link } from "react-router-dom";
-import Login from '../Login/Login';
-import RegisterNav from '../Navbar/RegisterNav';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import LandingPage from '../LandingPage/LandingPage';
+import '../script.css';
 
 const Home = () => {
-    return <div><Login></Login></div>;
+    // return <div><Login></Login></div>;
+    return <div className="voilet-bg"><LandingPage/></div>
 }
  
 export default Home;

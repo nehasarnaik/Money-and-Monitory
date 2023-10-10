@@ -5,6 +5,7 @@ import './Register.css'
 import { Link } from "react-router-dom";
 import axios from "axios";
 import RegisterNav from "../Navbar/RegisterNav";
+import HeaderBar from "../Header/header";
 
 const Register = () => {
    
@@ -117,6 +118,7 @@ const Register = () => {
     return ( 
     <div>
         <div>
+            <HeaderBar/>
              <RegisterNav/>
         </div>
         <form onSubmit={onSubmit}>

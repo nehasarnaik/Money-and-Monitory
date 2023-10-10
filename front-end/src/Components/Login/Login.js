@@ -5,6 +5,7 @@ import './Login.css';
 import { useUser } from '../../UserContext';
 import axios from 'axios'; // Make sure you have Axios installed
 import RegisterNav from '../Navbar/RegisterNav';
+import HeaderBar from '../Header/header';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -52,6 +53,7 @@ const Login = () => {
     return (
         <div>
             <div>
+                <HeaderBar/>
                <RegisterNav></RegisterNav>
             </div>
             <div className="login-container mt-5">

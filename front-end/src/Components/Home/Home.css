@@ -15,8 +15,8 @@ html, body {
 
   .left-half {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-around;
     margin: 0;
     padding: 0;
     height: 100vh;

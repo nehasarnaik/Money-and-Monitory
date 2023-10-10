@@ -27,6 +27,7 @@ import ForgotPassword from "./Components/ForgotPassword/forgotpassword";
 import TransactionHistorySavings from "./Components/Transactions/TransactionHistorySavings";
 import EditProfile from "./Components/ViewProfile/EditProfile";
 import HomePage from "./Components/Home/HomePage";
+import LandingPage from "./Components/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
       <div className="App" style={{ height: "820px" }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/" element={<LandingPage />}></Route>
 
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/withdraw" element={<Withdraw />}></Route>
