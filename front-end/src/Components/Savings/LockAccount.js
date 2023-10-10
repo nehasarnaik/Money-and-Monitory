@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import "react-datepicker/dist/react-datepicker.css";
+import HeaderBar from "../Header/header";
 
 export default function LockAccount() {
   const { user } = useUser();
@@ -53,6 +54,7 @@ export default function LockAccount() {
 
   return (
     <div className="width">
+      <HeaderBar/>
       <NavbarSavings />
       {/* //   <br></br>
     //   <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>

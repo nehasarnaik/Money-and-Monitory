@@ -122,7 +122,7 @@ const Register = () => {
              <RegisterNav/>
         </div>
         <form onSubmit={onSubmit}>
-            <div className="card-body form_width ">
+            <div className="card-body form_width mt-5">
                 <h2 className="top">Registration</h2>
                 <div className="row">
                     <div className="col-lg-12 padding">

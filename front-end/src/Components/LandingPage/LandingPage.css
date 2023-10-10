@@ -60,3 +60,11 @@
   .right-half{
     background-color: #6b2cb1;
   }
+
+  .padding{
+    padding-right: 64%;
+  }
+
+  .padding-top{
+    padding-top: 8%;
+  }
