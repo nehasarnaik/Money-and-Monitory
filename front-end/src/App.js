@@ -26,16 +26,16 @@ import TransferMoney from "./Components/Transactions/TransferMoney";
 import ForgotPassword from "./Components/ForgotPassword/forgotpassword";
 import TransactionHistorySavings from "./Components/Transactions/TransactionHistorySavings";
 import EditProfile from "./Components/ViewProfile/EditProfile";
+import HomePage from "./Components/Home/HomePage";
 
 function App() {
   return (
     <UserProvider>
-      <div className="App" style={{height:"820px"}}>
+      <div className="App" style={{ height: "820px" }}>
         <BrowserRouter>
-            
-        
           <Routes>
-            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/" element={<HomePage />}></Route>
+
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/withdraw" element={<Withdraw />}></Route>
             <Route path="/deposit" element={<Deposit />}></Route>
