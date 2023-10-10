@@ -5,7 +5,7 @@ import successimg from "../../Assets/sucess.png";
 import HeaderBar from "../Header/header";
 
 export default function TransactionSucess() {
-  const transactionDate = new Date().toLocaleDateString(); // Get the current date
+  const transactionDate = new Date().toISOString()
 
   // Generate a random transaction ID (you can replace this with your logic)
   //temporary -- technically this should come from withdraw component
@@ -20,7 +20,7 @@ export default function TransactionSucess() {
             {" "}
             Transaction Successful <i className="fas fa-check"></i>
           </h1>
-          <h4 className="transaction-date">Date: {transactionDate}</h4>
+          <h4 className="transaction-date">Date: {transactionDate.split("T")[0] + " " + transactionDate.split("T")[1].substring(0,8)}</h4>
           <div className="circle-image">
             {/* You can replace this with your circle image */}
             <br></br>
