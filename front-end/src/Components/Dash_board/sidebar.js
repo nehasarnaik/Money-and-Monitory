@@ -22,7 +22,6 @@ const Sidebar = () => {
                 <tr>
                 <td className='sidebar'>
                   <h3 className='display-6'>USER DETAILS</h3>
-
                   <table class="table table-borderless">
                     <tbody>
                       <tr>
