@@ -11,6 +11,7 @@
 }
 
 
+
 .dropdown{
     margin-left: 40px;
     color: #490778;
@@ -54,3 +55,15 @@
 .paddingTop{
     padding-top: 1%;
 }
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes up the full height of the column */
+  }
+
+  .img-fluid{
+    width: 500px;
+    height: 500px;
+  }
