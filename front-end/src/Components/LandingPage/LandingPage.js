@@ -22,9 +22,9 @@ function LandingPage() {
       </div>
     </header>
     <div class="position-left text-left left-half text-white">
-      <div class="col-md-8">
-        <h1 class="display-6">Banking Made Easier</h1>
-        <p class="lead font-weight-normal">Welcome to Coin Stash, where smart banking meets effortless saving! Discover our innovative 'RoundUp Savings' feature – every transaction you make gets rounded up, and the extra change goes straight into your savings account. It's a simple, automatic way to cultivate the habit of saving while you manage your finances. Start rounding up and watch your savings grow. Join us on the journey to financial empowerment today</p>
+      <div class="col-md-10">
+        <h1 class="display-6 padding-top">Banking Made Easier</h1>
+        <p class="lead font-weight-normal padding">Welcome to Coin Stash, where smart banking meets effortless saving! Discover our innovative 'RoundUp Savings' feature – every transaction you make gets rounded up, and the extra change goes straight into your savings account. It's a simple, automatic way to cultivate the habit of saving while you manage your finances. Start rounding up and watch your savings grow. Join us on the journey to financial empowerment today</p>
             
       </div>
     </div>

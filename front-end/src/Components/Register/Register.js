@@ -121,11 +121,13 @@ const Register = () => {
             <HeaderBar/>
              <RegisterNav/>
         </div>
+        <div className="form_width">
         <form onSubmit={onSubmit}>
-            <div className="card-body form_width ">
+            
+            <div className="card-body  mt-11 ">
                 <h2 className="top">Registration</h2>
                 <div className="row">
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="text"
@@ -137,7 +139,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="text"
@@ -149,7 +151,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="text"
@@ -161,7 +163,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12 ">
                         <div className="form-group">
                             <input 
                             type="text"
@@ -173,7 +175,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="text"
@@ -185,7 +187,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="password"
@@ -197,7 +199,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="password"
@@ -209,7 +211,7 @@ const Register = () => {
                             required></input>
                         </div>
                     </div>
-                    <div className="col-lg-12 padding">
+                    <div className="col-lg-12">
                         <div className="form-group">
                             <input 
                             type="password"
@@ -242,6 +244,7 @@ const Register = () => {
                 <button className="btn btn-light button" type="submit">Register</button>
             </div>
         </form>
+        </div>
     </div> 
     );
 }

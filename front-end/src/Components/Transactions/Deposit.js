@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
+import HeaderBar from "../Header/header";
 
 export default function Deposit() {
   const { user } = useUser();
@@ -83,6 +84,7 @@ export default function Deposit() {
 
   return (
     <div>
+      <HeaderBar/>
       <SidebarFunctions />
       <div className="container mt-4">
         <div className="row justify-content-center">

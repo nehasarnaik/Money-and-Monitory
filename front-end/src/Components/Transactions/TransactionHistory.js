@@ -7,6 +7,7 @@ import { useUser } from "../../UserContext";
 import Pagination from "./Pagination";
 import Records from "./Records";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
+import HeaderBar from "../Header/header";
 
 export default function TransactionHistory() {
   const { user } = useUser();
@@ -42,6 +43,7 @@ export default function TransactionHistory() {
 
     return (
       <div>
+          <HeaderBar/>
           <SidebarFunctions/>
           
           <div className="container">

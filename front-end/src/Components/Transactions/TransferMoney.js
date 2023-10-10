@@ -7,6 +7,7 @@ import "../script.css"
 import { useUser } from '../../UserContext';
 import axios from "axios";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
+import HeaderBar from "../Header/header";
 export default function TransferMoney() {
     
     const { user } = useUser();
@@ -83,13 +84,17 @@ export default function TransferMoney() {
       }, [user.userId]); // Dependency array ensures this effect runs when userId changes
 
     return (
-        <div>
+        <div >
+            <div>
+            <HeaderBar/>
             <SidebarFunctions/>
+            </div>
+            <div className="form_width">
             <form onSubmit={onSubmit}>
-                    <div className="card-body form_width">
+                    <div className="card-body ">
                         <h2 className="top">Make Payment</h2>
                         <div className="row">
-                            <div className="col-lg-12 padding">
+                            <div className="col-lg-12">
                                 <div className="form-group">
                                     <label className="label youraccount">Your Account Number</label>
                                     <input 
@@ -101,9 +106,9 @@ export default function TransferMoney() {
                                     required></input>
                                 </div>
                             </div>
-                            <div className="col-lg-12 padding">
+                            <div className="col-lg-12">
                                 <div className="form-group">
-                                    <label className="label">Receiver's Account Number</label>
+                                    <label className="label receiver">Receiver's Account Number</label>
                                     <input 
                                     type="text"
                                     name="receiverAccountNumber"
@@ -114,7 +119,7 @@ export default function TransferMoney() {
                                     required></input>
                                 </div>
                             </div>
-                            <div className="col-lg-12 padding">
+                            <div className="col-lg-12">
                                 <div className="form-group">
                                     <label className="label amount">Amount to Pay</label>
                                     <input 
@@ -127,7 +132,7 @@ export default function TransferMoney() {
                                     required></input>
                                 </div>
                             </div>
-                            <div className="col-lg-12 padding">
+                            <div className="col-lg-12">
                                 <div className="form-group">
                                     <label className="label cardnumber">Your Card Number</label>
                                     <input 
@@ -139,7 +144,7 @@ export default function TransferMoney() {
                                     required></input>
                                 </div>
                             </div>
-                            <div className="col-lg-12 padding">
+                            <div className="col-lg-12">
                                 <div className="form-group">
                                     <label className="label cvv">Your Card CVV</label>
                                     <input 
@@ -156,6 +161,7 @@ export default function TransferMoney() {
                         <button className="btn btn-light button" type="submit">Proceed</button>
                     </div>
                 </form>
+                </div>
             </div>
     );
 }

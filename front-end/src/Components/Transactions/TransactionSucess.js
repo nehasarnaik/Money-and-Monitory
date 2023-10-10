@@ -2,6 +2,7 @@ import React from "react";
 import NavBarUser from "../Navbar/NavBarUser";
 import { Link, useParams } from "react-router-dom";
 import successimg from "../../Assets/sucess.png";
+import HeaderBar from "../Header/header";
 
 export default function TransactionSucess() {
   const transactionDate = new Date().toLocaleDateString(); // Get the current date
@@ -12,6 +13,7 @@ export default function TransactionSucess() {
 
   return (
     <div>
+      <HeaderBar/>
       <div className="container mt-4">
         <div className="row justify-content-center violet-text">
           <h1>

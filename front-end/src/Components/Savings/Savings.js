@@ -3,6 +3,7 @@ import NavbarSavings from "../Navbar/NavbarSavings";
 import NavBarUser from "../Navbar/NavBarUser";
 import { useUser } from "../../UserContext";
 import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
+import HeaderBar from "../Header/header";
 
 export default function Savings() {
   const { user } = useUser();
@@ -35,6 +36,7 @@ export default function Savings() {
 
   return (
     <div>
+      <HeaderBar/>
       <NavbarSavings />
 
       <div className="container mt-4">

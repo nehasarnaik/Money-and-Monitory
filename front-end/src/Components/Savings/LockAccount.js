@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import "react-datepicker/dist/react-datepicker.css";
+import HeaderBar from "../Header/header";
 
 export default function LockAccount() {
   const { user } = useUser();
@@ -53,6 +54,7 @@ export default function LockAccount() {
 
   return (
     <div className="width">
+      <HeaderBar/>
       <NavbarSavings />
       {/* //   <br></br>
     //   <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
@@ -83,7 +85,7 @@ export default function LockAccount() {
     //     <br></br>
     //   </form> */}
 
-      <div className="container lockAccount">
+      {/* <div className="container lockAccount">
         <br></br>
         <h1 className="display-3">WANT TO SAVE MORE MONEY?</h1>
         <h4 className="display-6">LOCK YOUR SAVINGS ACCOUNT</h4>
@@ -121,7 +123,33 @@ export default function LockAccount() {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
+      <div className="lock">
+      <br></br>
+      <br></br>
+        <h1 className="hh1">WANT TO SAVE MORE MONEY?</h1>
+        <br></br>
+        <h4 className="h5">LOCK YOUR SAVINGS ACCOUNT</h4>
+        
+        <form className="dropdown" onSubmit={onSubmit}>
+        <div className="calender">
+          <DatePicker 
+            placeholderText="Select date"
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd-MM-yyyy" // Specify the date format you prefer
+            minDate={yesterday.toDate()} // Set minDate to yesterday
+          />
+        </div>
+        <br></br>
+        <label>
+        <input className="checkbox" type="checkbox" required/> You won't be able to withdraw money for above selected period of time</label><br></br>
+        <br></br>
+        <button className="btn btn-light button buttonpadding" type="submit">Lock the Account</button>
+        <br></br>
+        <br></br>
+        </form>
+        </div>
     </div>
   );
 }

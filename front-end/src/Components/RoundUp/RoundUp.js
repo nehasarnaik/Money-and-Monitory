@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import "./RoundUp.css";
+import HeaderBar from "../Header/header";
 
 const RoundUp = () => {
   const navigate = useNavigate();
@@ -35,6 +36,8 @@ const RoundUp = () => {
   };
 
   return (
+    <div>
+      <HeaderBar/>
     <div className="roundup-container">
       <div className="row">
         <div className="col-md-3">
@@ -113,6 +116,7 @@ const RoundUp = () => {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
