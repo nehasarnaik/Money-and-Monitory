@@ -11,7 +11,7 @@ form.white-text{
 /* In your CSS file */
 .cardbg-color {
   position: relative; /* Required for the pseudo-element */
-  background-color: #490778; /* Violet background color */
+  /* background-color: #490778; Violet background color */
   padding: 20px; /* Add padding to the card for better visibility */
 }
 

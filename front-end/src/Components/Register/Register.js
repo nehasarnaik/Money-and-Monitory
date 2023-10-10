@@ -131,10 +131,15 @@ const Register = () => {
             <HeaderBar/>
              <RegisterNav/>
         </div>
-        <div className="form_width">
+        <div class="container">
+            <div class="row">
+                <div class="col" id="leftPanelLogin">
+                </div>
+                <div class="col">
+                <div>
         <form onSubmit={onSubmit}>
             
-            <div className="card-body  mt-11 ">
+            <div className="card-body2  mt-11 ">
                 <h2 className="top">JOIN US NOW</h2>
                 <div className="row">
                     <div className="col-lg-12">
@@ -235,7 +240,7 @@ const Register = () => {
                     </div>
                         <table>
                             <tr>
-                                <td className="right">Round Ups savings feature</td>
+                                <td className="right" style={{textAlign: "left"}}>Round Ups savings feature</td>
                                 <td className="right">
                                     <label class="switch">  
                                     <input type="checkbox"
@@ -251,10 +256,14 @@ const Register = () => {
                             </tr>
                         </table>
                     </div>
-                <button className="btn btn-light button" type="submit">Register</button>
+                <button className="btn btn-light button" style={{width:"40%"}} type="submit">Register</button>
             </div>
         </form>
         </div>
+                </div>
+            </div>
+        </div>
+        
     </div> 
     );
 }

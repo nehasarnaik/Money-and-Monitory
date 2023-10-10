@@ -94,9 +94,9 @@ export default function Withdraw() {
       <div className="container mt-4">
         <div className="row justify-content-center">
           <div className="col-md-4">
-            <div className="card cardbg-color">
+            <div className="card cardbg-color" style={{marginTop: "40px"}}>
               <div className="card-body">
-                <h2 className="card-title white-text">Withdraw</h2>
+                <h2 className="card-title" style={{color:"#502080"}}>Withdraw</h2>
                 <br />
                 <form className="text-start white-text">
                   <div className="mb-3">

@@ -90,11 +90,11 @@ export default function Deposit() {
         <div className="row justify-content-center">
           {/* Center align content */}
           <div className="col-md-4">
-            <div className="card cardbg-color">
+            <div className="card cardbg-color" style={{marginTop: "40px"}}>
               {" "}
               {/* Apply violet border */}
               <div className="card-body">
-                <h2 className="card-title white-text">Deposit</h2>
+                <h2 className="card-title" style={{color:"#502080"}}>Deposit</h2>
                 <br />
                 {/* Center align the heading */}
                 <form className="text-start white-text">
