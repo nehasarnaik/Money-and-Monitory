@@ -56,12 +56,17 @@ const Login = () => {
                 <HeaderBar/>
                <RegisterNav></RegisterNav>
             </div>
-            <div className="login-container mt-5">
+            <div class="container">
+            <div class="row">
+                <div class="col" id="leftPanelLogin">
+                </div>
+                <div class="col">
+                <div className="login-container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 custom-column">
+                    <div className="col-md-10 custom-column">
                         <div class="card">
                             <div className="card-body">
-                                <h3 className="card-title text-center violet-text bold-text">Login</h3>
+                                <h3 className="card-title text-center violet-text bold-text">LOGIN</h3>
                                 <form>
                                     <div className="form-group mb-3 mt-4">
                                         <input
@@ -108,6 +113,10 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+                </div>
+                </div>
+            </div>
+            
         </div>
     );
 };

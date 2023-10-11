@@ -30,7 +30,7 @@ function LandingPage() {
     </div>
     
     {/* <div className=" left-half"></div> */}
-    <footer class="container py-5">
+    {/* <footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">
           <small class="d-block mb-3 text-muted">© 2023</small>
@@ -51,7 +51,7 @@ function LandingPage() {
           <h5>About</h5>
         </div>
       </div>
-    </footer>
+    </footer> */}
     </>
   );
 }

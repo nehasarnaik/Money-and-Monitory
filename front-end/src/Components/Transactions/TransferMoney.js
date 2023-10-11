@@ -45,18 +45,20 @@ export default function TransferMoney() {
                     username: MSUsername,
                     password: MSPassword
                   }
-              });
-            console.log(res)
-            //navigate("/paymentgateway");
-            if (res.status === 200) {
-                alert("Transaction Successful");
-                console.log(res.data.referenceNumber);
-                let transactionId = res.data.referenceNumber.toString();
-                console.log(transactionId);
-                navigate(`/transactionsuccess/${transactionId}`);
-              } else {
+            }).then((res) => {
+                if (res.status === 200) {
+                    alert("Transaction Successful");
+                    console.log(res.data.referenceNumber);
+                    let transactionId = res.data.referenceNumber.toString();
+                    console.log(transactionId);
+                    navigate(`/transactionsuccess/${transactionId}`);
+                } else {
+                    navigate("/transactionfail");
+                  }
+            }).catch((error) => {
+                alert("Insufficient funds");
                 navigate("/transactionfail");
-              }
+            });
         }else{
             alert("Enter correct CVV");
         }

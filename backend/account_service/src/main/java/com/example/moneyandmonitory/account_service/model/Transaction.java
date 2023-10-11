@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
-    private Date date;
+    private String date;
     private String narration;
     private UUID referenceNumber;
     private double debited;
