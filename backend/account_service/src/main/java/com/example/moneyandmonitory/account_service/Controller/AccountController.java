@@ -78,7 +78,7 @@ public class AccountController {
     public ResponseEntity<Transaction> withdrawFromDebitAccount(@PathVariable long userId, @PathVariable double amount)
     {
         logger.info("Withdrawing {} from debit account for userId: {}", amount, userId);
-        return accountService.withdrawFromDebitAccount(userId, amount);
+        return accountService.withdrawFromDebitAccount(userId, amount,"Withdrawn");
     }
 
     @PostMapping("/transfermoney")
