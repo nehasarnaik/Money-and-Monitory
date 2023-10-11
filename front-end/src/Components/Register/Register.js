@@ -52,8 +52,10 @@ const Register = () => {
     const dobYear = parseInt(dobParts[2], 10);
     const currentYear = new Date().getFullYear();
 
-    // Check if the year is less than the current year
-    if (dobYear >= currentYear) {
+    const minValidYear = 1900; // Set a lower limit for the year
+
+    // Check if the year is within a valid range
+    if (dobYear < minValidYear || dobYear > currentYear) {
       return false; // Year is not valid
     }
 
@@ -111,7 +113,7 @@ const Register = () => {
     }
 
     if (!isDOBValid(user.dob)) {
-      alert("Invalid date of birth format (DD/MM/YYYY)");
+      alert("Invalid date of birth format (DD/MM/YYYY) or year");
       return;
     }
 

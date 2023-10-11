@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./sidebar.css";
 import { useUser } from "../../UserContext";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -15,7 +16,7 @@ const Sidebar = () => {
                 <td className="h1 sidebar">
                   <h3 className="display-3">DEBIT ACCOUNT</h3>
                   <img
-                    src="user-profile.png"
+                    src="userprofile1.png"
                     alt="Profile"
                     className="profile-image"
                   />
@@ -52,6 +53,16 @@ const Sidebar = () => {
                   </table>
                 </td>
               </tr>
+              <div className="d-flex justify-content-center">
+                <tr>
+                  <td>
+                    <Link to="/editprofile" className="btn btn-primary button">
+                      Edit Profile
+                    </Link>
+                  </td>
+                  <br></br>
+                </tr>
+              </div>
             </table>
           </div>
         </div>
