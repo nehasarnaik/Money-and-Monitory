@@ -29,9 +29,14 @@ export default function LockAccount() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+  const [isCheckboxChecked, setCheckboxChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setCheckboxChecked(event.target.checked);
+  };
 
   const yesterday = moment().subtract(1, "day");
-  const fixedPeriod=moment().add(1,"year");
+  const fixedPeriod = moment().add(1, "year");
   const disablePastDt = (current) => {
     return current.isAfter(yesterday);
   };
@@ -43,9 +48,9 @@ export default function LockAccount() {
 
     axios.put(
       "http://localhost:8080/account-service/account/lockaccount/" +
-        user.userId +
-        "/" +
-        selectedDate,
+      user.userId +
+      "/" +
+      selectedDate,
       {},
       {
         auth: {
@@ -82,12 +87,16 @@ export default function LockAccount() {
           </div>
           <br></br>
           <label>
-            <input className="checkbox" type="checkbox" required /> You won't be
+            <input className="checkbox" type="checkbox" required checked={isCheckboxChecked}
+              onChange={handleCheckboxChange} /> You won't be
             able to withdraw money for above selected period of time. <br></br>If you wish to withdraw money before selected time please visit the bank.
           </label>
           <br></br>
           <br></br>
-          <button className="btn btn-light button buttonpadding" type="submit">
+          <button
+            className={`btn btn-primary buttonpadding custom-button ${!isCheckboxChecked ? 'violet-disabled' : ''
+              }`}
+            type="submit" disabled={!isCheckboxChecked}>
             Lock the Account
           </button>
           <br></br>
