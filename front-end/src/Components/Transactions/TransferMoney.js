@@ -11,13 +11,13 @@ import HeaderBar from "../Header/header";
 import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransferMoney() {
-
-    const { user } = useUser();
-    const [debitAccountNumber, setDebitAccountNumber] = useState();
-    const [cardNumber, setCardNumber] = useState();
-    const [cvv, setCvv] = useState();
-    const [error, setError] = useState(null);
-    const phoneRegex = /^\?([0-9]{3})[-. ]?[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/
+  const { user } = useUser();
+  const [debitAccountNumber, setDebitAccountNumber] = useState();
+  const [cardNumber, setCardNumber] = useState();
+  const [cvv, setCvv] = useState();
+  const [error, setError] = useState(null);
+  const phoneRegex =
+    /^\?([0-9]{3})[-. ]?[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
 
   const userUrl = "http://localhost:8080/account-service/account/transfermoney";
   const MSUsername = "MSUser";
@@ -37,69 +37,71 @@ export default function TransferMoney() {
     setPayment({ ...payment, [name]: value });
   };
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        
-        console.log(user.userId);
-        if(cvv===payment.cvv){
-            
-            const res = await axios.post(userUrl, payment, {
-                auth: {
-                    username: MSUsername,
-                    password: MSPassword
-                  }
-              });
-            console.log(res)
-            //navigate("/paymentgateway");
-            if (res.status === 200) {
-                alert("Transaction Successful");
-                console.log(res.data.referenceNumber);
-                let transactionId = res.data.referenceNumber.toString();
-                console.log(transactionId);
-                navigate(`/transactionsuccess/${transactionId}`);
-              } else {
-                navigate("/transactionfail");
-              }
-        }else{
-            alert("Enter correct CVV");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(user.userId);
+    if (cvv === payment.cvv) {
+      const res = await axios.post(userUrl, payment, {
+        auth: {
+          username: MSUsername,
+          password: MSPassword,
+        },
+      });
+      console.log(res);
+      //navigate("/paymentgateway");
+      if (res.status === 200) {
+        alert("Transaction Successful");
+        console.log(res.data.referenceNumber);
+        let transactionId = res.data.referenceNumber.toString();
+        console.log(transactionId);
+        navigate(`/transactionsuccess/${transactionId}`);
+      } else {
+        navigate("/transactionfail");
+      }
+    } else {
+      alert("Enter correct CVV");
+    }
+  };
+
+  useEffect(() => {
+    // Fetch the debit account number when the component mounts
+    const userId = user.userId;
+    axios
+      .get(
+        `http://localhost:8080/account-service/account/debitaccount/${userId}`,
+        {
+          auth: {
+            username: MSUsername,
+            password: MSPassword,
+          },
         }
-    };
+      )
+      .then((res) => {
+        setDebitAccountNumber(String(res.data.debitAccountNumber));
+        setCardNumber(
+          String(res.data.card.cardNumber)
+            .replace(/(\d{3})/g, "$1-")
+            .substring(0, 15)
+        );
+        setCvv(String(res.data.card.cvv));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user.userId]); // Dependency array ensures this effect runs when userId changes
 
-   
-    useEffect(() => {
-        // Fetch the debit account number when the component mounts
-        const userId = user.userId;   
-        axios
-          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{
-            auth: {
-                username: MSUsername,
-                password: MSPassword
-              }
-          })
-          .then((res) => {
-            setDebitAccountNumber(String(res.data.debitAccountNumber));
-            setCardNumber(String(res.data.card.cardNumber).replace(/(\d{3})/g, '$1-').substring(0,15));
-            setCvv(String(res.data.card.cvv));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }, [user.userId]); // Dependency array ensures this effect runs when userId changes
-
-
-   
-  
   return (
     <div>
       <div>
-        <HandleTimeout/>
+        <HandleTimeout />
         <HeaderBar />
         <SidebarFunctions />
       </div>
       <div className="form_width">
         <form onSubmit={onSubmit}>
           <div className="card-body ">
-            <h2 className="top">Make Payment</h2>
+            <h1 className="color">MAKE PAYMENT</h1>
             <div className="row">
               <div className="col-lg-12">
                 <div className="form-group">

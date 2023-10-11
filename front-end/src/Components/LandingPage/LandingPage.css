@@ -47,8 +47,9 @@
     /* background-image: url("./banner3.webp"); */
     background-repeat: no-repeat;
     background-attachment: fixed; 
-    background-size: 100% 150%;
-    height: 500px;
+   /* background-size: 100% 150%;*/
+   background-size: cover;
+    height: 100vh;
     background-position: center;
   }
   .left-half{

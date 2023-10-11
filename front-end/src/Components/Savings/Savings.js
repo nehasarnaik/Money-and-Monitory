@@ -8,40 +8,40 @@ import { useNavigate } from "react-router-dom";
 import savingsaccount from "../../Assets/savings.png";
 import HandleTimeout from "../Timeout/Timeout";
 
-
-
 export default function Savings() {
   const { user } = useUser();
   const [accountInfo, setAccountInfo] = useState({});
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory';
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
     if (Object.keys(user).length === 0) {
-          navigate("/login"); // Replace with your login route
+      navigate("/login"); // Replace with your login route
     }
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`,{method:'GET', 
-          headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
+          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: "Basic " + btoa(MSUsername + ":" + MSPassword),
+            },
+          }
         );
         if (response.ok) {
           const data = await response.json();
           setAccountInfo(data);
           console.log(data);
-        } 
-        else {
+        } else {
           // Handle errors, e.g., show an error message
           console.error("Failed to fetch account info");
         }
       } catch (error) {
-
         navigate("/dashboard");
         // alert("Please enable round up feature first");
-
       }
     };
 
@@ -50,7 +50,7 @@ export default function Savings() {
 
   return (
     <div>
-      <HandleTimeout/>
+      <HandleTimeout />
       <HeaderBar />
       <div className="mt-4">
         <div className="row">
@@ -62,10 +62,10 @@ export default function Savings() {
           {/* Third Column: Savings Account Display */}
           <div
             className="col-md-4 justify-content-center"
-            style={{ marginTop: "30px" }}
+            style={{ marginTop: "83px" }}
           >
             <div className="alert alert-light-violet" role="alert">
-              <h2 className="alert-heading">Savings Account</h2>
+              <h2 className="color">SAVINGS ACCOUNT</h2>
               <hr />
               <p className="mb-0">
                 <strong>

@@ -53,7 +53,7 @@ export default function TransactionHistorySavings() {
 
   return (
     <div>
-      <HandleTimeout/>
+      <HandleTimeout />
       <HeaderBar />
       <NavbarSavings />
 
@@ -67,7 +67,6 @@ export default function TransactionHistorySavings() {
          /> */}
       </div>
 
-      <br></br>
       <h1 className="color">TRANSACTION HISTORY - SAVINGS ACCOUNT</h1>
 
       <br></br>

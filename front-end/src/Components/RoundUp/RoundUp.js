@@ -45,15 +45,19 @@ const RoundUp = () => {
 
   return (
     <div>
-      <HandleTimeout/>
+      <HandleTimeout />
       <HeaderBar />
+      <SidebarFunctions />
+
+      <h1 className="color" style={{ marginTop: "20px" }}>
+        ROUND UP SERVICE
+      </h1>
       <div className="roundup-container">
-        <div className="row">
-          <div className="col-md-3">
-            <SidebarFunctions />
-          </div>
+        <div className="row ">
+          <div className="col-md-3"></div>
           <div className="col-md-5">
             {/* Two Rows of Two Cards Each */}
+
             <div className="row">
               <div className="col-md-6">
                 <div className="card bg-violet text-white">
@@ -111,7 +115,7 @@ const RoundUp = () => {
           <div className="col-md-4">
             {/* Right Side Content */}
             <div className="roundup-container mt-3">
-              <h2 className="violet-text bold-text">Round Up Service</h2>
+              <h3 className="color">Enable / Disable Round Up Service</h3>
               <label className="switch">
                 <input
                   type="checkbox"
@@ -120,11 +124,11 @@ const RoundUp = () => {
                 />
                 <span className="slider round"></span>
               </label>
-              <p>
+              <h5 className="color">
                 {isRoundUpEnabled
                   ? "Round Up service is enabled"
                   : "Round Up service is disabled"}
-              </p>
+              </h5>
             </div>
           </div>
         </div>
