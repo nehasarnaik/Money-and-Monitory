@@ -5,9 +5,11 @@ import { useUser } from "../../UserContext";
 import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
 import HeaderBar from "../Header/header";
 import savingsaccount from "../../Assets/savings.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Savings() {
   const { user } = useUser();
+  let navigate = useNavigate();
 
   const [accountInfo, setAccountInfo] = useState({});
   const MSUsername = "MSUser";
@@ -15,6 +17,9 @@ export default function Savings() {
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(

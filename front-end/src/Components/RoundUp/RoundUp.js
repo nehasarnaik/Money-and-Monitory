@@ -13,6 +13,13 @@ import HeaderBar from "../Header/header";
 const RoundUp = () => {
   const navigate = useNavigate();
   const { user } = useUser();
+
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
+  }, []);
+
   const [isRoundUpEnabled, setIsRoundUpEnabled] = useState(user.roundUpSavings);
   const MSUsername = "MSUser";
   const MSPassword = "moneyAndMonitory";

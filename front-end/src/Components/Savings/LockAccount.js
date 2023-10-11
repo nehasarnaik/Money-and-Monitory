@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarFunctions from "../Navbar/NavbarFunctions";
 import NavBarUser from "../Navbar/NavBarUser";
@@ -21,6 +21,11 @@ export default function LockAccount() {
   const navigate = useNavigate();
   const MSUsername = "MSUser";
   const MSPassword = "moneyAndMonitory";
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
+  });
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -54,7 +59,7 @@ export default function LockAccount() {
 
   return (
     <div className="width">
-      <HeaderBar/>
+      <HeaderBar />
       <NavbarSavings />
       {/* //   <br></br>
     //   <h1 className="h1">WANT TO SAVE MORE MONEY?</h1>
@@ -125,31 +130,36 @@ export default function LockAccount() {
         </div>
       </div> */}
       <div className="lock">
-      <br></br>
-      <br></br>
+        <br></br>
+        <br></br>
         <h1 className="hh1">WANT TO SAVE MORE MONEY?</h1>
         <br></br>
         <h4 className="h5">LOCK YOUR SAVINGS ACCOUNT</h4>
-        
+
         <form className="dropdown" onSubmit={onSubmit}>
-        <div className="calender">
-          <DatePicker 
-            placeholderText="Select date"
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd-MM-yyyy" // Specify the date format you prefer
-            minDate={yesterday.toDate()} // Set minDate to yesterday
-          />
-        </div>
-        <br></br>
-        <label>
-        <input className="checkbox" type="checkbox" required/> You won't be able to withdraw money for above selected period of time</label><br></br>
-        <br></br>
-        <button className="btn btn-light button buttonpadding" type="submit">Lock the Account</button>
-        <br></br>
-        <br></br>
+          <div className="calender">
+            <DatePicker
+              placeholderText="Select date"
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="dd-MM-yyyy" // Specify the date format you prefer
+              minDate={yesterday.toDate()} // Set minDate to yesterday
+            />
+          </div>
+          <br></br>
+          <label>
+            <input className="checkbox" type="checkbox" required /> You won't be
+            able to withdraw money for above selected period of time
+          </label>
+          <br></br>
+          <br></br>
+          <button className="btn btn-light button buttonpadding" type="submit">
+            Lock the Account
+          </button>
+          <br></br>
+          <br></br>
         </form>
-        </div>
+      </div>
     </div>
   );
 }
