@@ -2,7 +2,7 @@ package com.example.moneyandmonitory.user_management_service.UniqueAccountNumber
 
 public class AccountNumber {
 
-    private static final long LIMIT = 10000000000000L;
+    private static final long LIMIT = 10000000000000000L;
     private static long last = 0;
 
     public static long getID() {

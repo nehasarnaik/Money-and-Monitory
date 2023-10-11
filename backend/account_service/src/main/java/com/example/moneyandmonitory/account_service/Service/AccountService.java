@@ -54,7 +54,7 @@ public class AccountService {
     }
 
     private Transaction createTransaction(double amount, String narration, double closingBalance) {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
+        TimeZone tz = TimeZone.getTimeZone("Asia/Kolkata");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
         df.setTimeZone(tz);
         String nowAsISO = df.format(new Date());
@@ -79,7 +79,7 @@ public class AccountService {
             }
             double closingBal = curBal - amount;
             Query query = new Query(Criteria.where("userId").is(userId));
-            Transaction t = createTransaction(-amount, "Debited " + amount, closingBal);
+            Transaction t = createTransaction(-amount, "Withdrawn Money", closingBal);
 
             Update update = new Update()
                     .inc("balance", -amount)  // Decrement the balance by the specified amount
@@ -107,7 +107,7 @@ public class AccountService {
         double curBal = debitAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
         double newBalance = curBal + amount;
-        Transaction t = createTransaction(amount, "credited " + amount, newBalance);
+        Transaction t = createTransaction(amount, "Deposited Money", newBalance);
         Update update = new Update()
                 .inc("balance", amount)  // Decrement the balance by the specified amount
                 .push("transactions", t ); // Add the new transaction
@@ -135,7 +135,7 @@ public class AccountService {
         double curBal = savingsAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
         double newBalance = curBal + amount;
-        Transaction t = createTransaction(amount, "", newBalance);
+        Transaction t = createTransaction(amount, "Credited Round Up amount", newBalance);
         Update update = new Update()
                 .inc("balance", amount)  // Decrement the balance by the specified amount
                 .push("transactions", t ); // Add the new transaction
@@ -153,7 +153,7 @@ public class AccountService {
 
     }
 
-    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount) {
+    public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount, String narration) {
         logger.info("Inside WithdrawFromDebitAccount function in Account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
         double curBal = debitAccount.getBalance();
@@ -161,9 +161,10 @@ public class AccountService {
         {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
+
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
-        String narration = "debited " + amount ;
+        //String narration = "debited " + amount ;
         Transaction t =  createTransaction(-amount, narration, closingBal);
 
         Update update = new Update()
@@ -206,7 +207,8 @@ public class AccountService {
             logger.info("Round-up is performed");
         }
         logger.info("Round-up disabled so normal payment is done");
-        return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount);
+        String narration="Transfered to account number " +mt.getReceiverAccountNumber();
+        return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount,narration);
     }
 
     public List<Transaction> transactionHistoryForDebitAccount(long userId) {

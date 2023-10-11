@@ -9,7 +9,13 @@ import axios from "axios";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
 export default function TransferMoney() {
-  const { user } = useUser();
+
+const { user } = useUser();
+    const [debitAccountNumber, setDebitAccountNumber] = useState();
+    const [cardNumber, setCardNumber] = useState();
+    const [cvv, setCvv] = useState();
+    const [error, setError] = useState(null);
+    const phoneRegex = /^\?([0-9]{3})[-. ]?[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/
 
   const [debitAccountNumber, setDebitAccountNumber] = useState();
   const [cardNumber, setCardNumber] = useState();
@@ -34,64 +40,58 @@ export default function TransferMoney() {
     setPayment({ ...payment, [name]: value });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(user.userId);
-    if (cvv === payment.cvv) {
-      const res = await axios
-        .post(userUrl, payment, {
-          auth: {
-            username: MSUsername,
-            password: MSPassword,
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            alert("Transaction Successful");
-            console.log(res.data.referenceNumber);
-            let transactionId = res.data.referenceNumber.toString();
-            console.log(transactionId);
-            navigate(`/transactionsuccess/${transactionId}`);
-          } else {
-            navigate("/transactionfail");
-          }
-        })
-        .catch((error) => {
-          alert("Insufficient funds");
-          navigate("/transactionfail");
-        });
-    } else {
-      alert("Enter correct CVV");
-    }
-  };
-
-  useEffect(() => {
-    // Fetch the debit account number when the component mounts
-    if (Object.keys(user).length === 0) {
-      navigate("/login"); // Replace with your login route
-    }
-    const userId = user.userId;
-    axios
-      .get(
-        `http://localhost:8080/account-service/account/debitaccount/${userId}`,
-        {
-          auth: {
-            username: MSUsername,
-            password: MSPassword,
-          },
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        
+        console.log(user.userId);
+        if(cvv===payment.cvv){
+            
+            const res = await axios.post(userUrl, payment, {
+                auth: {
+                    username: MSUsername,
+                    password: MSPassword
+                  }
+              });
+            console.log(res)
+            //navigate("/paymentgateway");
+            if (res.status === 200) {
+                alert("Transaction Successful");
+                console.log(res.data.referenceNumber);
+                let transactionId = res.data.referenceNumber.toString();
+                console.log(transactionId);
+                navigate(`/transactionsuccess/${transactionId}`);
+              } else {
+                navigate("/transactionfail");
+              }
+        }else{
+            alert("Enter correct CVV");
         }
-      )
-      .then((res) => {
-        setDebitAccountNumber(String(res.data.debitAccountNumber));
-        setCardNumber(String(res.data.card.cardNumber));
-        setCvv(String(res.data.card.cvv));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [user.userId]); // Dependency array ensures this effect runs when userId changes
+    };
 
+   
+    useEffect(() => {
+        // Fetch the debit account number when the component mounts
+        const userId = user.userId;   
+        axios
+          .get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{
+            auth: {
+                username: MSUsername,
+                password: MSPassword
+              }
+          })
+          .then((res) => {
+            setDebitAccountNumber(String(res.data.debitAccountNumber));
+            setCardNumber(String(res.data.card.cardNumber).replace(/(\d{3})/g, '$1-').substring(0,15));
+            setCvv(String(res.data.card.cvv));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, [user.userId]); // Dependency array ensures this effect runs when userId changes
+
+
+   
+  
   return (
     <div>
       <div>

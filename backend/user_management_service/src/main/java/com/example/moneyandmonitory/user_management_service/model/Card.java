@@ -16,7 +16,7 @@ public class Card {
     private long cvv;
 
     public Card() {
-        this.cardNumber = getID();
+        this.cardNumber = getID()/10;
         this.cvv = (int) (Math.random() * 900) + 100;
     }
 }
