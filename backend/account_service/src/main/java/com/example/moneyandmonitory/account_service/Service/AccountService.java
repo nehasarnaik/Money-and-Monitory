@@ -203,6 +203,7 @@ public class AccountService {
 
             finalAmount=Math.ceil(mt.getAmount());
             double savingsAmount=finalAmount-mt.getAmount();
+            //round-up upto two decimal places
             savingsAmount = Double.parseDouble(new DecimalFormat("#.00").format(savingsAmount));
             depositToSavingsAccount(debitAccount.getUserId(),savingsAmount);
             logger.info("Round-up is performed");

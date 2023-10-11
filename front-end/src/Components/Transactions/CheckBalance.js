@@ -1,6 +1,4 @@
 import React from 'react';
-import NavbarFunctions from '../Navbar/NavbarFunctions';
-import NavBarUser from '../Navbar/NavBarUser';
 import { useState } from 'react';
 import { useUser } from '../../UserContext';
 import SidebarFunctions from '../Navbar/SidebarFunctions';
@@ -11,6 +9,7 @@ const CheckBalance = () => {
     const [balance, setBalance] = useState(null);
     const [error, setError] = useState(null);
     const { user } = useUser();
+
     const handleAccountChange = (e) => {
         setSelectedAccount(e.target.value);
     };
@@ -40,6 +39,7 @@ const CheckBalance = () => {
         }
     };
 
+
     return (
         <div>
             <HeaderBar/>
@@ -47,7 +47,7 @@ const CheckBalance = () => {
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
-                        <div className="mb-5"> {/* Remove the "card" class to remove square*/}
+                        <div className="mb-5"> {/* Remove the "card" class to remove the square*/}
                             <div className="card-body">
                                 <h2 className="card-title text-center violet-text bold-text">Check Balance</h2>
                                 <br></br>
