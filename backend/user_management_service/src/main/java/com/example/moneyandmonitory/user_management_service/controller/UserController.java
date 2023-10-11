@@ -39,6 +39,13 @@ public class UserController {
         return userService.userDetails(email);
     }
 
+    @GetMapping("/checkEmailExists/{email}")
+    public ResponseEntity<Boolean> checkEmailExists(@PathVariable String email) {
+        boolean emailExists = userService.existsByEmail(email);
+        logger.info("email exists output {}",emailExists);
+        return ResponseEntity.ok(emailExists);
+    }
+
     @PutMapping("/roundup/{userId}")
     public void roundUpFeature(@PathVariable long userId){
         logger.info("Enabling/disabling round-up feature for user ID: {}", userId);
