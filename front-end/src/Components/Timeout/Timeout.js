@@ -1,7 +1,8 @@
-import {useRef} from 'react';
-import {useIdleTimer} from 'react-idle-timer'
-import {useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useIdleTimer } from "react-idle-timer";
+import { useNavigate } from "react-router-dom";
 function HandleTimeout() {
+
     const idleTimeRef = useRef(null);
     let navigate = useNavigate();
     const onIdle = () => {

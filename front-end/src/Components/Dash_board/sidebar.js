@@ -4,7 +4,6 @@ import { useUser } from "../../UserContext";
 import { Link } from "react-router-dom";
 import DebitCard from "../DebitCard/DebitCard";
 
-
 const Sidebar = () => {
   const { user } = useUser();
 
@@ -16,7 +15,9 @@ const Sidebar = () => {
             <table>
               <tr>
                 <td className="h1 sidebar">
-                  <h3 className="display-3">DEBIT ACCOUNT</h3>
+                  <h3 className="display-3">
+                    <b>DEBIT ACCOUNT</b>
+                  </h3>
                   <h1 className="display-6">{user.name}</h1>
                   <hr />
                 </td>
@@ -58,7 +59,7 @@ const Sidebar = () => {
                         <td>{user.userId}</td>
                       </tr> */}
                       <tr>
-                        <DebitCard/>
+                        <DebitCard />
                       </tr>
                     </tbody>
                   </table>

@@ -73,3 +73,12 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* You can apply it to specific elements as well */
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+}

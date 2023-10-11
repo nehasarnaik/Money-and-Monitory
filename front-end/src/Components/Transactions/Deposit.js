@@ -92,7 +92,7 @@ export default function Deposit() {
 
   return (
     <div>
-      <HandleTimeout/>
+      <HandleTimeout />
       <HeaderBar />
       <SidebarFunctions />
       <div className="container mt-4">
@@ -103,9 +103,7 @@ export default function Deposit() {
               {" "}
               {/* Apply violet border */}
               <div className="card-body">
-                <h2 className="card-title" style={{ color: "#502080" }}>
-                  Deposit
-                </h2>
+                <h2 className="card-title color">DEPOSIT</h2>
                 <br />
                 {/* Center align the heading */}
                 <form className="text-start white-text">
