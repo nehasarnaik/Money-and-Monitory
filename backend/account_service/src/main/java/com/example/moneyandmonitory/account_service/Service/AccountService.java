@@ -187,7 +187,8 @@ public class AccountService {
 
     public double getSavingsAccountBalance(long userId) {
         logger.info("Inside getSavingsAccountBalance function in account service");
-        return savingsAccountRepository.findByuserId(userId).getBalance();
+        return Double.parseDouble(new DecimalFormat("#.00").format(savingsAccountRepository.findByuserId(userId).getBalance()));
+        //return savingsAccountRepository.findByuserId(userId).getBalance();
     }
 
     public double getDebitAccountBalance(long userId) {

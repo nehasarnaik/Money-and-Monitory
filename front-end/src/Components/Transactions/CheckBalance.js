@@ -12,11 +12,10 @@ const CheckBalance = () => {
   const [balance, setBalance] = useState(null);
   const [error, setError] = useState(null);
   const { user } = useUser();
-
+  const navigate = useNavigate();
   const handleAccountChange = (e) => {
     setSelectedAccount(e.target.value);
   };
-
   useEffect(() => {
     if (Object.keys(user).length === 0) {
       navigate("/login"); // Replace with your login route
