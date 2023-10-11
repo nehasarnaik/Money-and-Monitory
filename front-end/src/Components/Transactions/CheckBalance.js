@@ -43,6 +43,7 @@ const CheckBalance = () => {
           return response.json();
         })
         .then((data) => {
+          
           setBalance(data);
           setError(null);
         })

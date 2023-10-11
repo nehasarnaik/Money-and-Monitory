@@ -147,4 +147,10 @@ public class UserService {
 
 
     }
+
+    public Boolean existsByEmail(String email) {
+
+        return userRepository.existsByemail(email);
+
+    }
 }
