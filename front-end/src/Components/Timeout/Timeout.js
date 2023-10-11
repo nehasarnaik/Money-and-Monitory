@@ -5,6 +5,7 @@ function HandleTimeout() {
     const idleTimeRef = useRef(null);
     let navigate = useNavigate();
     const onIdle = () => {
+      alert("Session Timeout");
       navigate("/")
     };
       const idleTimer = useIdleTimer({

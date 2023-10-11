@@ -7,6 +7,8 @@ import axios from 'axios'; // Make sure you have Axios installed
 
 
 const DebitCard = () => {
+
+    const { user } = useUser();
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -58,24 +60,25 @@ const DebitCard = () => {
         <span class="line-3"></span>
         <div class="top-row">
             <div class="visa">
-                <h4>VISA</h4>
-                <span>John Doe</span>
+                <h6>Coin Stash</h6>
+                <h5>{user.name}</h5>
             </div>
             <div class="tick">
                 <i class="fa fa-check"></i>
             </div>
-         
+            
         </div>
         
       
         <div class="bottom-row">
+        <p class="bottom-row">CardNumber</p>
                 <div class="dots">
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
-                
+               
                 <span class="number">4564</span>
         </div>
       
