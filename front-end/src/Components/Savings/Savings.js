@@ -4,12 +4,14 @@ import NavBarUser from "../Navbar/NavBarUser";
 import { useUser } from "../../UserContext";
 import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
 import HeaderBar from "../Header/header";
+import { useNavigate } from "react-router-dom";
 
 export default function Savings() {
   const { user } = useUser();
   const [accountInfo, setAccountInfo] = useState({});
   const MSUsername = 'MSUser';
   const MSPassword = 'moneyAndMonitory';
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
@@ -22,12 +24,17 @@ export default function Savings() {
         if (response.ok) {
           const data = await response.json();
           setAccountInfo(data);
-        } else {
+          console.log(data);
+        } 
+        else {
           // Handle errors, e.g., show an error message
           console.error("Failed to fetch account info");
         }
       } catch (error) {
-        console.error("Error fetching account info:", error);
+
+        navigate("/dashboard");
+        // alert("Enable round up feature");
+
       }
     };
 

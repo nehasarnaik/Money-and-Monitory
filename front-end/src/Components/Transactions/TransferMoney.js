@@ -15,6 +15,7 @@ export default function TransferMoney() {
     const [cardNumber, setCardNumber] = useState();
     const [cvv, setCvv] = useState();
     const [error, setError] = useState(null);
+    const phoneRegex = /^\?([0-9]{4})[-. ]?[-. ]?([0-9]{4})[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/
 
     const userUrl = "http://localhost:8080/account-service/account/transfermoney";
     const MSUsername = 'MSUser';
@@ -137,7 +138,8 @@ export default function TransferMoney() {
                                     <label className="label cardnumber">Your Card Number</label>
                                     <input 
                                     type="text"
-                                    value={cardNumber}
+                                    value={cardNumber.replace(phoneRegex, '$1-$2-$3-4$')
+                                }
                                     name="cardNumber"
                                     className="form-control" 
                                     placeholder="Card Number"
