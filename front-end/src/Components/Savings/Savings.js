@@ -7,6 +7,7 @@ import HeaderBar from "../Header/header";
 import { useNavigate } from "react-router-dom";
 
 import savingsaccount from "../../Assets/savings.png";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Savings() {
@@ -18,6 +19,9 @@ export default function Savings() {
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(

@@ -21,6 +21,9 @@ export default function Withdraw() {
 
   useEffect(() => {
     // Fetch savings account number when the component mounts
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     const userId = user.userId;
     axios
       .get(
@@ -89,14 +92,16 @@ export default function Withdraw() {
 
   return (
     <div>
-      <HeaderBar/>
+      <HeaderBar />
       <NavbarSavings />
       <div className="container mt-4">
         <div className="row justify-content-center">
           <div className="col-md-4">
-            <div className="card cardbg-color" style={{marginTop: "40px"}}>
+            <div className="card cardbg-color" style={{ marginTop: "40px" }}>
               <div className="card-body">
-                <h2 className="card-title" style={{color:"#502080"}}>Withdraw</h2>
+                <h2 className="card-title" style={{ color: "#502080" }}>
+                  Withdraw
+                </h2>
                 <br />
                 <form className="text-start white-text">
                   <div className="mb-3">

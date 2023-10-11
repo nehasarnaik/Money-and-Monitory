@@ -1,27 +1,31 @@
-import React from 'react';
-import './sidebar.css'; 
-import { useUser } from '../../UserContext';
+import React, { useEffect } from "react";
+import "./sidebar.css";
+import { useUser } from "../../UserContext";
 
 const Sidebar = () => {
- 
-  const { user } = useUser(); 
+  const { user } = useUser();
+
   return (
-    <div className='container'>
+    <div className="container">
       <div className="sidebar">
         <div className="user-profile">
           <div className="user-info">
-            <table >
+            <table>
               <tr>
-                <td className='h1 sidebar'>
-                  <h3 className='display-3'>DEBIT ACCOUNT</h3>
-                  <img src="user-profile.png" alt="Profile" className="profile-image"/>
-                <h1 className='display-6'>{user.name}</h1>
-                <hr/>
+                <td className="h1 sidebar">
+                  <h3 className="display-3">DEBIT ACCOUNT</h3>
+                  <img
+                    src="user-profile.png"
+                    alt="Profile"
+                    className="profile-image"
+                  />
+                  <h1 className="display-6">{user.name}</h1>
+                  <hr />
                 </td>
-                </tr>
-                <tr>
-                <td className='sidebar'>
-                  <h3 className='display-6'>USER DETAILS</h3>
+              </tr>
+              <tr>
+                <td className="sidebar">
+                  <h3 className="display-6">USER DETAILS</h3>
                   <table class="table table-borderless">
                     <tbody>
                       <tr>
