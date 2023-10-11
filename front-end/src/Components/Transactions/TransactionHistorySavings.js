@@ -7,6 +7,7 @@ import Table from "react-bootstrap/Table";
 import Records from "./Records";
 import Pagination from "./Pagination";
 import HeaderBar from "../Header/header";
+import { useNavigate } from "react-router-dom";
 
 export default function TransactionHistorySavings() {
   const { user } = useUser();
@@ -16,14 +17,22 @@ export default function TransactionHistorySavings() {
   // No of Records to be displayed on each page
   const [recordsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory';
-
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
+  let navigate = useNavigate();
   useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     fetch(
       "http://localhost:8080/account-service/account/savings/transactionhistory/" +
         user.userId,
-        {method:'GET', headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Basic " + btoa(MSUsername + ":" + MSPassword),
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => {
@@ -43,7 +52,7 @@ export default function TransactionHistorySavings() {
 
   return (
     <div>
-      <HeaderBar/>
+      <HeaderBar />
       <NavbarSavings />
 
       <div className="history">

@@ -8,6 +8,7 @@ import Pagination from "./Pagination";
 import Records from "./Records";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
+import { useNavigate } from "react-router-dom";
 
 export default function TransactionHistory() {
   const { user } = useUser();
@@ -17,13 +18,22 @@ export default function TransactionHistory() {
   // No of Records to be displayed on each page
   const [recordsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory'; 
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
+  let navigate = useNavigate();
   useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     fetch(
       "http://localhost:8080/account-service/account/debit/transactionhistory/" +
-        user.userId,{method:'GET', 
-        headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
+        user.userId,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Basic " + btoa(MSUsername + ":" + MSPassword),
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => {
@@ -41,22 +51,22 @@ export default function TransactionHistory() {
   const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
   const nPages = Math.ceil(data.length / recordsPerPage);
 
-    return (
-      <div>
-          <HeaderBar/>
-          <SidebarFunctions/>
-          
-          <div className="container">
-            <div className="history">
-                <Records data={currentRecords}/>
-                <Pagination
-                    nPages={nPages}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    color="secondary"
-                />
-            </div>
-          </div>
+  return (
+    <div>
+      <HeaderBar />
+      <SidebarFunctions />
+
+      <div className="container">
+        <div className="history">
+          <Records data={currentRecords} />
+          <Pagination
+            nPages={nPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            color="secondary"
+          />
+        </div>
       </div>
+    </div>
   );
 }

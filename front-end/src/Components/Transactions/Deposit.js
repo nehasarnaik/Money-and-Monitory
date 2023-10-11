@@ -19,18 +19,25 @@ export default function Deposit() {
   const handleAmountChange = (event) => {
     setDepositAmount(event.target.value);
   };
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory';
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
 
   useEffect(() => {
     // Fetch the debit account number when the component mounts
+    if (Object.keys(user).length === 0) {
+      navigate("/login"); // Replace with your login route
+    }
     const userId = user.userId;
-    axios.get(`http://localhost:8080/account-service/account/debitaccount/${userId}`,{
-      auth: {
-          username: MSUsername,
-          password: MSPassword
+    axios
+      .get(
+        `http://localhost:8080/account-service/account/debitaccount/${userId}`,
+        {
+          auth: {
+            username: MSUsername,
+            password: MSPassword,
+          },
         }
-  })
+      )
       .then((res) => {
         setSelectedAccount(String(res.data.debitAccountNumber));
       })
@@ -45,14 +52,14 @@ export default function Deposit() {
     const userId = user.userId;
     await axios
       .put(
-        `http://localhost:8080/account-service/account/debitaccount/deposit/${userId}/${depositAmount}`,{},
+        `http://localhost:8080/account-service/account/debitaccount/deposit/${userId}/${depositAmount}`,
+        {},
         {
           auth: {
-              username: MSUsername,
-              password: MSPassword
-            }
-      }
-
+            username: MSUsername,
+            password: MSPassword,
+          },
+        }
       )
       .then((res) => {
         console.log(res);
@@ -84,17 +91,19 @@ export default function Deposit() {
 
   return (
     <div>
-      <HeaderBar/>
+      <HeaderBar />
       <SidebarFunctions />
       <div className="container mt-4">
         <div className="row justify-content-center">
           {/* Center align content */}
           <div className="col-md-4">
-            <div className="card cardbg-color" style={{marginTop: "40px"}}>
+            <div className="card cardbg-color" style={{ marginTop: "40px" }}>
               {" "}
               {/* Apply violet border */}
               <div className="card-body">
-                <h2 className="card-title" style={{color:"#502080"}}>Deposit</h2>
+                <h2 className="card-title" style={{ color: "#502080" }}>
+                  Deposit
+                </h2>
                 <br />
                 {/* Center align the heading */}
                 <form className="text-start white-text">

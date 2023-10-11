@@ -67,6 +67,7 @@ function App() {
             <Route path="/transfermoney" element={<TransferMoney />}></Route>
             <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
             <Route path="/savingsaccount" element={<Savings />}></Route>
+            <Route path="*" element={<LandingPage />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -10,12 +10,12 @@ export default function SidebarFunctions() {
     let navigate = useNavigate();
     const handleSavingsAccountLinkClick = (event) => {
         // console.log(user);
-        if (user && user.roundUpSavings) {
+        //if (user && user.roundUpSavings) {
           navigate("/savingsaccount");
-        } else {
-          alert("Round Off is not enabled. Please enable it first.");
-          event.preventDefault();
-        }
+        // } else {
+        //   alert("Round Off is not enabled. Please enable it first.");
+        //   event.preventDefault();
+        // }
       };
     const handleSidebarClick = (e) => {
         e.preventDefault();
