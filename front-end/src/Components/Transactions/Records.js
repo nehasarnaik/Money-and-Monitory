@@ -24,11 +24,11 @@ const Records = ({ data }) => {
             {Array.isArray(data) ? (
               data.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.date}</td>
+                  <td>{(item.date).split("T")[0] + " " + (item.date).split("T")[1].substring(0,5)}</td>
                   <td>{item.narration}</td>
                   <td>{item.referenceNumber}</td>
-                  <td>{item.debited}</td>
-                  <td>{item.credited}</td>
+                  <td>{item.debited == 0 ? "-":item.debited}</td>
+                  <td>{item.credited  == 0 ? "-":item.credited}</td>
                   <td>{item.closingBalance}</td>
                 </tr>
               ))

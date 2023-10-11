@@ -20,12 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -56,12 +54,15 @@ public class AccountService {
     }
 
     private Transaction createTransaction(double amount, String narration, double closingBalance) {
-
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
+        df.setTimeZone(tz);
+        String nowAsISO = df.format(new Date());
         if(amount < 0)
         {
-            return new Transaction(new Date(),narration , UUID.randomUUID(), -amount, 0, closingBalance);
+            return new Transaction(nowAsISO,narration , UUID.randomUUID(), -amount, 0, closingBalance);
         }
-        return new Transaction(new Date(),narration , UUID.randomUUID(), 0,amount, closingBalance);
+        return new Transaction(nowAsISO,narration , UUID.randomUUID(), 0,amount, closingBalance);
     }
     @Transactional
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(long userId, double amount) {
@@ -129,7 +130,7 @@ public class AccountService {
 
 
     public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
-        logger.error("Inside depositToSavingsAccount Function in Account service");
+        logger.info("Inside depositToSavingsAccount Function in Account service");
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         double curBal = savingsAccount.getBalance();
         Query query = new Query(Criteria.where("userId").is(userId));
@@ -158,7 +159,7 @@ public class AccountService {
         double curBal = debitAccount.getBalance();
         if(curBal < amount)
         {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
         double closingBal = curBal - amount;
         Query query = new Query(Criteria.where("userId").is(userId));
