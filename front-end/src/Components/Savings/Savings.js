@@ -49,11 +49,19 @@ export default function Savings() {
 
   return (
     <div>
-      <HeaderBar/>
-      <NavbarSavings />
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
+      <HeaderBar />
+      <div className="mt-4">
+        <div className="row">
+          {/* First Column: Navbar */}
+          <div className="col-md-3 justify-content-start">
+            <NavbarSavings />
+          </div>
+
+          {/* Third Column: Savings Account Display */}
+          <div
+            className="col-md-4 justify-content-center"
+            style={{ marginTop: "30px" }}
+          >
             <div className="alert alert-light-violet" role="alert">
               <h2 className="alert-heading">Savings Account</h2>
               <hr />
@@ -65,6 +73,14 @@ export default function Savings() {
               <p className="mb-0">
                 <strong>Balance: $ {accountInfo.balance || ""}</strong>
               </p>
+            </div>
+          </div>
+
+          {/* Second Column: Image */}
+          <div className="col-md-5">
+            <div className="vertical-center">
+              {/* Add your image here */}
+              <img src={savingsaccount} alt="savings" className="img-fluid" />
             </div>
           </div>
         </div>
