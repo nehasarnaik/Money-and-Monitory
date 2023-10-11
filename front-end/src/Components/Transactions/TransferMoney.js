@@ -15,7 +15,7 @@ export default function TransferMoney() {
     const [cardNumber, setCardNumber] = useState();
     const [cvv, setCvv] = useState();
     const [error, setError] = useState(null);
-    const phoneRegex = /^\?([0-9]{4})[-. ]?[-. ]?([0-9]{4})[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/
+    const phoneRegex = /^\?([0-9]{3})[-. ]?[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/
 
     const userUrl = "http://localhost:8080/account-service/account/transfermoney";
     const MSUsername = 'MSUser';
@@ -46,20 +46,18 @@ export default function TransferMoney() {
                     username: MSUsername,
                     password: MSPassword
                   }
-            }).then((res) => {
-                if (res.status === 200) {
-                    alert("Transaction Successful");
-                    console.log(res.data.referenceNumber);
-                    let transactionId = res.data.referenceNumber.toString();
-                    console.log(transactionId);
-                    navigate(`/transactionsuccess/${transactionId}`);
-                } else {
-                    navigate("/transactionfail");
-                  }
-            }).catch((error) => {
-                alert("Insufficient funds");
+              });
+            console.log(res)
+            //navigate("/paymentgateway");
+            if (res.status === 200) {
+                alert("Transaction Successful");
+                console.log(res.data.referenceNumber);
+                let transactionId = res.data.referenceNumber.toString();
+                console.log(transactionId);
+                navigate(`/transactionsuccess/${transactionId}`);
+              } else {
                 navigate("/transactionfail");
-            });
+              }
         }else{
             alert("Enter correct CVV");
         }
@@ -78,7 +76,7 @@ export default function TransferMoney() {
           })
           .then((res) => {
             setDebitAccountNumber(String(res.data.debitAccountNumber));
-            setCardNumber(String(res.data.card.cardNumber));
+            setCardNumber(String(res.data.card.cardNumber).replace(/(\d{3})/g, '$1-').substring(0,15));
             setCvv(String(res.data.card.cvv));
           })
           .catch((err) => {
@@ -140,8 +138,7 @@ export default function TransferMoney() {
                                     <label className="label cardnumber">Your Card Number</label>
                                     <input 
                                     type="text"
-                                    value={cardNumber.replace(phoneRegex, '$1-$2-$3-4$')
-                                }
+                                    value={cardNumber}
                                     name="cardNumber"
                                     className="form-control" 
                                     placeholder="Card Number"
