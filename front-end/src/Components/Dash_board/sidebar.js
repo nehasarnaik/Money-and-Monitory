@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./sidebar.css";
 import { useUser } from "../../UserContext";
+import DebitCard from "../DebitCard/DebitCard";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -14,11 +15,6 @@ const Sidebar = () => {
               <tr>
                 <td className="h1 sidebar">
                   <h3 className="display-3">DEBIT ACCOUNT</h3>
-                  <img
-                    src="user-profile.png"
-                    alt="Profile"
-                    className="profile-image"
-                  />
                   <h1 className="display-6">{user.name}</h1>
                   <hr />
                 </td>
@@ -47,6 +43,20 @@ const Sidebar = () => {
                       <tr>
                         <th scope="row">Address</th>
                         <td>{user.address}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td className="sidebar">
+                  <h3 className="display-6">ACCOUNT DETAILS</h3>
+                  <table class="table table-borderless">
+                    <tbody>
+                      {/* <tr>
+                        <th scope="row">Account Number</th>
+                        <td>{user.userId}</td>
+                      </tr> */}
+                      <tr>
+                        <DebitCard/>
                       </tr>
                     </tbody>
                   </table>

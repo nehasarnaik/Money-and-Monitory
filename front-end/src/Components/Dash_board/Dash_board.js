@@ -6,6 +6,7 @@ import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
 import { useUser } from "../../UserContext";
 import { useNavigate } from "react-router-dom";
+import HandleTimeout from '../Timeout/Timeout';
 
 function Dashboard() {
   const { user } = useUser();
@@ -19,6 +20,7 @@ function Dashboard() {
   }, []);
   return (
     <div>
+      <HandleTimeout/>
       <div>
         <HeaderBar />
         <SidebarFunctions />
