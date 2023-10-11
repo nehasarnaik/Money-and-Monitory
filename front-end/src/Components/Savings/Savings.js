@@ -6,6 +6,7 @@ import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
 import HeaderBar from "../Header/header";
 import { useNavigate } from "react-router-dom";
 import savingsaccount from "../../Assets/savings.png";
+import HandleTimeout from "../Timeout/Timeout";
 
 
 
@@ -49,6 +50,7 @@ export default function Savings() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <div className="mt-4">
         <div className="row">

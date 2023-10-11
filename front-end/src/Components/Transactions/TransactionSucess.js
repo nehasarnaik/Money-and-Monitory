@@ -3,6 +3,7 @@ import NavBarUser from "../Navbar/NavBarUser";
 import { Link, useParams } from "react-router-dom";
 import successimg from "../../Assets/sucess.png";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransactionSucess() {
   const transactionDate = new Date().toISOString()
@@ -13,6 +14,7 @@ export default function TransactionSucess() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar/>
       <div className="container mt-4">
         <div className="row justify-content-center violet-text">

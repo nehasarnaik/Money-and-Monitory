@@ -13,6 +13,7 @@ import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import "react-datepicker/dist/react-datepicker.css";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function LockAccount() {
   const { user } = useUser();
@@ -65,6 +66,7 @@ export default function LockAccount() {
 
   return (
     <div className="width">
+      <HandleTimeout/>
       <HeaderBar />
       <NavbarSavings />
       <div className="lock">

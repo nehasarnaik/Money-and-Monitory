@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function Deposit() {
   const { user } = useUser();
@@ -91,6 +92,7 @@ export default function Deposit() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <SidebarFunctions />
       <div className="container mt-4">

@@ -8,6 +8,7 @@ import { useUser } from "../../UserContext";
 import axios from "axios";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransferMoney() {
 
@@ -91,6 +92,7 @@ export default function TransferMoney() {
   return (
     <div>
       <div>
+        <HandleTimeout/>
         <HeaderBar />
         <SidebarFunctions />
       </div>

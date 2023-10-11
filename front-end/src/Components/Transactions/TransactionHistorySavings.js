@@ -8,6 +8,7 @@ import Records from "./Records";
 import Pagination from "./Pagination";
 import HeaderBar from "../Header/header";
 import { useNavigate } from "react-router-dom";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransactionHistorySavings() {
   const { user } = useUser();
@@ -52,6 +53,7 @@ export default function TransactionHistorySavings() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <NavbarSavings />
 

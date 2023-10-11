@@ -3,10 +3,12 @@ import NavBarUser from "../Navbar/NavBarUser";
 import { Link } from "react-router-dom";
 import "./withdraw.css";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransactionFail() {
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar/>
       <div className="container mt-4">
         <div className="row justify-content-center violet-text">

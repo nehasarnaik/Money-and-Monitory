@@ -9,6 +9,7 @@ import { useUser } from "../../UserContext";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import "./RoundUp.css";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 const RoundUp = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const RoundUp = () => {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <div className="roundup-container">
         <div className="row">

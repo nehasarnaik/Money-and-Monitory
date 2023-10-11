@@ -32,7 +32,7 @@ import LandingPage from "./Components/LandingPage/LandingPage";
 function App() {
   return (
     <UserProvider>
-      <div className="App" style={{ height: "820px" }}>
+      <div className="App" style={{ height: "1000px" }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />}></Route>

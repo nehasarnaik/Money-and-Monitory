@@ -6,6 +6,7 @@ import { useUser } from "../../UserContext";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
 import { useNavigate } from "react-router-dom";
+import HandleTimeout from "../Timeout/Timeout";
 
 const CheckBalance = () => {
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -56,6 +57,7 @@ const CheckBalance = () => {
 
     return (
         <div>
+            <HandleTimeout/>
             <HeaderBar/>
             <SidebarFunctions />
             <div className="container mt-3">

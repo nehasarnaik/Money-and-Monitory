@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import NavbarSavings from "../Navbar/NavbarSavings";
 import HeaderBar from "../Header/header";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function Withdraw() {
   const { user } = useUser();
@@ -92,6 +93,7 @@ export default function Withdraw() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <NavbarSavings />
       <div className="container mt-4">

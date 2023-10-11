@@ -9,6 +9,7 @@ import Records from "./Records";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
 import { useNavigate } from "react-router-dom";
+import HandleTimeout from "../Timeout/Timeout";
 
 export default function TransactionHistory() {
   const { user } = useUser();
@@ -53,6 +54,7 @@ export default function TransactionHistory() {
 
   return (
     <div>
+      <HandleTimeout/>
       <HeaderBar />
       <SidebarFunctions />
 
