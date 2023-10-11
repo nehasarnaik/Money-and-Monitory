@@ -4,20 +4,27 @@ import NavBarUser from "../Navbar/NavBarUser";
 import { useUser } from "../../UserContext";
 import RoundUp from "../RoundUp/RoundUp"; // Import the RoundUp component
 import HeaderBar from "../Header/header";
+import savingsaccount from "../../Assets/savings.png";
 
 export default function Savings() {
   const { user } = useUser();
+
   const [accountInfo, setAccountInfo] = useState({});
-  const MSUsername = 'MSUser';
-  const MSPassword = 'moneyAndMonitory';
+  const MSUsername = "MSUser";
+  const MSPassword = "moneyAndMonitory";
 
   useEffect(() => {
     // Fetch account number info from the server when the component mounts
     const fetchAccountInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`,{method:'GET', 
-          headers: {'Authorization': 'Basic ' + btoa(MSUsername+':'+MSPassword)}}
+          `http://localhost:8080/account-service/account/savingsaccount/${user.userId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: "Basic " + btoa(MSUsername + ":" + MSPassword),
+            },
+          }
         );
         if (response.ok) {
           const data = await response.json();
@@ -36,12 +43,19 @@ export default function Savings() {
 
   return (
     <div>
-      <HeaderBar/>
-      <NavbarSavings />
+      <HeaderBar />
+      <div className="mt-4">
+        <div className="row">
+          {/* First Column: Navbar */}
+          <div className="col-md-3 justify-content-start">
+            <NavbarSavings />
+          </div>
 
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
+          {/* Third Column: Savings Account Display */}
+          <div
+            className="col-md-4 justify-content-center"
+            style={{ marginTop: "30px" }}
+          >
             <div className="alert alert-light-violet" role="alert">
               <h2 className="alert-heading">Savings Account</h2>
               <hr />
@@ -53,6 +67,14 @@ export default function Savings() {
               <p className="mb-0">
                 <strong>Balance: $ {accountInfo.balance || ""}</strong>
               </p>
+            </div>
+          </div>
+
+          {/* Second Column: Image */}
+          <div className="col-md-5">
+            <div className="vertical-center">
+              {/* Add your image here */}
+              <img src={savingsaccount} alt="savings" className="img-fluid" />
             </div>
           </div>
         </div>
