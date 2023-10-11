@@ -54,7 +54,7 @@ const CheckBalance = () => {
                                 <div className="form-group">
                                     <label style={{ fontWeight: 'bold' }}>Select Account Type:</label>
                                     <select
-                                        className="form-control"
+                                        className="form-control form-select"
                                         value={selectedAccount}
                                         onChange={handleAccountChange}
                                     >
