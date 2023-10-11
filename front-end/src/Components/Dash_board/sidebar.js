@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import "./sidebar.css";
 import { useUser } from "../../UserContext";
+import { Link } from "react-router-dom";
 import DebitCard from "../DebitCard/DebitCard";
+
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -62,6 +64,16 @@ const Sidebar = () => {
                   </table>
                 </td>
               </tr>
+              <div className="d-flex justify-content-center">
+                <tr>
+                  <td>
+                    <Link to="/editprofile" className="btn btn-primary button">
+                      Edit Profile
+                    </Link>
+                  </td>
+                  <br></br>
+                </tr>
+              </div>
             </table>
           </div>
         </div>
