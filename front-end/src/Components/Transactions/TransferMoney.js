@@ -8,19 +8,15 @@ import { useUser } from "../../UserContext";
 import axios from "axios";
 import SidebarFunctions from "../Navbar/SidebarFunctions";
 import HeaderBar from "../Header/header";
+
 export default function TransferMoney() {
 
-const { user } = useUser();
+    const { user } = useUser();
     const [debitAccountNumber, setDebitAccountNumber] = useState();
     const [cardNumber, setCardNumber] = useState();
     const [cvv, setCvv] = useState();
     const [error, setError] = useState(null);
     const phoneRegex = /^\?([0-9]{3})[-. ]?[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/
-
-  const [debitAccountNumber, setDebitAccountNumber] = useState();
-  const [cardNumber, setCardNumber] = useState();
-  const [cvv, setCvv] = useState();
-  const [error, setError] = useState(null);
 
   const userUrl = "http://localhost:8080/account-service/account/transfermoney";
   const MSUsername = "MSUser";
