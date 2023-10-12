@@ -42,4 +42,22 @@ form.white-text{
   border-radius: 2px solid;
 }
 
+.depositLeftPane{
+  background-image: url("../../manPayingOnline.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  margin-left: 300px;
+  background-size: 110% 110%;
+}
+
+.depositLeftPaneWithdraw{
+  background-image: url("../../withdraw.PNG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  margin-left: 300px;
+  background-size: 110% 110%;
+  z-index: -1;
+}
 

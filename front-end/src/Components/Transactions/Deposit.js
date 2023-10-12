@@ -95,10 +95,14 @@ export default function Deposit() {
       <HandleTimeout />
       <HeaderBar />
       <SidebarFunctions />
-      <div className="container mt-4">
-        <div className="row justify-content-center">
+      <div className="row">
+      <div className="col depositLeftPane">
+        </div>
+        <div className="col">
+        <div className="container mt-4">
+        <div className="row">
           {/* Center align content */}
-          <div className="col-md-4">
+          <div className="col-md-10">
             <div className="card cardbg-color" style={{ marginTop: "40px" }}>
               {" "}
               {/* Apply violet border */}
@@ -157,6 +161,9 @@ export default function Deposit() {
           </div>
         </div>
       </div>
+        </div>
+        
+      </div>      
     </div>
   );
 }

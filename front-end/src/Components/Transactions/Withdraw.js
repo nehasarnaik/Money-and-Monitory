@@ -96,63 +96,72 @@ export default function Withdraw() {
       <HandleTimeout />
       <HeaderBar />
       <NavbarSavings />
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-md-4">
-            <div className="card cardbg-color" style={{ marginTop: "40px" }}>
-              <div className="card-body">
-                <h2 className="card-title color">WITHDRAW</h2>
-                <br />
-                <form className="text-start white-text">
-                  <div className="mb-3">
-                    <label htmlFor="accountSelect" className="form-label">
-                      Account Number
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="account"
-                      value={selectedAccount}
-                      disabled
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="amount" className="form-label">
-                      Amount
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="amount"
-                      value={withdrawAmount}
-                      onChange={handleAmountChange}
-                      placeholder="Enter Amount to withdraw"
-                    />
-                  </div>
+
+      <div className="row">
+        <div className="col depositLeftPaneWithdraw">
+
+        </div>
+        <div className="col">
+          <div className="container mt-4">
+          <div className="row">
+            <div className="col-md-10">
+              <div className="card cardbg-color" style={{ marginTop: "40px" }}>
+                <div className="card-body">
+                  <h2 className="card-title color">WITHDRAW</h2>
                   <br />
-                  <div className="text-center">
-                    <button
-                      type="button"
-                      className="btn whitebutton"
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary ms-2"
-                      onClick={handleCancel}
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
+                  <form className="text-start white-text">
+                    <div className="mb-3">
+                      <label htmlFor="accountSelect" className="form-label">
+                        Account Number
+                      </label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="account"
+                        value={selectedAccount}
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="amount" className="form-label">
+                        Amount
+                      </label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="amount"
+                        value={withdrawAmount}
+                        onChange={handleAmountChange}
+                        placeholder="Enter Amount to withdraw"
+                      />
+                    </div>
+                    <br />
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        className="btn whitebutton"
+                        onClick={handleSubmit}
+                      >
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary ms-2"
+                        onClick={handleCancel}
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        </div>
       </div>
+      
     </div>
   );
 }
