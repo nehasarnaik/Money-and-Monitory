@@ -1,15 +1,14 @@
 /* Sidebar.css */
 
-.sidebar {
-  background-color: #fbfafc; /* Background color for the sidebar */
+.sidebar {  
   color: #490778; /* Text color */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: left;
   margin-left: 120px;
   margin-right: 120px;
   border-radius: 5px;
+  padding-right: 60px
 }
 
 .profile-image {
