@@ -64,9 +64,9 @@ export default function EditProfile() {
       >
         <div className="card mb-3">
           <div className="card-body view-profile">
-            <h5 className="card-title view-profile mb-4 violet-text bold-text">
+            <h3 className="mb-4 violet-text bold-text">
               EDIT PROFILE
-            </h5>
+            </h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">

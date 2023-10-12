@@ -40,7 +40,9 @@ const Register = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   }
-
+  const subscribed = () => {
+    alert("Subscribed!");
+  }
   function isDOBValid(dob) {
     const dobRegex = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[0-2])[/]\d{4}$/;
     if (!dobRegex.test(dob)) {
@@ -367,7 +369,7 @@ const Register = () => {
               <div class="d-flex w-100 gap-2">
                 <label for="newsletter1" class="visually-hidden">Email address</label>
                 <input id="newsletter1" type="text" class="form-control" placeholder="Email address"/>
-                <button class="btn btn-primary" type="button" onclick="subscribed()">Subscribe</button>
+                <button class="btn btn-primary" type="button" onClick={subscribed}>Subscribe</button>
               </div>
             </form>
           </div>

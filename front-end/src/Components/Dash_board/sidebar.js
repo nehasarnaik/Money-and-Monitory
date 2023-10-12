@@ -100,7 +100,17 @@ const Sidebar = () => {
                     {user.userId}
                   </div>
                 </div> 
-                <br/><br/><br/>
+                <br/>
+                <div style={{height:"14px"}}></div>
+                <div className="row">
+                  <div className="col">
+                    <div className="d-flex justify-content-left">
+                        <Link to="/editprofile" className="btn btn-primary button">
+                          Edit Profile
+                        </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
           </div>
         </div>

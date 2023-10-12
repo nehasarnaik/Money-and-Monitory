@@ -15,7 +15,9 @@ const Login = () => {
 
     const { updateUser } = useUser();
 
-   
+    const subscribed = () => {
+        alert("Subscribed!");
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -148,7 +150,7 @@ const Login = () => {
               <div class="d-flex w-100 gap-2">
                 <label for="newsletter1" class="visually-hidden">Email address</label>
                 <input id="newsletter1" type="text" class="form-control" placeholder="Email address"/>
-                <button class="btn btn-primary" type="button" onclick="subscribed()">Subscribe</button>
+                <button class="btn btn-primary" type="button" onClick={subscribed}>Subscribe</button>
               </div>
             </form>
           </div>
@@ -164,7 +166,7 @@ const Login = () => {
           </ul>
         </div>
       </footer>
-    </div>
+    </div>  
         </div>
     );
 };

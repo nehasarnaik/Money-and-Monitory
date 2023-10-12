@@ -2,6 +2,9 @@ import React from "react";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
 function LandingPage() {
+  const subscribed = () => {
+    alert("Subscribed!");
+  }
   return (
     <>
       <header style={{ width: "-webkit-fill-available" }}>
@@ -73,7 +76,7 @@ function LandingPage() {
               <div class="d-flex w-100 gap-2">
                 <label for="newsletter1" class="visually-hidden">Email address</label>
                 <input id="newsletter1" type="text" class="form-control" placeholder="Email address"/>
-                <button class="btn btn-primary" type="button" onclick="subscribed()">Subscribe</button>
+                <button class="btn btn-primary" type="button" onClick={subscribed}>Subscribe</button>
               </div>
             </form>
           </div>
@@ -90,29 +93,7 @@ function LandingPage() {
         </div>
       </footer>
     </div>
-    {/* <div className=" left-half"></div> */}
-    {/* <footer class="container py-5">
-      <div class="row">
-        <div class="col-12 col-md">
-          <small class="d-block mb-3 text-muted">© 2023</small>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Features</h5>
-          
-        </div>
-        <div class="col-6 col-md">
-          <h5>Resources</h5>
-          
-        </div>
-        <div class="col-6 col-md">
-          <h5>Resources</h5>
-          
-        </div>
-        <div class="col-6 col-md">
-          <h5>About</h5>
-        </div>
-      </div>
-    </footer> */}
+    
     </>
   );
 }

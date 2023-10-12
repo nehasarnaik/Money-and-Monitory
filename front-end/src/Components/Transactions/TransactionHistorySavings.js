@@ -102,6 +102,7 @@ export default function TransactionHistorySavings() {
               )}
             </tbody>
           </Table>
+          <div style={{height:"100px"}}></div>
         </div>
       </div>
     </div>
