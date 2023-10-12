@@ -1,7 +1,9 @@
 /* Sidebar.css */
 
-.sidebar {  
-  color: #490778; /* Text color */
+.sidebar {
+  background-color: #fbfafc; /* Background color for the sidebar */
+  font-family: 'Roboto', sans-serif;
+  color: #490778; 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
