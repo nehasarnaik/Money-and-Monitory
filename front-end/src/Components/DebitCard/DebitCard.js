@@ -78,7 +78,6 @@ const DebitCard = () => {
                     <span></span>
                     <span></span>
                 </div>
-               
                 <span class="number">4564</span>
         </div>
       
