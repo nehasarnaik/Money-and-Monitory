@@ -45,20 +45,19 @@ const RoundUp = () => {
 
   return (
     <div>
-      <HandleTimeout />
+      <HandleTimeout/>
       <HeaderBar />
-      <SidebarFunctions />
-
-      <h1 className="color" style={{ marginTop: "20px" }}>
-        ROUND UP SERVICE
-      </h1>
       <div className="roundup-container">
         <div className="row ">
-          <div className="col-md-3"></div>
+          <div className="col-md-3">
+          <SidebarFunctions />
+          </div>
           <div className="col-md-5">
-            {/* Two Rows of Two Cards Each */}
 
             <div className="row">
+            <h1 className="color" style={{ marginTop: "20px" }}>
+              ROUND UP SERVICE
+            </h1>
               <div className="col-md-6">
                 <div className="card bg-violet text-white">
                   <div className="card-body">

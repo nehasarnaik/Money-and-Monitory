@@ -12,7 +12,7 @@ function HandleTimeout() {
       const idleTimer = useIdleTimer({
       crossTab: true,
       ref: idleTimeRef,
-      timeout: 60 * 0.5 * 1000,
+      timeout: 60 * 10 * 1000,
       onIdle: onIdle})
       return (
         <div idleTimer={idleTimer}></div>

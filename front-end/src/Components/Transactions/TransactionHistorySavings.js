@@ -90,9 +90,9 @@ export default function TransactionHistorySavings() {
                     <td>{item.date}</td>
                     <td>{item.narration}</td>
                     <td>{item.referenceNumber}</td>
-                    <td>{item.debited}</td>
-                    <td>{item.credited}</td>
-                    <td>{item.closingBalance}</td>
+                    <td>{item.debited > 0?item.debited:"-"}</td>
+                    <td>{item.credited > 0? item.credited:"-"}</td>
+                    <td>{item.closingBalance > 0?item.closingBalance:"-"}</td>
                   </tr>
                 ))
               ) : (
@@ -102,6 +102,7 @@ export default function TransactionHistorySavings() {
               )}
             </tbody>
           </Table>
+          <div style={{height:"100px"}}></div>
         </div>
       </div>
     </div>
