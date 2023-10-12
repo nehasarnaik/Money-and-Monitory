@@ -44,16 +44,19 @@ public class AccountService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    //service to get debit account details using user ID
     public DebitAccount getDebitAccountInfo(long userId) {
 
         return debitAccountRepository.findByuserId(userId);
     }
 
+    //service to get savings account details using user ID
     public SavingsAccount getSavingsAccountInfo(long userId) {
 
         return savingsAccountRepository.findByuserId(userId);
     }
 
+    //service to create transaction and assigned a reference ID to that transaction using UUID
     private Transaction createTransaction(double amount, String narration, double closingBalance) {
         TimeZone tz = TimeZone.getTimeZone("Asia/Kolkata");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
@@ -101,6 +104,7 @@ public class AccountService {
         }
     }
 
+    //service to deposit money to depit account
     public ResponseEntity<Transaction> depositToDebitAccount(long userId, double amount) {
 
         logger.info("Deposit request for debit account of userId: {}, amount: {}", userId, amount);
@@ -126,10 +130,7 @@ public class AccountService {
 
     }
 
-
-    //withdraw from debitaccount
-
-
+    //service to deposit money to savings account
     public ResponseEntity<Transaction> depositToSavingsAccount(long userId, double amount) {
         logger.info("Inside depositToSavingsAccount Function in Account service");
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
@@ -154,6 +155,7 @@ public class AccountService {
 
     }
 
+    //service to withdraw money from debit account
     public ResponseEntity<Transaction> withdrawFromDebitAccount(long userId, double amount, String narration) {
         logger.info("Inside WithdrawFromDebitAccount function in Account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
@@ -185,12 +187,14 @@ public class AccountService {
 
     }
 
+    //service to get balance from savings account
     public double getSavingsAccountBalance(long userId) {
         logger.info("Inside getSavingsAccountBalance function in account service");
         return Double.parseDouble(new DecimalFormat("#.00").format(savingsAccountRepository.findByuserId(userId).getBalance()));
         //return savingsAccountRepository.findByuserId(userId).getBalance();
     }
 
+    //service to get balance from debit account
     public double getDebitAccountBalance(long userId) {
         logger.info("Inside getDebitAccountBalance function in account service");
         return debitAccountRepository.findByuserId(userId).getBalance();
@@ -215,6 +219,7 @@ public class AccountService {
         return withdrawFromDebitAccount(debitAccount.getUserId(),finalAmount,narration);
     }
 
+    //service to get transaction history from debit account
     public List<Transaction> transactionHistoryForDebitAccount(long userId) {
         logger.info("Indside transactionhistoryfordebitaccount function in account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
@@ -224,11 +229,14 @@ public class AccountService {
     }
 
 
+    //service to get transaction history from savings account
     public List<Transaction> transactionHistorySavingsAccount(long userId) {
         logger.info("Inside transactionhistoryfordebitaccount function in account service");
         SavingsAccount savingsAccount = savingsAccountRepository.findByuserId(userId);
         return savingsAccount.getTransactions();
     }
+
+    //service to lock savings account for particular period
     public void lockAccount(long userId,Date lockDate) {
 
         logger.info("Inside lockAccount function in account service");
@@ -242,6 +250,7 @@ public class AccountService {
 
     }
 
+    //service to enable/disable round up feature
     public void roundUpFeature(long userId) {
         logger.info("Inside roundUpFeature function in account service");
         DebitAccount debitAccount = debitAccountRepository.findByuserId(userId);
