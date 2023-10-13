@@ -28,6 +28,7 @@ public class AccountController {
     private AccountService accountService;
 
 
+    //Api to get debit account info of particular user using user id
     @GetMapping("/debitaccount/{userId}")
     public DebitAccount getDebitAccountInfo(@PathVariable long userId)
     {
@@ -35,6 +36,7 @@ public class AccountController {
         return accountService.getDebitAccountInfo(userId);
     }
 
+    //Api to get savings account balance using user id
     @GetMapping("/savingsaccount/balance/{userId}")
     public double getSavingsAccountBalance(@PathVariable long userId)
     {
@@ -42,6 +44,7 @@ public class AccountController {
         return accountService.getSavingsAccountBalance(userId);
     }
 
+    //Api to get debit account balance using user id
     @GetMapping("/debitaccount/balance/{userId}")
     public double getDebitAccountBalance(@PathVariable long userId)
     {
@@ -50,7 +53,7 @@ public class AccountController {
     }
 
 
-
+    //Api to get savings account information using user id
     @GetMapping("/savingsaccount/{userId}")
     public SavingsAccount getSavingsAccountInfo(@PathVariable long userId)
     {
@@ -59,6 +62,7 @@ public class AccountController {
     }
 
 
+    //Api to withdraw money from savings account
     @PutMapping("/savingsaccount/withdraw/{userId}/{amount}")
     public ResponseEntity<Transaction> withdrawFromSavingsAccount(@PathVariable long userId, @PathVariable double amount)
     {
@@ -66,6 +70,7 @@ public class AccountController {
         return accountService.withdrawFromSavingsAccount(userId, amount);
     }
 
+    //Api to deposit money to debit account
     @PutMapping("/debitaccount/deposit/{userId}/{amount}")
     public ResponseEntity<Transaction> depositToDebitAccount(@PathVariable long userId, @PathVariable double amount)
     {
@@ -81,6 +86,7 @@ public class AccountController {
         return accountService.withdrawFromDebitAccount(userId, amount,"Withdrawn");
     }
 
+    //Api to transfer money from debit account to another and apply round up feature if applicable
     @PostMapping("/transfermoney")
     public ResponseEntity<Transaction> transferMoney(@RequestBody MoneyTransferRequestDTO moneyTransferRequestDTO)
     {
@@ -90,6 +96,7 @@ public class AccountController {
         return accountService.transferMoney(moneyTransferRequestDTO);
     }
 
+    //Api to get transaction history for debit account
     @GetMapping("/debit/transactionhistory/{userId}")
     public List<Transaction> transactionHistoryForDebitAccount(@PathVariable long userId){
 
@@ -102,6 +109,7 @@ public class AccountController {
 
     }
 
+    //Api to get transaction history for savings account
     @GetMapping("/savings/transactionhistory/{userId}")
     public List<Transaction> transactionHistoryForSavingsAccount(@PathVariable long userId){
 
@@ -114,12 +122,14 @@ public class AccountController {
 
     }
 
+    //Api to lock savings account for specified period of time
     @PutMapping("lockaccount/{userId}/{date}")
     public void lockAccount(@PathVariable long userId, @PathVariable Date date){
         logger.info("Locking account for userId: {} until date: {}", userId, date);
         accountService.lockAccount(userId,date);
     }
 
+    //Api to enable round up feature
     @PutMapping("/roundup/{userId}/{roundup}")
     public void roundUpFeature(@PathVariable long userId){
         logger.info("Enabling round-up feature for userId: {}", userId);

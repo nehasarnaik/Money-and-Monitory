@@ -91,7 +91,7 @@ export default function EditProfile() {
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
+                  //onChange={handleInputChange}
                 />
               </div>
               <div className="mb-3">

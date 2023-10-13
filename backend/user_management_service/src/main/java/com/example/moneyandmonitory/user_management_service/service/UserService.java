@@ -40,6 +40,8 @@ public class UserService {
 
     @Autowired
     SavingsAccountRepository savingsAccountRepository;
+
+    //service for user registeration
     public User registerUser(User user) {
 
         logger.info("Storing new user details ");
@@ -59,6 +61,7 @@ public class UserService {
         return userBO;
     }
 
+    //service for user login
     public boolean login(String email, String password) {
         logger.info("Handling login request ");
         List<User> userList = userRepository.findAll();
@@ -71,6 +74,7 @@ public class UserService {
         return false;
     }
 
+    //service for getting user details
     public User userDetails(String email) {
         logger.info("Fetching user details(inside service class)");
         List<User> userList = userRepository.findAll();
@@ -83,6 +87,8 @@ public class UserService {
         return null;
     }
 
+
+    //service for enabling roundup feature
     public void roundUpFeature(long userId) {
 
         logger.info("Inside RoundupFeature function in userservice class");
@@ -111,6 +117,7 @@ public class UserService {
         }
     }
 
+    //service for changing password if user forgets it
     public ResponseEntity<ForgotPasswordRequestDTO> forgotPassword(ForgotPasswordRequestDTO forgotPasswordRequestDTO) {
         logger.info("Implementing forgot password process for email: {}", forgotPasswordRequestDTO.getEmail());
         User user = userRepository.findByemail(forgotPasswordRequestDTO.getEmail());
@@ -125,6 +132,7 @@ public class UserService {
     }
 
 
+    //service to update user details
     public ResponseEntity<User> updateProfile(User updateUser) {
 
         logger.info("Implementing update user profile for user with email: {}", updateUser.getEmail());
@@ -148,6 +156,7 @@ public class UserService {
 
     }
 
+    //service to check if user already exists
     public Boolean existsByEmail(String email) {
 
         return userRepository.existsByemail(email);

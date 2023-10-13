@@ -21,24 +21,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //Api for user registration
     @PostMapping
     public User registerUser(@RequestBody User user){
         logger.info("Registering a new user: {}", user.getEmail());
         return userService.registerUser(user);
     }
 
+    //Api for user login
     @GetMapping("/{email}/{password}")
     public boolean login(@PathVariable String email, @PathVariable String password){
         logger.info("Login request for user with email: {}", email);
         return userService.login(email,password);
     }
 
+    //Api for to get the user details
     @GetMapping("/{email}")
     public User userDetails(@PathVariable String email){
         logger.info("Fetching user details for email: {}", email);
         return userService.userDetails(email);
     }
 
+    //Api to check if email entered while registration already exists
     @GetMapping("/checkEmailExists/{email}")
     public ResponseEntity<Boolean> checkEmailExists(@PathVariable String email) {
         boolean emailExists = userService.existsByEmail(email);
@@ -46,18 +50,24 @@ public class UserController {
         return ResponseEntity.ok(emailExists);
     }
 
+
+    //Api to manage the round up feature
     @PutMapping("/roundup/{userId}")
     public void roundUpFeature(@PathVariable long userId){
         logger.info("Enabling/disabling round-up feature for user ID: {}", userId);
         userService.roundUpFeature(userId);
     }
 
+
+    //Api to change the password if user forgets its
     @PutMapping("/forgotPassword")
     public ResponseEntity<ForgotPasswordRequestDTO> forgotPassword(@RequestBody ForgotPasswordRequestDTO forgotPasswordRequestDTO){
         logger.info("Initiating forgot password process for email: {}", forgotPasswordRequestDTO.getEmail());
         return userService.forgotPassword(forgotPasswordRequestDTO);
     }
 
+
+    //Api for upadting the user profile
     @PutMapping("/updateprofile")
     public  ResponseEntity<User> updateProfile(@RequestBody User updateUser){
         logger.info("Updating user profile for user with email: {}", updateUser.getEmail());
